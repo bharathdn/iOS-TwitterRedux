@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Scheme
-   LastUpgradeVersion = "0830"
+   LastUpgradeVersion = "0700"
    version = "1.3">
    <BuildAction
       parallelizeBuildables = "YES"
@@ -14,10 +14,10 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "A1285B371E9D835D00B67B13"
-               BuildableName = "TwitterClient.app"
-               BlueprintName = "TwitterClient"
-               ReferencedContainer = "container:TwitterClient.xcodeproj">
+               BlueprintIdentifier = "D42A318A3D9F709D197892F94E2A323B"
+               BuildableName = "Pods_TwitterClient.framework"
+               BlueprintName = "Pods-TwitterClient"
+               ReferencedContainer = "container:Pods.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -29,15 +29,6 @@
       shouldUseLaunchSchemeArgsEnv = "YES">
       <Testables>
       </Testables>
-      <MacroExpansion>
-         <BuildableReference
-            BuildableIdentifier = "primary"
-            BlueprintIdentifier = "A1285B371E9D835D00B67B13"
-            BuildableName = "TwitterClient.app"
-            BlueprintName = "TwitterClient"
-            ReferencedContainer = "container:TwitterClient.xcodeproj">
-         </BuildableReference>
-      </MacroExpansion>
       <AdditionalOptions>
       </AdditionalOptions>
    </TestAction>
@@ -51,16 +42,15 @@
       debugDocumentVersioning = "YES"
       debugServiceExtension = "internal"
       allowLocationSimulation = "YES">
-      <BuildableProductRunnable
-         runnableDebuggingMode = "0">
+      <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "A1285B371E9D835D00B67B13"
-            BuildableName = "TwitterClient.app"
-            BlueprintName = "TwitterClient"
-            ReferencedContainer = "container:TwitterClient.xcodeproj">
+            BlueprintIdentifier = "D42A318A3D9F709D197892F94E2A323B"
+            BuildableName = "Pods_TwitterClient.framework"
+            BlueprintName = "Pods-TwitterClient"
+            ReferencedContainer = "container:Pods.xcodeproj">
          </BuildableReference>
-      </BuildableProductRunnable>
+      </MacroExpansion>
       <AdditionalOptions>
       </AdditionalOptions>
    </LaunchAction>
@@ -70,16 +60,6 @@
       savedToolIdentifier = ""
       useCustomWorkingDirectory = "NO"
       debugDocumentVersioning = "YES">
-      <BuildableProductRunnable
-         runnableDebuggingMode = "0">
-         <BuildableReference
-            BuildableIdentifier = "primary"
-            BlueprintIdentifier = "A1285B371E9D835D00B67B13"
-            BuildableName = "TwitterClient.app"
-            BlueprintName = "TwitterClient"
-            ReferencedContainer = "container:TwitterClient.xcodeproj">
-         </BuildableReference>
-      </BuildableProductRunnable>
    </ProfileAction>
    <AnalyzeAction
       buildConfiguration = "Debug">
