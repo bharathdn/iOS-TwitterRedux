@@ -25,9 +25,6 @@ class LoginViewController: UIViewController {
   @IBAction func onLoginButton(_ sender: Any) {
     let client = TwitterClient.sharedInstance
     
-    // clear any keychains of previous sessions
-    client?.deauthorize()
-    
     client?.login(success: {
       // on succesful login, segue to next view controller
       print("I;ve loggged in successfully")

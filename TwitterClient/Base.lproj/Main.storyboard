@@ -125,7 +125,13 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
-                    <navigationItem key="navigationItem" id="xHv-nc-5Wt"/>
+                    <navigationItem key="navigationItem" id="xHv-nc-5Wt">
+                        <barButtonItem key="leftBarButtonItem" title="Logout" id="G57-C1-zhx">
+                            <connections>
+                                <action selector="onLogoutButton:" destination="NEt-qH-ENh" id="Z0h-ow-lW0"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <outlet property="tableView" destination="DeV-og-yhG" id="1n9-f1-O5I"/>
                     </connections>
@@ -137,7 +143,7 @@
         <!--Navigation Controller-->
         <scene sceneID="wpz-vG-bIZ">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="9lM-An-c9S" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="TweetsNavigationController" automaticallyAdjustsScrollViewInsets="NO" id="9lM-An-c9S" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="Mej-AD-2ai">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>

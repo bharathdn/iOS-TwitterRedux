@@ -44,7 +44,25 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
   
   
   func application(_ app: UIApplication, open url: URL, options: [UIApplicationOpenURLOptionsKey : Any] = [:]) -> Bool {
-    TwitterClient.sharedInstance?.handleOpenUrl(url: url)
+    print("from URL to delegate")
+    
+    if User.currentUser != nil {
+      print("There is a current user")
+      let storyBoard = UIStoryboard(name: "Main", bundle: nil)
+      let tweetViewController = storyBoard.instantiateViewController(withIdentifier: "TweetsNavigationController")
+      window?.rootViewController = tweetViewController 
+    }
+    else {
+      print("There is no current user")
+      TwitterClient.sharedInstance?.handleOpenUrl(url: url)
+    }
+    
+    NotificationCenter.default.addObserver(forName: NSNotification.Name(rawValue: User.userDidLogoutNotification), object: nil, queue: OperationQueue.main) { (Notification) in
+      let storyBoard = UIStoryboard(name: "Main", bundle: nil)
+      let viewControllerMain = storyBoard.instantiateInitialViewController()
+      self.window?.rootViewController = viewControllerMain
+    }
+    
     return true
   }
 
