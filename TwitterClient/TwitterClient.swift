@@ -41,8 +41,8 @@ class TwitterClient: BDBOAuth1SessionManager {
   func currentAccount() {
     get(twitterVerifyCredentialsPath, parameters: nil, progress: nil, success: { (task: URLSessionDataTask, response: Any?) in
       
-      let userDictionary = response as! NSDictionary
-      let user = User(dictionary: userDictionary)
+//      let userDictionary = response as! NSDictionary
+//      let user = User(dictionary: userDictionary)
       
     }, failure: { (task: URLSessionDataTask?, error: Error?) in
       print("error verifying credentials")

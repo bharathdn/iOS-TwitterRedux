@@ -16,25 +16,20 @@ class TweetsViewController: UIViewController {
   
   override func viewDidLoad() {
     super.viewDidLoad()
-    // Do any additional setup after loading the view.
+    
+    tableView.dataSource = self
+    tableView.delegate = self
     
     TwitterClient.sharedInstance?.homeTimeLine(success: { (tweets: [Tweet]) in
+      print("*** \(tweets.count) Number of tweets retrieved for user")
+      
       self.tweets = tweets
       self.tableView.reloadData()
       
-//      for tweet in tweets {
-//        print(tweet.text!)
-//      }
     }, failure: { (error: Error) in
        print(error.localizedDescription)
     })
   }
-
-  override func didReceiveMemoryWarning() {
-    super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-  }
-    
 
     /*
     // MARK: - Navigation
@@ -45,4 +40,23 @@ class TweetsViewController: UIViewController {
         // Pass the selected object to the new view controller.
     }
     */
+}
+
+extension TweetsViewController: UITableViewDataSource, UITableViewDelegate {
+  
+  func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    if tweets != nil {
+      return tweets.count
+    }
+    else {
+      return 0
+    }
+  }
+  
+  func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+    let cell = tableView.dequeueReusableCell(withIdentifier: "TweetCell", for: indexPath) as! TweetCell
+    cell.tweet = tweets[indexPath.row]
+    return cell
+  }
+  
 }
