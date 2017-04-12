@@ -67,7 +67,7 @@ class TwitterClient: BDBOAuth1SessionManager {
       
       let authUrl = twitterAuthUrl + "?oauth_token=\(requestToken.token!)"
       let url = NSURL(string: authUrl)! as URL
-      print("opening url")
+      print("Auth token fetched, opening URL")
       UIApplication.shared.open(url)
       
     }, failure: { (error: Error?) in
@@ -96,7 +96,7 @@ class TwitterClient: BDBOAuth1SessionManager {
       
     }, failure: { (error: Error?) in
       
-      print("Error fetching Access TOken")
+      print("Error fetching Access Token")
       self.loginFailure?(error!)
       
     })

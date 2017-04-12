@@ -46,6 +46,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
   func application(_ app: UIApplication, open url: URL, options: [UIApplicationOpenURLOptionsKey : Any] = [:]) -> Bool {
     print("from URL to delegate")
     
+    print("checking if user already exists")
     if User.currentUser != nil {
       print("There is a current user")
       let storyBoard = UIStoryboard(name: "Main", bundle: nil)
