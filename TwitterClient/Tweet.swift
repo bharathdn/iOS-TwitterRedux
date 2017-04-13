@@ -12,7 +12,7 @@ class Tweet: NSObject {
   
   var text: String?
   var retweetCount: Int = 0
-  var favouritesCount = 0
+  var favouritesCount: Int = 0
   var timeStamp: Date?
   
   var userName: String?
@@ -44,7 +44,7 @@ class Tweet: NSObject {
   init(dictionary: NSDictionary) {
     text = dictionary["text"] as? String
     retweetCount = (dictionary["retweet_count"] as? Int) ?? 0
-    favouritesCount = (dictionary["favourites_count"] as? Int) ?? 0
+    favouritesCount = (dictionary["favorite_count"] as? Int) ?? 0
     
     let timeStampString = dictionary["created_at"] as? String
     
@@ -71,8 +71,8 @@ class Tweet: NSObject {
       let user = dictionary["user"] as? NSDictionary
       if user != nil
       {
-        userName = user?["name"] as? String
-        userScreenName = user?["screen_name"] as? String
+        userName = user?["screen_name"] as? String
+        userScreenName = user?["name"] as? String
         let userImageUrlString = user?["profile_image_url_https"] as? String
         userImageUrl = URL(string: userImageUrlString!)
       }
