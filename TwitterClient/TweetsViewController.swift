@@ -33,7 +33,7 @@ class TweetsViewController: UIViewController {
 
   @IBAction func onLogoutButton(_ sender: Any) {
     print("Logging out user")
-    User.currentUser = nil
+//    User.currentUser = nil
     TwitterClient.sharedInstance?.logout()
     
     NotificationCenter.default.post(name: NSNotification.Name(rawValue: User.userDidLogoutNotification), object: nil)
@@ -63,6 +63,7 @@ extension TweetsViewController: UITableViewDataSource, UITableViewDelegate {
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
     let cell = tableView.dequeueReusableCell(withIdentifier: "TweetCell", for: indexPath) as! TweetCell
     cell.tweet = tweets[indexPath.row]
+//    print(tweets[indexPath.row])
     return cell
   }
   

@@ -9,10 +9,37 @@
 import UIKit
 
 class Tweet: NSObject {
+  
   var text: String?
   var retweetCount: Int = 0
   var favouritesCount = 0
   var timeStamp: Date?
+  
+  var userName: String?
+  var userScreenName: String?
+  var userImageUrl: URL?
+  
+  var retweetUserName: String?
+  var retweetUserScreenName: String?
+  
+  
+  
+  /*
+   original poster
+   x["retweeted_status"]["user"]["name"]
+   "Freddie Wilde"
+   x["retweeted_status"]["user"]["name"]
+   "Freddie Wilde"
+   x["retweeted_status"]["user"]["screen_name"]
+   "fwildecricket"
+   
+   retweeter
+   
+   x["user"]["screen_name"]
+   "sksathwik"
+   x["user"]["screen_name"]
+   "sksathwik"
+   */
   
   init(dictionary: NSDictionary) {
     text = dictionary["text"] as? String
@@ -26,6 +53,33 @@ class Tweet: NSObject {
       formatter.dateFormat = "EEE MMM d HH:mm:ss Z y"
       timeStamp = formatter.date(from: timeStampString)
     }
+    
+    let retweetStatus = dictionary["retweeted_status"] as? NSDictionary
+    if retweetStatus != nil {
+      let user = retweetStatus?["user"] as? NSDictionary
+      userName = user?["screen_name"] as? String
+      userScreenName = user?["name"] as? String
+      //or profile_image_url
+      let userImageUrlString = user?["profile_image_url_https"] as? String
+      userImageUrl = URL(string: userImageUrlString!)
+      
+      let retweetUser = dictionary["user"] as? NSDictionary
+      retweetUserName = retweetUser?["screen_name"] as? String
+      retweetUserScreenName = retweetUser?["name"] as? String
+    }
+    else {
+      let user = dictionary["user"] as? NSDictionary
+      if user != nil
+      {
+        userName = user?["name"] as? String
+        userScreenName = user?["screen_name"] as? String
+        let userImageUrlString = user?["profile_image_url_https"] as? String
+        userImageUrl = URL(string: userImageUrlString!)
+      }
+      else {
+        print("no retweet user present")
+      }
+    }
   }
   
   class func tweetsWithArray(dictionaryArray: [NSDictionary]) -> [Tweet] {
@@ -35,6 +89,7 @@ class Tweet: NSObject {
       let tweet = Tweet(dictionary: dictionary)
       tweets.append(tweet)
     }
+//    print(dictionaryArray[1])
     
     return tweets
   }
