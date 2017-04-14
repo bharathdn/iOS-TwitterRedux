@@ -8,6 +8,7 @@
 
 import UIKit
 
+
 class Tweet: NSObject {
   
   var text: String?
@@ -21,26 +22,7 @@ class Tweet: NSObject {
   
   var retweetUserName: String?
   var retweetUserScreenName: String?
-  
-  
-  
-  /*
-   original poster
-   x["retweeted_status"]["user"]["name"]
-   "Freddie Wilde"
-   x["retweeted_status"]["user"]["name"]
-   "Freddie Wilde"
-   x["retweeted_status"]["user"]["screen_name"]
-   "fwildecricket"
-   
-   retweeter
-   
-   x["user"]["screen_name"]
-   "sksathwik"
-   x["user"]["screen_name"]
-   "sksathwik"
-   */
-  
+
   init(dictionary: NSDictionary) {
     text = dictionary["text"] as? String
     retweetCount = (dictionary["retweet_count"] as? Int) ?? 0
@@ -89,9 +71,9 @@ class Tweet: NSObject {
       let tweet = Tweet(dictionary: dictionary)
       tweets.append(tweet)
     }
-//    print(dictionaryArray[1])
+    //    print(dictionaryArray[1])
     
     return tweets
   }
-
+  
 }

@@ -21,14 +21,17 @@ class TweetsViewController: UIViewController {
     tableView.dataSource = self
     tableView.delegate = self
     
+    tableView.rowHeight = UITableViewAutomaticDimension
+    tableView.estimatedRowHeight = 200
+    
     loadTweets()
     
     refreshControl.addTarget(self, action: #selector(TweetsViewController.loadTweets), for: .valueChanged)
     tableView.insertSubview(refreshControl, at: 0)
-
+    
     
   }
-
+  
   @IBAction func onLogoutButton(_ sender: Any) {
     print("Logging out user")
     User.currentUser = nil
@@ -49,15 +52,21 @@ class TweetsViewController: UIViewController {
       print(error.localizedDescription)
     })
   }
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+  
+  // MARK: - Navigation
+  override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+    if segue.identifier == "tweetDetailSegue" {
+      let cell = sender as! TweetCell
+      let indexPath = tableView.indexPath(for: cell)
+      let tweet = tweets![indexPath!.row]
+      
+      let uiNavigationController = segue.destination as! UINavigationController
+      let detailViewController = uiNavigationController.topViewController as! TweetDetailViewController
+      detailViewController.tweet = tweet
     }
-    */
+    
+  }
+  
 }
 
 extension TweetsViewController: UITableViewDataSource, UITableViewDelegate {
@@ -74,7 +83,7 @@ extension TweetsViewController: UITableViewDataSource, UITableViewDelegate {
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
     let cell = tableView.dequeueReusableCell(withIdentifier: "TweetCell", for: indexPath) as! TweetCell
     cell.tweet = tweets[indexPath.row]
-//    print(tweets[indexPath.row])
+    //    print(tweets[indexPath.row])
     return cell
   }
   
