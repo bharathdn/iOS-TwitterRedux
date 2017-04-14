@@ -28,8 +28,6 @@ class TweetsViewController: UIViewController {
     
     refreshControl.addTarget(self, action: #selector(TweetsViewController.loadTweets), for: .valueChanged)
     tableView.insertSubview(refreshControl, at: 0)
-    
-    
   }
   
   @IBAction func onLogoutButton(_ sender: Any) {

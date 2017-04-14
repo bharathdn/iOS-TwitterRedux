@@ -10,7 +10,7 @@ import UIKit
 
 class TweetDetailViewController: UIViewController {
   
-  var tweet: Tweet?
+  var tweet: Tweet! = nil
   @IBOutlet weak var userImageView: UIImageView!
   @IBOutlet weak var retweetImageView: UIImageView!
   @IBOutlet weak var retweetUserNameLabel: UILabel!
@@ -18,15 +18,20 @@ class TweetDetailViewController: UIViewController {
   @IBOutlet weak var userScreenNameLabel: UILabel!
   @IBOutlet weak var tweetTextLabel: UILabel!
   @IBOutlet weak var tweetTimeStampLabel: UILabel!
+  @IBOutlet weak var retweetCountLabel: UILabel!
+  @IBOutlet weak var favCountLabel: UILabel!
+  
   
   override func viewDidLoad() {
     super.viewDidLoad()
-    
-    populateDetails()
+    tweetTextLabel.preferredMaxLayoutWidth = tweetTextLabel.frame.size.width
+    if tweet != nil {
+      populateDetails()
+    }
   }
   
   func populateDetails() {
-    userImageView.setImageWith((tweet?.userImageUrl)!)
+    userImageView.setImageWith(tweet.userImageUrl!)
     
     if tweet?.retweetUserName == nil {
       retweetImageView.isHidden = true
@@ -38,14 +43,19 @@ class TweetDetailViewController: UIViewController {
       retweetUserNameLabel.text = tweet?.retweetUserName
     }
     
-    userNameLabel.text = tweet?.userName
-    userScreenNameLabel.text = tweet?.userScreenName
-    tweetTextLabel.text = tweet?.text
+    userNameLabel.text = tweet.userName
+    userScreenNameLabel.text = tweet.userScreenName
+    
+    tweetTextLabel.text = tweet.text
     
     let formatter = DateFormatter()
     formatter.dateFormat = "MMM d, h:mm a"
     formatter.amSymbol = "AM"
+    formatter.pmSymbol = "PM"
     tweetTimeStampLabel.text = formatter.string(from: (tweet?.timeStamp)!)
+    
+    retweetCountLabel.text = String(describing: tweet.retweetCount)
+    favCountLabel.text = String(describing: tweet.favouritesCount)
   }
   
   @IBAction func onCancelButton(_ sender: Any) {

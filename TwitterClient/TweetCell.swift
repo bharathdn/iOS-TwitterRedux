@@ -48,17 +48,17 @@ class TweetCell: UITableViewCell {
   private func getTimeStampLabel(timeStamp: Date) -> String {
     return "20h"
   }
-
-    override func awakeFromNib() {
-        super.awakeFromNib()
-        // Initialization code
-      tweetTextLabel.preferredMaxLayoutWidth = tweetTextLabel.frame.size.width
-    }
-
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-      // Configure the view for the selected state
-      tweetTextLabel.preferredMaxLayoutWidth = tweetTextLabel.frame.size.width
-    }
-
+  
+  override func awakeFromNib() {
+    super.awakeFromNib()
+    // Initialization code
+    tweetTextLabel.preferredMaxLayoutWidth = tweetTextLabel.frame.size.width
+  }
+  
+  override func setSelected(_ selected: Bool, animated: Bool) {
+    super.setSelected(selected, animated: animated)
+    // Configure the view for the selected state
+    tweetTextLabel.preferredMaxLayoutWidth = tweetTextLabel.frame.size.width
+  }
+  
 }
