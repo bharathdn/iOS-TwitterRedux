@@ -275,7 +275,7 @@
                                 <rect key="frame" x="16" y="130" width="288" height="418"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <color key="textColor" red="0.50196081400000003" green="0.50196081400000003" blue="0.50196081400000003" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
@@ -311,6 +311,7 @@
                     </navigationItem>
                     <connections>
                         <outlet property="charCountBarItem" destination="IT0-ns-SwX" id="9bP-fj-CCk"/>
+                        <outlet property="tweetButton" destination="vA8-rJ-KNf" id="5Wg-wU-1DH"/>
                         <outlet property="tweetTextView" destination="RM4-Dz-tW9" id="Py6-Qy-D7M"/>
                         <outlet property="userImageView" destination="99N-XL-GsY" id="GAp-f2-HL8"/>
                         <outlet property="userNameLabel" destination="YOW-Q2-GIJ" id="9p5-Qh-GbO"/>

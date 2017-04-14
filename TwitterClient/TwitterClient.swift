@@ -107,15 +107,16 @@ class TwitterClient: BDBOAuth1SessionManager {
     })
   }
   
-  func postTweet(tweetMsg: String, success: (Tweet) -> (), failure: (Error) -> ()) {
+  func postTweet(tweetMsg: String, success: @escaping (Tweet) -> (), failure: @escaping (Error) -> ()) {
     let parameters = ["status": tweetMsg]
     
     post(twitterPostTweetUrl, parameters: parameters, progress: nil, success: { (task:  URLSessionDataTask, response: Any?) in
       print("tweet sent successfully")
-      //      success(response)
+      success(Tweet.init(dictionary: response as! NSDictionary))
       print(response!)
     }, failure: { (task: URLSessionDataTask?, error: Error) in
       print("\nError posting tweet1:: \(error) \n\n")
+      failure(error)
     })
   }
 }

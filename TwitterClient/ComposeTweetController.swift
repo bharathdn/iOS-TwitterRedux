@@ -9,6 +9,10 @@
 import UIKit
 import AFNetworking
 
+@objc protocol ComposeTweetControllerDelegate {
+  @objc optional func composeTweetController (composeTweetController: ComposeTweetController, didPostTweet tweet: Tweet)
+}
+
 class ComposeTweetController: UIViewController {
   
   @IBOutlet weak var userImageView: UIImageView!
@@ -16,6 +20,9 @@ class ComposeTweetController: UIViewController {
   @IBOutlet weak var userNameLabel: UILabel!
   @IBOutlet weak var charCountBarItem: UIBarButtonItem!
   @IBOutlet weak var tweetTextView: UITextView!
+  @IBOutlet weak var tweetButton: UIBarButtonItem!
+  
+  weak var delegate: ComposeTweetControllerDelegate?
   
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -26,15 +33,21 @@ class ComposeTweetController: UIViewController {
     userImageView.setImageWith((user?.profileImageUrl)!)
     userScreenNameLabel.text = user?.screenName!
     userNameLabel.text = user?.name!
-    tweetTextView.text = "What's Happening"
+    
+    tweetButton.isEnabled = false
   }
   
   @IBAction func onTweetButton(_ sender: Any) {
+    print("\n\n \(tweetTextView.text!.characters.count) \n\n")
+    print(tweetTextView.text!)
     if tweetTextView.text!.characters.count > 0 {
       TwitterClient.sharedInstance?.postTweet(tweetMsg: tweetTextView.text!, success: { (response: Tweet) in
-      print("tweeting success")
+        print("tweeting success")
+        print(response.stringifyTweet())
+        self.delegate?.composeTweetController!(composeTweetController: self, didPostTweet: response)
+        self.tweetTextView.text = nil
       }, failure: { (error: Error) in
-      print("\nError posting tweet2:: \(error) \n\n")
+        print("\nError posting tweet2:: \(error) \n\n")
       })
     }
   }
@@ -42,8 +55,6 @@ class ComposeTweetController: UIViewController {
   @IBAction func onCancelButton(_ sender: Any) {
     dismiss(animated: true, completion: nil)
   }
-
-  
   
   func limitcharacterCount() {
     let limit = 140
@@ -51,15 +62,21 @@ class ComposeTweetController: UIViewController {
     
     let tweetTextCharCount = tweetText.characters.count
     let remainingCharacters = limit - tweetTextCharCount
-    charCountBarItem.title = String(remainingCharacters)
     
-    if remainingCharacters == 0 {
+    if remainingCharacters <= 0 {
+      charCountBarItem.tintColor = UIColor.red
+      charCountBarItem.title = "0"
+      
       let limitedCharactersIndex = tweetText.index(tweetText.startIndex, offsetBy: limit)
       tweetTextView.text = tweetText.substring(to: limitedCharactersIndex)
     }
+    else {
+      charCountBarItem.title = String(remainingCharacters)
+      charCountBarItem.tintColor = UIColor.gray
+    }
   }
   
-
+  
   /*
    // MARK: - Navigation
    
@@ -74,12 +91,13 @@ class ComposeTweetController: UIViewController {
 extension ComposeTweetController: UITextViewDelegate {
   
   func textViewDidChange(_ textView: UITextView) {
-      limitcharacterCount()
-  }
-  
-  func textViewDidBeginEditing(_ textView: UITextView) {
-    tweetTextView.text = nil
-    tweetTextView.textColor = UIColor.black
-    print("color set to \(UIColor.black)")
+    if(tweetTextView.text!.characters.count > 0) {
+      tweetButton.isEnabled = true
+    }
+    else {
+      tweetButton.isEnabled = false
+    }
+    
+    limitcharacterCount()
   }
 }

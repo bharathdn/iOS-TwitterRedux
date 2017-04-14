@@ -76,4 +76,7 @@ class Tweet: NSObject {
     return tweets
   }
   
+  func stringifyTweet() -> String {
+    return "tweet with text \" \(text ?? "Text Unavailable!!") \"  posted successfully"
+  }
 }

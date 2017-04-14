@@ -90,6 +90,11 @@ class TweetsViewController: UIViewController {
   
 }
 
+// MARK: - ComposeTweetControllerDelegate
+extension TweetsViewController: ComposeTweetControllerDelegate {
+  
+}
+
 
 // MARK: - Table and Scroll View
 extension TweetsViewController: UITableViewDataSource, UITableViewDelegate {
