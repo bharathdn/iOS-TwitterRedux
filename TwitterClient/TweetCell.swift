@@ -37,7 +37,7 @@ class TweetCell: UITableViewCell {
       
       userScreenNameLabel.text = tweet.userScreenName!
       userNameLabel.text = "@" + tweet.userName!
-      timeStampLabel.text = "• 20h" //getTimeStampLabel(timeStamp: tweet.timeStamp!)
+      timeStampLabel.text = getTimeStampLabel(timeStamp: tweet.timeStamp!)
       tweetTextLabel.text = tweet.text
       repliesCountLabel.text = ""
       retweetCountLabel.text = String(tweet.retweetCount)
@@ -46,7 +46,25 @@ class TweetCell: UITableViewCell {
   }
   
   private func getTimeStampLabel(timeStamp: Date) -> String {
-    return "20h"
+    let timeElaspsedInSeconds = Int(fabs((tweet.timeStamp?.timeIntervalSinceNow)!))
+    let secondsIn23Hours = 23 * 60 * 60
+    
+    if timeElaspsedInSeconds < 3600 {
+      print(timeElaspsedInSeconds)
+      let minutes = Int(timeElaspsedInSeconds/60)
+      print(minutes)
+      return "• \(minutes)m"
+    }
+    else if timeElaspsedInSeconds < secondsIn23Hours {
+      let hours = Int(timeElaspsedInSeconds/60/60)
+      return "• \(hours)h"
+    }
+    else {
+      let formatter = DateFormatter()
+      formatter.dateFormat = "MM/dd/yy"
+      let dateString = formatter.string(from: (tweet?.timeStamp)!)
+      return "• \(dateString)h"
+    }
   }
   
   override func awakeFromNib() {
