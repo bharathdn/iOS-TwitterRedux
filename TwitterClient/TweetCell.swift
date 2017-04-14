@@ -32,7 +32,7 @@ class TweetCell: UITableViewCell {
         retweetUserLabel.isHidden = true
         retweetUserLabel.bounds.size.height = 0
       } else {
-        retweetUserLabel.text = tweet.retweetUserScreenName! + " retweeted"
+        retweetUserLabel.text = tweet.retweetUserScreenName! + " Retweeted"
       }
       
       userScreenNameLabel.text = tweet.userScreenName!
@@ -50,9 +50,7 @@ class TweetCell: UITableViewCell {
     let secondsIn23Hours = 23 * 60 * 60
     
     if timeElaspsedInSeconds < 3600 {
-      print(timeElaspsedInSeconds)
       let minutes = Int(timeElaspsedInSeconds/60)
-      print(minutes)
       return "• \(minutes)m"
     }
     else if timeElaspsedInSeconds < secondsIn23Hours {

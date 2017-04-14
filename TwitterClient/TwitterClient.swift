@@ -31,8 +31,10 @@ class TwitterClient: BDBOAuth1SessionManager {
   var loginSuccess: (() -> ())?
   var loginFailure: ((Error) -> ())?
   
-  func homeTimeLine(success: @escaping ([Tweet]) -> (), failure: @escaping (Error) -> ()) {
-    get(twitterHomeTimeLinePath, parameters: nil, progress: nil, success: { (task: URLSessionDataTask, response: Any?) in
+  
+  func homeTimeLine(parameters: [String: AnyObject]? ,success: @escaping ([Tweet]) -> (), failure: @escaping (Error) -> ()) {
+    
+    get(twitterHomeTimeLinePath, parameters: parameters, progress: nil, success: { (task: URLSessionDataTask, response: Any?) in
       
       let dictionariesArray = response as! [NSDictionary]
       let tweets = Tweet.tweetsWithArray(dictionaryArray: dictionariesArray)
@@ -90,10 +92,10 @@ class TwitterClient: BDBOAuth1SessionManager {
     fetchAccessToken(withPath: twitterAccessTokenPath, method: "POST", requestToken: requestToken, success: { (accesToken: BDBOAuth1Credential?) in
       
       self.currentAccount(success: { (user: User) in
-          User.currentUser = user
-          self.loginSuccess?()
+        User.currentUser = user
+        self.loginSuccess?()
       }, failure: { (error: Error) in
-          self.loginFailure?(error)
+        self.loginFailure?(error)
       })
       
       
@@ -110,12 +112,10 @@ class TwitterClient: BDBOAuth1SessionManager {
     
     post(twitterPostTweetUrl, parameters: parameters, progress: nil, success: { (task:  URLSessionDataTask, response: Any?) in
       print("tweet sent successfully")
-//      success(response)
+      //      success(response)
       print(response!)
     }, failure: { (task: URLSessionDataTask?, error: Error) in
       print("\nError posting tweet1:: \(error) \n\n")
     })
   }
-  
-
 }

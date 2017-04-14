@@ -10,10 +10,15 @@ import UIKit
 
 class TweetsViewController: UIViewController {
   
-  var tweets: [Tweet]!
+  var tweets: [Tweet] = []
   
   @IBOutlet weak var tableView: UITableView!
+  
   let refreshControl = UIRefreshControl()
+  
+  var isMoreDataLoading = false
+  var currentOffset = 0
+  var loadingMoreView:InfiniteScrollActivityView?
   
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -24,10 +29,22 @@ class TweetsViewController: UIViewController {
     tableView.rowHeight = UITableViewAutomaticDimension
     tableView.estimatedRowHeight = 200
     
+    currentOffset = 0
     loadTweets()
     
+    // Refresh Control
     refreshControl.addTarget(self, action: #selector(TweetsViewController.loadTweets), for: .valueChanged)
     tableView.insertSubview(refreshControl, at: 0)
+    
+    // Infinite Scroll Control
+    let frame = CGRect(x: 0, y: tableView.contentSize.height, width: tableView.bounds.size.width, height: InfiniteScrollActivityView.defaultHeight)
+    loadingMoreView = InfiniteScrollActivityView(frame: frame)
+    loadingMoreView!.isHidden = true
+    tableView.addSubview(loadingMoreView!)
+    
+    var insets = tableView.contentInset
+    insets.bottom += InfiniteScrollActivityView.defaultHeight
+    tableView.contentInset = insets
   }
   
   @IBAction func onLogoutButton(_ sender: Any) {
@@ -39,12 +56,18 @@ class TweetsViewController: UIViewController {
   }
   
   func loadTweets() {
-    TwitterClient.sharedInstance?.homeTimeLine(success: { (tweets: [Tweet]) in
-      print("*** \(tweets.count) Number of tweets retrieved for user")
+    var parameters = [String: AnyObject]()
+    parameters["count"] = 20 as AnyObject
+    parameters["offset"] = currentOffset as AnyObject
+    
+    TwitterClient.sharedInstance?.homeTimeLine(parameters: parameters ,success: { (tweets: [Tweet]?) in
+      print("*** \(tweets?.count ?? 0) Number of tweets retrieved for user")
       
-      self.tweets = tweets
+      self.tweets += tweets!
       self.tableView.reloadData()
       self.refreshControl.endRefreshing()
+      self.loadingMoreView!.stopAnimating()
+      self.isMoreDataLoading = false
       
     }, failure: { (error: Error) in
       print(error.localizedDescription)
@@ -56,7 +79,7 @@ class TweetsViewController: UIViewController {
     if segue.identifier == "tweetDetailSegue" {
       let cell = sender as! TweetCell
       let indexPath = tableView.indexPath(for: cell)
-      let tweet = tweets![indexPath!.row]
+      let tweet = tweets[indexPath!.row]
       
       let uiNavigationController = segue.destination as! UINavigationController
       let detailViewController = uiNavigationController.topViewController as! TweetDetailViewController
@@ -67,15 +90,12 @@ class TweetsViewController: UIViewController {
   
 }
 
+
+// MARK: - Table and Scroll View
 extension TweetsViewController: UITableViewDataSource, UITableViewDelegate {
   
   func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-    if tweets != nil {
       return tweets.count
-    }
-    else {
-      return 0
-    }
   }
   
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -85,4 +105,23 @@ extension TweetsViewController: UITableViewDataSource, UITableViewDelegate {
     return cell
   }
   
+  func scrollViewDidScroll(_ scrollView: UIScrollView) {
+    // Calculate the position of one screen length before the bottom of the results
+    let scrollViewContentHeight = tableView.contentSize.height
+    let scrollOffsetThreshold = scrollViewContentHeight - tableView.bounds.size.height
+    
+    if (!isMoreDataLoading) {
+      // When the user has scrolled past the threshold, start requesting
+      if(scrollView.contentOffset.y > scrollOffsetThreshold && tableView.isDragging) {
+        print("UI Scrolled for more data")
+        isMoreDataLoading = true
+        // Update position of loadingMoreView, and start loading indicator
+        let frame = CGRect(x: 0, y: tableView.contentSize.height, width: tableView.bounds.size.width, height: InfiniteScrollActivityView.defaultHeight)
+        loadingMoreView?.frame = frame
+        loadingMoreView!.startAnimating()
+        currentOffset += 20
+        loadTweets()
+      }
+    }
+  }
 }

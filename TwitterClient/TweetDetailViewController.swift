@@ -40,7 +40,7 @@ class TweetDetailViewController: UIViewController {
       retweetUserNameLabel.bounds.size.height = 0
     }
     else {
-      retweetUserNameLabel.text = tweet?.retweetUserName
+      retweetUserNameLabel.text = (tweet?.retweetUserName)! + " Retweeted"
     }
     
     userNameLabel.text = tweet.userName

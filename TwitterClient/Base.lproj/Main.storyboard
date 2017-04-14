@@ -22,10 +22,12 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="C3O-qJ-rMc">
-                                <rect key="frame" x="55" y="321" width="210" height="52"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="C3O-qJ-rMc">
+                                <rect key="frame" x="56" y="301" width="208" height="50"/>
                                 <color key="backgroundColor" red="0.40000000600000002" green="0.80000001190000003" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="50" id="YVu-8Z-Lar"/>
+                                </constraints>
                                 <fontDescription key="fontDescription" type="system" weight="light" pointSize="19"/>
                                 <state key="normal" title="Login with Twitter">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -36,6 +38,12 @@
                             </button>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="C3O-qJ-rMc" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="JCJ-dn-GM2"/>
+                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="C3O-qJ-rMc" secondAttribute="bottom" constant="217" id="fRH-s3-8jw"/>
+                            <constraint firstAttribute="trailing" secondItem="C3O-qJ-rMc" secondAttribute="trailing" constant="56" id="nz8-pM-uo8"/>
+                            <constraint firstItem="C3O-qJ-rMc" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" constant="56" id="tOY-kR-SE3"/>
+                        </constraints>
                     </view>
                     <connections>
                         <segue destination="9lM-An-c9S" kind="presentation" identifier="loginSegue" id="MY2-Ob-rbS"/>
@@ -43,7 +51,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-332" y="172"/>
+            <point key="canvasLocation" x="-333.75" y="171.12676056338029"/>
         </scene>
         <!--Home-->
         <scene sceneID="i5f-Ue-3cu">
@@ -218,7 +226,7 @@
                                 <action selector="onLogoutButton:" destination="NEt-qH-ENh" id="Z0h-ow-lW0"/>
                             </connections>
                         </barButtonItem>
-                        <barButtonItem key="rightBarButtonItem" title="New" id="52P-W3-Cyk">
+                        <barButtonItem key="rightBarButtonItem" image="tweet3" id="52P-W3-Cyk">
                             <connections>
                                 <segue destination="Taf-Wk-V1C" kind="presentation" identifier="newTweetSegue" id="3OJ-13-8jt"/>
                             </connections>
@@ -291,7 +299,7 @@
                             </connections>
                         </barButtonItem>
                         <rightBarButtonItems>
-                            <barButtonItem title="Tweet" id="vA8-rJ-KNf">
+                            <barButtonItem image="tweet" id="vA8-rJ-KNf">
                                 <connections>
                                     <action selector="onTweetButton:" destination="2s1-AV-nlZ" id="AbQ-qm-Y7x"/>
                                 </connections>
@@ -568,6 +576,8 @@
         <image name="retweet" width="24" height="24"/>
         <image name="retweet_blue" width="24" height="24"/>
         <image name="star" width="24" height="24"/>
+        <image name="tweet" width="24" height="24"/>
+        <image name="tweet3" width="16" height="16"/>
         <image name="unstar" width="25" height="25"/>
     </resources>
 </document>
