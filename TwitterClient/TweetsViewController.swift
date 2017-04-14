@@ -13,6 +13,7 @@ class TweetsViewController: UIViewController {
   var tweets: [Tweet]!
   
   @IBOutlet weak var tableView: UITableView!
+  let refreshControl = UIRefreshControl()
   
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -20,15 +21,12 @@ class TweetsViewController: UIViewController {
     tableView.dataSource = self
     tableView.delegate = self
     
-    TwitterClient.sharedInstance?.homeTimeLine(success: { (tweets: [Tweet]) in
-      print("*** \(tweets.count) Number of tweets retrieved for user")
-      
-      self.tweets = tweets
-      self.tableView.reloadData()
-      
-    }, failure: { (error: Error) in
-       print(error.localizedDescription)
-    })
+    loadTweets()
+    
+    refreshControl.addTarget(self, action: #selector(TweetsViewController.loadTweets), for: .valueChanged)
+    tableView.insertSubview(refreshControl, at: 0)
+
+    
   }
 
   @IBAction func onLogoutButton(_ sender: Any) {
@@ -37,6 +35,19 @@ class TweetsViewController: UIViewController {
     TwitterClient.sharedInstance?.logout()
     
     NotificationCenter.default.post(name: NSNotification.Name(rawValue: User.userDidLogoutNotification), object: nil)
+  }
+  
+  func loadTweets() {
+    TwitterClient.sharedInstance?.homeTimeLine(success: { (tweets: [Tweet]) in
+      print("*** \(tweets.count) Number of tweets retrieved for user")
+      
+      self.tweets = tweets
+      self.tableView.reloadData()
+      self.refreshControl.endRefreshing()
+      
+    }, failure: { (error: Error) in
+      print(error.localizedDescription)
+    })
   }
     /*
     // MARK: - Navigation

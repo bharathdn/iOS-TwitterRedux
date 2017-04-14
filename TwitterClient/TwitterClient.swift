@@ -21,6 +21,9 @@ let twitterVerifyCredentialsPath = "1.1/account/verify_credentials.json"
 let twitterHomeTimeLinePath = "1.1/statuses/home_timeline.json"
 let twitterClientOAuthUrl = "twitterClient://oauth"
 
+// post tweet
+let twitterPostTweetUrl = "1.1/statuses/update.json"
+
 class TwitterClient: BDBOAuth1SessionManager {
   
   static let sharedInstance = TwitterClient(baseURL: NSURL(string: twitterBaseUrl)! as URL, consumerKey: twitterConsumerKey, consumerSecret: twitterConsumerSecret)
@@ -99,6 +102,18 @@ class TwitterClient: BDBOAuth1SessionManager {
       print("Error fetching Access Token")
       self.loginFailure?(error!)
       
+    })
+  }
+  
+  func postTweet(tweetMsg: String, success: (Tweet) -> (), failure: (Error) -> ()) {
+    let parameters = ["status": tweetMsg]
+    
+    post(twitterPostTweetUrl, parameters: parameters, progress: nil, success: { (task:  URLSessionDataTask, response: Any?) in
+      print("tweet sent successfully")
+//      success(response)
+      print(response!)
+    }, failure: { (task: URLSessionDataTask?, error: Error) in
+      print("\nError posting tweet1:: \(error) \n\n")
     })
   }
   
