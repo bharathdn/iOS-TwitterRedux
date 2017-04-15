@@ -236,11 +236,13 @@
                     </view>
                     <navigationItem key="navigationItem" title="Home" id="xHv-nc-5Wt">
                         <barButtonItem key="leftBarButtonItem" title="Sign Out" id="G57-C1-zhx">
+                            <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             <connections>
                                 <action selector="onLogoutButton:" destination="NEt-qH-ENh" id="Z0h-ow-lW0"/>
                             </connections>
                         </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" image="tweet3" id="52P-W3-Cyk">
+                            <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             <connections>
                                 <segue destination="Taf-Wk-V1C" kind="presentation" identifier="newTweetSegue" id="3OJ-13-8jt"/>
                             </connections>
@@ -311,18 +313,20 @@
                     </view>
                     <navigationItem key="navigationItem" id="cfC-zP-nrS">
                         <barButtonItem key="leftBarButtonItem" title="Cancel" id="1Lo-j9-yMo">
+                            <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             <connections>
                                 <action selector="onCancelButton:" destination="2s1-AV-nlZ" id="cKy-Tg-2PJ"/>
                             </connections>
                         </barButtonItem>
                         <rightBarButtonItems>
                             <barButtonItem image="tweet" id="vA8-rJ-KNf">
+                                <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <connections>
                                     <action selector="onTweetButton:" destination="2s1-AV-nlZ" id="AbQ-qm-Y7x"/>
                                 </connections>
                             </barButtonItem>
                             <barButtonItem title="140" id="IT0-ns-SwX">
-                                <color key="tintColor" red="0.69011962410000005" green="0.69024020429999999" blue="0.69011199469999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </barButtonItem>
                         </rightBarButtonItems>
                     </navigationItem>
@@ -347,6 +351,11 @@
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="Mej-AD-2ai">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
+                        <color key="tintColor" red="0.1148131862" green="0.63301128149999997" blue="0.94878464939999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="barTintColor" red="0.1148131862" green="0.63301128149999997" blue="0.94878464939999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <textAttributes key="titleTextAttributes">
+                            <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        </textAttributes>
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>
@@ -540,8 +549,8 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Tweet" id="ToE-UB-6g1">
-                        <barButtonItem key="backBarButtonItem" tag="1" title="Back" id="GdT-Qv-LbN"/>
                         <barButtonItem key="leftBarButtonItem" title="Cancel" id="YS8-P7-PuM">
+                            <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             <connections>
                                 <action selector="onCancelButton:" destination="xZE-Rj-9A0" id="NWj-J3-wsG"/>
                             </connections>
@@ -571,6 +580,7 @@
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="8t9-RU-reX">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
+                        <color key="barTintColor" red="0.1148131862" green="0.63301128149999997" blue="0.94878464939999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>
@@ -589,6 +599,10 @@
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="fSu-Ar-UPg">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
+                        <color key="barTintColor" red="0.1148131862" green="0.63301128149999997" blue="0.94878464939999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <textAttributes key="titleTextAttributes">
+                            <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        </textAttributes>
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>

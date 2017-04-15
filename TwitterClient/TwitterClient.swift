@@ -23,6 +23,8 @@ let twitterClientOAuthUrl = "twitterClient://oauth"
 
 // post tweet
 let twitterPostTweetUrl = "1.1/statuses/update.json"
+//retweet
+let twitterRetweetUrl = "1.1/statuses/retweet/:id.json"
 
 class TwitterClient: BDBOAuth1SessionManager {
   
