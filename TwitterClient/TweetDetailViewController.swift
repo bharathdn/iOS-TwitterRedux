@@ -20,12 +20,22 @@ class TweetDetailViewController: UIViewController {
   @IBOutlet weak var tweetTimeStampLabel: UILabel!
   @IBOutlet weak var retweetCountLabel: UILabel!
   @IBOutlet weak var favCountLabel: UILabel!
-  
   @IBOutlet weak var retweetButtonImageView: UIButton!
   @IBOutlet weak var favButtonImageView: UIButton!
+  @IBOutlet weak var charsRemainingLabel: UILabel!
+  
+  // Pop over items
+  @IBOutlet weak var replyPopoverView: UIView!
+  @IBOutlet weak var replyPopoverTextView: UITextView!
+  @IBOutlet weak var replyPopoverButton: UIButton!
+  @IBOutlet weak var remainingCharLabel: UILabel!
+  
+  let twitterBlueColor = UIColor(displayP3Red: 0, green: 122, blue: 255, alpha: 0)
   
   override func viewDidLoad() {
     super.viewDidLoad()
+    replyPopoverView.isHidden = true
+    replyPopoverTextView.delegate = self
     tweetTextLabel.preferredMaxLayoutWidth = tweetTextLabel.frame.size.width
     if tweet != nil {
       populateDetails()
@@ -74,17 +84,15 @@ class TweetDetailViewController: UIViewController {
   
   @IBAction func onReplyButtton(_ sender: Any) {
     print("Replying to tweet")
-    TwitterClient.sharedInstance?.replyToTweet(replyMsg: "Hello der", tweet: tweet, success: { (responseTweet: Tweet) in
-      print("reply success")
-    }, failure: { (error: Error) in
-      print("reply fail")
-    })
+    replyPopoverView.isHidden = false
+    replyPopoverTextView.becomeFirstResponder()
+    replyPopoverButton.isEnabled = false
+    replyPopoverButton.setTitleColor(UIColor.gray, for: .normal)
   }
   
   @IBAction func onRetweetButton(_ sender: Any) {
     print("Retweeting")
-    TwitterClient.sharedInstance?.reTweet(tweet: tweet,
-    success: { (responseTweet: Tweet) in
+    TwitterClient.sharedInstance?.reTweet(tweet: tweet, success: { (responseTweet: Tweet) in
       self.retweetButtonImageView.setImage(#imageLiteral(resourceName: "retweetGreen"), for: .normal)
       self.retweetCountLabel.text = String(responseTweet.retweetCount)
     }, failure: { (error: Error) in
@@ -102,6 +110,19 @@ class TweetDetailViewController: UIViewController {
     })
   }
   
+  @IBAction func onPopoverReplyButton(_ sender: Any) {
+    let replyText = replyPopoverTextView.text!
+    print("your reply:: \(replyText)")
+    let replyMsg = replyPopoverTextView.text!
+    TwitterClient.sharedInstance?.replyToTweet(replyMsg: replyMsg, tweet: tweet, success: { (responseTweet: Tweet) in
+      print("reply success")
+    }, failure: { (error: Error) in
+      print("reply fail")
+    })
+    
+    view.endEditing(true)
+    replyPopoverView.isHidden = true
+  }
   /*
    // MARK: - Navigation
    
@@ -113,3 +134,40 @@ class TweetDetailViewController: UIViewController {
    */
   
 }
+
+extension TweetDetailViewController: UITextViewDelegate {
+  
+  func textViewDidChange(_ textView: UITextView) {
+    if(replyPopoverTextView.text!.characters.count > 0) {
+      replyPopoverButton.isEnabled = true
+      replyPopoverButton.setTitleColor(UIColor.white, for: .normal)
+    }
+    else {
+      replyPopoverButton.isEnabled = false
+      replyPopoverButton.setTitleColor(UIColor.gray, for: .normal)
+    }
+    
+    limitcharacterCount()
+  }
+  
+  func limitcharacterCount() {
+    let limit = 140
+    let replyText = replyPopoverTextView.text!
+    
+    let replyTextCharCount = replyText.characters.count
+    let remainingCharacters = limit - replyTextCharCount
+    
+    if remainingCharacters <= 0 {
+      remainingCharLabel.textColor = UIColor.red
+      remainingCharLabel.text = "0 chars remaining"
+      
+      let limitedCharactersIndex = replyText.index(replyText.startIndex, offsetBy: limit)
+      replyPopoverTextView.text = replyText.substring(to: limitedCharactersIndex)
+    }
+    else {
+      remainingCharLabel.text = String(remainingCharacters) + " chars remaining"
+      remainingCharLabel.textColor = UIColor.white
+    }
+  }
+}
+

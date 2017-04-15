@@ -27,7 +27,7 @@ class ComposeTweetController: UIViewController {
   override func viewDidLoad() {
     super.viewDidLoad()
     tweetTextView.delegate = self
-    
+    tweetTextView.becomeFirstResponder()
     // Do any additional setup after loading the view.
     let user = User.currentUser
     userImageView.setImageWith((user?.profileImageUrl)!)
@@ -40,6 +40,7 @@ class ComposeTweetController: UIViewController {
   @IBAction func onTweetButton(_ sender: Any) {
     print("\n\n \(tweetTextView.text!.characters.count) \n\n")
     print(tweetTextView.text!)
+    view.endEditing(true)
     if tweetTextView.text!.characters.count > 0 {
       TwitterClient.sharedInstance?.postTweet(tweetMsg: tweetTextView.text!, success: { (response: Tweet) in
         print("tweeting success")

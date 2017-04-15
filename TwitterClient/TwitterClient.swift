@@ -151,8 +151,10 @@ class TwitterClient: BDBOAuth1SessionManager {
   }
   
   func replyToTweet(replyMsg: String, tweet: Tweet, success: @escaping (Tweet) -> (), failure: @escaping (Error) -> ()) {
+    let replyMsg = "@" + tweet.userName! + " " + replyMsg
     let parsedMsg = replyMsg.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)
     let url = "1.1/statuses/update.json?status=\(parsedMsg!)&" + twitterReplyStatusId + "=" + tweet.id!
+    print(url)
     post(url, parameters: nil, progress: nil, success: { (task:  URLSessionDataTask, response: Any?) in
     print("reply posted successfully")
     success(Tweet.init(dictionary: response as! NSDictionary))
