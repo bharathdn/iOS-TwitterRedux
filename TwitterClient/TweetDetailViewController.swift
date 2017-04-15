@@ -21,7 +21,6 @@ class TweetDetailViewController: UIViewController {
   @IBOutlet weak var retweetCountLabel: UILabel!
   @IBOutlet weak var favCountLabel: UILabel!
   
-  
   override func viewDidLoad() {
     super.viewDidLoad()
     tweetTextLabel.preferredMaxLayoutWidth = tweetTextLabel.frame.size.width
@@ -60,6 +59,18 @@ class TweetDetailViewController: UIViewController {
   
   @IBAction func onCancelButton(_ sender: Any) {
     dismiss(animated: true, completion: nil)
+  }
+  
+  @IBAction func onReplyButtton(_ sender: Any) {
+    print("Replying to tweet")
+  }
+  
+  @IBAction func onRetweetButton(_ sender: Any) {
+    print("Retweeting")
+  }
+  
+  @IBAction func onFavButton(_ sender: Any) {
+    print("Fav")
   }
   
   /*
