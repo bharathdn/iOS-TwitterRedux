@@ -74,6 +74,51 @@ class TweetsViewController: UIViewController {
     })
   }
   
+  @IBAction private func onReplyButtton(_ sender: Any) {
+    print("Replying to tweet")
+    //    TwitterClient.sharedInstance?.replyToTweet(replyMsg: "Hello der", tweet: tweet, success: { (responseTweet: Tweet) in
+    //      print("reply success")
+    //    }, failure: { (error: Error) in
+    //      print("reply fail")
+    //    })
+  }
+  
+  @IBAction private func onRetweetButton(_ sender: Any) {
+    print("Retweeting from home Timeline")
+    
+    let button = sender as! UIButton
+    let cell = button.superview?.superview as! TweetCell
+    let index = tableView.indexPath(for: cell)?[1]
+    
+    let tweet = tweets[index!]
+    let indexPath = IndexPath(item: index!, section: 0)
+    
+    TwitterClient.sharedInstance?.reTweet(tweet: tweet, success: { (responseTweet: Tweet) in
+      self.tweets[index!] = tweet
+      self.tableView.reloadRows(at: [indexPath], with: .automatic)
+    }, failure: { (error: Error) in
+      print("\n\nError retweting from Home TimeLine:: \(error.localizedDescription)")
+    })
+  }
+  
+  @IBAction private func onFavButton(_ sender: Any) {
+    print("Fav Tweet clicked")
+    let button = sender as! UIButton
+    let cell = button.superview?.superview as! TweetCell
+    let index = tableView.indexPath(for: cell)?[1]
+    
+    let tweet = tweets[index!]
+    let indexPath = IndexPath(item: index!, section: 0)
+    
+    TwitterClient.sharedInstance?.favoriteTweet(tweet: tweet, success: { (tweet: Tweet) in
+      self.tweets[index!] = tweet
+      self.tableView.reloadRows(at: [indexPath], with: .automatic)
+    }, failure: { (error: Error) in
+      print("\n\nError favoriting tweet on home Timeline:: \(error.localizedDescription)")
+    })
+  }
+  
+  
   // MARK: - Navigation
   override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
     if segue.identifier == "tweetDetailSegue" {
@@ -90,7 +135,6 @@ class TweetsViewController: UIViewController {
       let composeTweetController = uiNavigationController.topViewController as!ComposeTweetController
       composeTweetController.delegate = self
     }
-    
   }
   
 }
@@ -109,7 +153,7 @@ extension TweetsViewController: ComposeTweetControllerDelegate {
 extension TweetsViewController: UITableViewDataSource, UITableViewDelegate {
   
   func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-      return tweets.count
+    return tweets.count
   }
   
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {

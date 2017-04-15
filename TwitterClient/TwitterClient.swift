@@ -27,6 +27,8 @@ let twitterPostTweetUrl = "1.1/statuses/update.json"
 let twitterRetweetUrl = "1.1/statuses/retweet/" // + ":id.json"
 // Favorite
 let twitterFavUrl = "1.1/favorites/create.json"
+// reply
+let twitterReplyStatusId = "in_reply_to_status_id"
 
 class TwitterClient: BDBOAuth1SessionManager {
   
@@ -145,6 +147,18 @@ class TwitterClient: BDBOAuth1SessionManager {
     }, failure: { (task: URLSessionDataTask?, error: Error) in
       print("\nError favoriting tweet1:: \(error) \n\n")
       failure(error)
+    })
+  }
+  
+  func replyToTweet(replyMsg: String, tweet: Tweet, success: @escaping (Tweet) -> (), failure: @escaping (Error) -> ()) {
+    let parsedMsg = replyMsg.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)
+    let url = "1.1/statuses/update.json?status=\(parsedMsg!)&" + twitterReplyStatusId + "=" + tweet.id!
+    post(url, parameters: nil, progress: nil, success: { (task:  URLSessionDataTask, response: Any?) in
+    print("reply posted successfully")
+    success(Tweet.init(dictionary: response as! NSDictionary))
+    }, failure: { (task: URLSessionDataTask?, error: Error) in
+    print("\nError favoriting tweet1:: \(error) \n\n")
+    failure(error)
     })
   }
   

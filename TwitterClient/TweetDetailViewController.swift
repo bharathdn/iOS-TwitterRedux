@@ -74,6 +74,11 @@ class TweetDetailViewController: UIViewController {
   
   @IBAction func onReplyButtton(_ sender: Any) {
     print("Replying to tweet")
+    TwitterClient.sharedInstance?.replyToTweet(replyMsg: "Hello der", tweet: tweet, success: { (responseTweet: Tweet) in
+      print("reply success")
+    }, failure: { (error: Error) in
+      print("reply fail")
+    })
   }
   
   @IBAction func onRetweetButton(_ sender: Any) {
@@ -81,6 +86,7 @@ class TweetDetailViewController: UIViewController {
     TwitterClient.sharedInstance?.reTweet(tweet: tweet,
     success: { (responseTweet: Tweet) in
       self.retweetButtonImageView.setImage(#imageLiteral(resourceName: "retweetGreen"), for: .normal)
+      self.retweetCountLabel.text = String(responseTweet.retweetCount)
     }, failure: { (error: Error) in
       print("\n\nError retweting:: \(error.localizedDescription)")
     })
@@ -88,8 +94,9 @@ class TweetDetailViewController: UIViewController {
   
   @IBAction func onFavButton(_ sender: Any) {
     print("Fav Tweet clicked")
-    TwitterClient.sharedInstance?.favoriteTweet(tweet: tweet, success: { (tweet: Tweet) in
+    TwitterClient.sharedInstance?.favoriteTweet(tweet: tweet, success: { (responseTweet: Tweet) in
       self.favButtonImageView.setImage(#imageLiteral(resourceName: "likeActive"), for: .normal)
+      self.favCountLabel.text = String(responseTweet.favouritesCount)
     }, failure: { (error: Error) in
       print("\n\nError favoriting:: \(error.localizedDescription)")
     })

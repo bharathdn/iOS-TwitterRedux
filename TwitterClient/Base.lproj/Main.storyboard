@@ -167,6 +167,7 @@
                                                     </constraints>
                                                     <state key="normal" title="Button" image="retweet-1"/>
                                                     <connections>
+                                                        <action selector="onRetweetButton:" destination="NEt-qH-ENh" eventType="touchUpInside" id="JzU-1K-MWh"/>
                                                         <action selector="onRetweetButton:" destination="xZE-Rj-9A0" eventType="touchUpInside" id="PAk-1O-Va2"/>
                                                     </connections>
                                                 </button>
@@ -180,6 +181,7 @@
                                                     </constraints>
                                                     <state key="normal" title="Button" image="likeInactive"/>
                                                     <connections>
+                                                        <action selector="onFavButton:" destination="NEt-qH-ENh" eventType="touchUpInside" id="3H0-B5-oF2"/>
                                                         <action selector="onFavButton:" destination="xZE-Rj-9A0" eventType="touchUpInside" id="9B7-zM-R8a"/>
                                                     </connections>
                                                 </button>
@@ -513,6 +515,9 @@
                                     <constraint firstAttribute="height" constant="17" id="lhC-nz-G8g"/>
                                 </constraints>
                                 <state key="normal" title="Button" image="reply2"/>
+                                <connections>
+                                    <action selector="onReplyButtton:" destination="xZE-Rj-9A0" eventType="touchUpInside" id="cuc-Mf-8jF"/>
+                                </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -637,6 +642,7 @@
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="218-nO-qCC">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
+                        <color key="barTintColor" red="0.1148131862282753" green="0.63301128149032593" blue="0.94878464937210083" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>
@@ -645,7 +651,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="A6o-QB-Bof" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-333.75" y="171.12676056338029"/>
+            <point key="canvasLocation" x="-99" y="170"/>
         </scene>
     </scenes>
     <resources>
