@@ -475,7 +475,7 @@
                                 </constraints>
                                 <state key="normal" title="Button" image="likeInactive"/>
                                 <connections>
-                                    <action selector="onFavButton:" destination="xZE-Rj-9A0" eventType="touchUpInside" id="OGv-ws-kw2"/>
+                                    <action selector="onFavButton:" destination="xZE-Rj-9A0" eventType="touchUpInside" id="usq-q7-CIk"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Vnd-ef-M2s">
@@ -486,7 +486,7 @@
                                 </constraints>
                                 <state key="normal" title="Button" image="retweet-1"/>
                                 <connections>
-                                    <action selector="onRetweetButton:" destination="xZE-Rj-9A0" eventType="touchUpInside" id="BpU-l1-fEh"/>
+                                    <action selector="onRetweetButton:" destination="xZE-Rj-9A0" eventType="touchUpInside" id="Nb3-9S-gGV"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CfP-2i-TRB">
@@ -496,9 +496,6 @@
                                     <constraint firstAttribute="height" constant="17" id="lhC-nz-G8g"/>
                                 </constraints>
                                 <state key="normal" title="Button" image="reply2"/>
-                                <connections>
-                                    <action selector="onReplyButtton:" destination="xZE-Rj-9A0" eventType="touchUpInside" id="kq3-dj-kx8"/>
-                                </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -557,7 +554,9 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="favButtonImageView" destination="zrJ-kI-CzB" id="Ejj-on-Mtr"/>
                         <outlet property="favCountLabel" destination="Zoa-P7-wjT" id="orD-vR-lh6"/>
+                        <outlet property="retweetButtonImageView" destination="Vnd-ef-M2s" id="FR8-8m-gzu"/>
                         <outlet property="retweetCountLabel" destination="cEy-Hq-oa0" id="i09-ZH-V15"/>
                         <outlet property="retweetImageView" destination="lKG-t5-zpy" id="TSB-BN-TnT"/>
                         <outlet property="retweetUserNameLabel" destination="Nm3-vC-0rw" id="I9g-z2-KHr"/>

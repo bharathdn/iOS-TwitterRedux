@@ -21,10 +21,12 @@ let twitterVerifyCredentialsPath = "1.1/account/verify_credentials.json"
 let twitterHomeTimeLinePath = "1.1/statuses/home_timeline.json"
 let twitterClientOAuthUrl = "twitterClient://oauth"
 
-// post tweet
+// Post tweet
 let twitterPostTweetUrl = "1.1/statuses/update.json"
-//retweet
-let twitterRetweetUrl = "1.1/statuses/retweet/:id.json"
+// Retweet
+let twitterRetweetUrl = "1.1/statuses/retweet/" // + ":id.json"
+// Favorite
+let twitterFavUrl = "1.1/favorites/create.json"
 
 class TwitterClient: BDBOAuth1SessionManager {
   
@@ -120,4 +122,30 @@ class TwitterClient: BDBOAuth1SessionManager {
       failure(error)
     })
   }
+  
+  
+  func reTweet(tweet: Tweet, success: @escaping (Tweet) -> (), failure: @escaping (Error) -> ()) {
+    let retweetUrlWithId = twitterRetweetUrl + tweet.id! + ".json"
+    post(retweetUrlWithId, parameters: nil, progress: nil, success: { (task:  URLSessionDataTask, response: Any?) in
+      print("retweeted successfully\n")
+      print("\n\n")
+      success(Tweet.init(dictionary: response as! NSDictionary))
+    }, failure: { (task: URLSessionDataTask?, error: Error) in
+      print("\nError posting tweet1:: \(error) \n\n")
+      failure(error)
+    })
+  }
+  
+  
+  func favoriteTweet(tweet: Tweet, success: @escaping (Tweet) -> (), failure: @escaping (Error) -> ()) {
+    let parameters = ["id": tweet.id]
+    post(twitterFavUrl, parameters: parameters, progress: nil, success: { (task:  URLSessionDataTask, response: Any?) in
+      print("tweet favorited successfully")
+      success(Tweet.init(dictionary: response as! NSDictionary))
+    }, failure: { (task: URLSessionDataTask?, error: Error) in
+      print("\nError favoriting tweet1:: \(error) \n\n")
+      failure(error)
+    })
+  }
+  
 }

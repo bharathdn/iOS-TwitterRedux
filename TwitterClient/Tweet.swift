@@ -15,13 +15,17 @@ class Tweet: NSObject {
   var retweetCount: Int = 0
   var favouritesCount: Int = 0
   var timeStamp: Date?
+  var id: String?
   
   var userName: String?
   var userScreenName: String?
   var userImageUrl: URL?
+  var didUserRetweet: Bool?
+  var didUserFavorite: Bool?
   
   var retweetUserName: String?
   var retweetUserScreenName: String?
+  
 
   init(dictionary: NSDictionary) {
     text = dictionary["text"] as? String
@@ -35,6 +39,11 @@ class Tweet: NSObject {
       formatter.dateFormat = "EEE MMM d HH:mm:ss Z y"
       timeStamp = formatter.date(from: timeStampString)
     }
+    
+    id = dictionary["id_str"] as? String
+    
+    didUserRetweet = dictionary["retweeted"] as? Bool ?? false
+    didUserFavorite = dictionary["favorited"] as? Bool ?? false
     
     let retweetStatus = dictionary["retweeted_status"] as? NSDictionary
     if retweetStatus != nil {

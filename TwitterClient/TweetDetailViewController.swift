@@ -21,6 +21,9 @@ class TweetDetailViewController: UIViewController {
   @IBOutlet weak var retweetCountLabel: UILabel!
   @IBOutlet weak var favCountLabel: UILabel!
   
+  @IBOutlet weak var retweetButtonImageView: UIButton!
+  @IBOutlet weak var favButtonImageView: UIButton!
+  
   override func viewDidLoad() {
     super.viewDidLoad()
     tweetTextLabel.preferredMaxLayoutWidth = tweetTextLabel.frame.size.width
@@ -55,6 +58,14 @@ class TweetDetailViewController: UIViewController {
     
     retweetCountLabel.text = String(describing: tweet.retweetCount)
     favCountLabel.text = String(describing: tweet.favouritesCount)
+    
+    if tweet.didUserRetweet! {
+      retweetButtonImageView.setImage(#imageLiteral(resourceName: "retweetGreen"), for: .normal)
+    }
+    
+    if tweet.didUserFavorite! {
+      favButtonImageView.setImage(#imageLiteral(resourceName: "likeActive"), for: .normal)
+    }
   }
   
   @IBAction func onCancelButton(_ sender: Any) {
@@ -67,11 +78,21 @@ class TweetDetailViewController: UIViewController {
   
   @IBAction func onRetweetButton(_ sender: Any) {
     print("Retweeting")
-    
+    TwitterClient.sharedInstance?.reTweet(tweet: tweet,
+    success: { (responseTweet: Tweet) in
+      self.retweetButtonImageView.setImage(#imageLiteral(resourceName: "retweetGreen"), for: .normal)
+    }, failure: { (error: Error) in
+      print("\n\nError retweting:: \(error.localizedDescription)")
+    })
   }
   
   @IBAction func onFavButton(_ sender: Any) {
-    print("Fav")
+    print("Fav Tweet clicked")
+    TwitterClient.sharedInstance?.favoriteTweet(tweet: tweet, success: { (tweet: Tweet) in
+      self.favButtonImageView.setImage(#imageLiteral(resourceName: "likeActive"), for: .normal)
+    }, failure: { (error: Error) in
+      print("\n\nError favoriting:: \(error.localizedDescription)")
+    })
   }
   
   /*
