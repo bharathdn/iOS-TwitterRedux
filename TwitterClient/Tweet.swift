@@ -40,7 +40,7 @@ class Tweet: NSObject {
       timeStamp = formatter.date(from: timeStampString)
     }
     
-    id = dictionary["id"] as? String
+    id = dictionary["id_str"] as? String
     
     didUserRetweet = dictionary["retweeted"] as? Bool ?? false
     didUserFavorite = dictionary["favorited"] as? Bool ?? false

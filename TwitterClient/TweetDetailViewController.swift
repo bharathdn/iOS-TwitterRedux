@@ -122,6 +122,7 @@ class TweetDetailViewController: UIViewController {
     
     view.endEditing(true)
     replyPopoverView.isHidden = true
+    replyPopoverTextView.text = ""
   }
   /*
    // MARK: - Navigation
