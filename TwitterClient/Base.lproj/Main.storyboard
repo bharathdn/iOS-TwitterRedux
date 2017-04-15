@@ -271,9 +271,8 @@
                                 <color key="textColor" red="0.40000000600000002" green="0.40000000600000002" blue="0.40000000600000002" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="RM4-Dz-tW9">
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="RM4-Dz-tW9">
                                 <rect key="frame" x="16" y="130" width="288" height="418"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
@@ -284,7 +283,11 @@
                         <constraints>
                             <constraint firstItem="99N-XL-GsY" firstAttribute="leading" secondItem="Rbu-fV-cf5" secondAttribute="leading" constant="16" id="2B3-lb-28F"/>
                             <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="YOW-Q2-GIJ" secondAttribute="trailing" constant="20" id="40s-md-SUH"/>
+                            <constraint firstItem="RM4-Dz-tW9" firstAttribute="top" secondItem="99N-XL-GsY" secondAttribute="bottom" constant="8" id="HS4-gE-aG1"/>
+                            <constraint firstItem="DyE-fQ-AeR" firstAttribute="top" secondItem="RM4-Dz-tW9" secondAttribute="bottom" constant="20" id="Q6D-bp-NjH"/>
                             <constraint firstItem="YOW-Q2-GIJ" firstAttribute="leading" secondItem="99N-XL-GsY" secondAttribute="trailing" constant="8" id="Sdb-oZ-R3l"/>
+                            <constraint firstAttribute="trailing" secondItem="RM4-Dz-tW9" secondAttribute="trailing" constant="16" id="UvF-ru-W3p"/>
+                            <constraint firstItem="RM4-Dz-tW9" firstAttribute="leading" secondItem="Rbu-fV-cf5" secondAttribute="leading" constant="16" id="Vg7-CJ-65v"/>
                             <constraint firstItem="YOW-Q2-GIJ" firstAttribute="top" secondItem="dyS-VN-FCp" secondAttribute="bottom" constant="2" id="ZHb-U6-Dkn"/>
                             <constraint firstItem="dyS-VN-FCp" firstAttribute="top" secondItem="LDb-q2-9kb" secondAttribute="bottom" constant="8" id="jQO-Jt-fBo"/>
                             <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="dyS-VN-FCp" secondAttribute="trailing" constant="20" id="smF-7J-EKq"/>

@@ -113,7 +113,6 @@ class TwitterClient: BDBOAuth1SessionManager {
     post(twitterPostTweetUrl, parameters: parameters, progress: nil, success: { (task:  URLSessionDataTask, response: Any?) in
       print("tweet sent successfully")
       success(Tweet.init(dictionary: response as! NSDictionary))
-      print(response!)
     }, failure: { (task: URLSessionDataTask?, error: Error) in
       print("\nError posting tweet1:: \(error) \n\n")
       failure(error)

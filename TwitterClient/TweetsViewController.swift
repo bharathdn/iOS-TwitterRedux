@@ -85,6 +85,11 @@ class TweetsViewController: UIViewController {
       let detailViewController = uiNavigationController.topViewController as! TweetDetailViewController
       detailViewController.tweet = tweet
     }
+    else if segue.identifier == "newTweetSegue" {
+      let uiNavigationController = segue.destination as! UINavigationController
+      let composeTweetController = uiNavigationController.topViewController as!ComposeTweetController
+      composeTweetController.delegate = self
+    }
     
   }
   
@@ -92,7 +97,11 @@ class TweetsViewController: UIViewController {
 
 // MARK: - ComposeTweetControllerDelegate
 extension TweetsViewController: ComposeTweetControllerDelegate {
-  
+  func composeTweetController(composeTweetController: ComposeTweetController, didPostTweet tweet: Tweet) {
+    print("tweet posted delegate called on TweetViewController")
+    tweets.insert(tweet, at: 0)
+    tableView.reloadData()
+  }
 }
 
 

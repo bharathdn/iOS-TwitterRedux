@@ -46,6 +46,7 @@ class ComposeTweetController: UIViewController {
         print(response.stringifyTweet())
         self.delegate?.composeTweetController!(composeTweetController: self, didPostTweet: response)
         self.tweetTextView.text = nil
+        self.dismiss(animated: true, completion: nil)
       }, failure: { (error: Error) in
         print("\nError posting tweet2:: \(error) \n\n")
       })
