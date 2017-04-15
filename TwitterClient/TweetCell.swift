@@ -22,6 +22,10 @@ class TweetCell: UITableViewCell {
   @IBOutlet weak var retweetCountLabel: UILabel!
   @IBOutlet weak var favCountLabel: UILabel!
   
+  @IBOutlet weak var replyButtonImageView: UIButton!
+  @IBOutlet weak var retweetButtonImageView: UIButton!
+  @IBOutlet weak var favButtonImageView: UIButton!
+  
   
   var tweet: Tweet! {
     didSet {
@@ -42,6 +46,14 @@ class TweetCell: UITableViewCell {
       repliesCountLabel.text = ""
       retweetCountLabel.text = String(tweet.retweetCount)
       favCountLabel.text = String(tweet.favouritesCount)
+      
+      if tweet.didUserRetweet! {
+        retweetButtonImageView.setImage(#imageLiteral(resourceName: "retweetGreen"), for: .normal)
+      }
+      
+      if tweet.didUserFavorite! {
+        favButtonImageView.setImage(#imageLiteral(resourceName: "likeActive"), for: .normal)
+      }
     }
   }
   
