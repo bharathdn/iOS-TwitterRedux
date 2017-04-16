@@ -30,6 +30,10 @@ class TweetDetailViewController: UIViewController {
   @IBOutlet weak var replyPopoverButton: UIButton!
   @IBOutlet weak var remainingCharLabel: UILabel!
   
+  // auto-layout constraints
+  @IBOutlet weak var userScreenNameTopConstraint: NSLayoutConstraint!
+  @IBOutlet weak var userImageTopConstraint: NSLayoutConstraint!
+  
   let twitterBlueColor = UIColor(displayP3Red: 0, green: 122, blue: 255, alpha: 0)
   
   override func viewDidLoad() {
@@ -47,11 +51,15 @@ class TweetDetailViewController: UIViewController {
     
     if tweet?.retweetUserName == nil {
       retweetImageView.isHidden = true
-      retweetImageView.bounds.size.height = 0
       retweetUserNameLabel.isHidden = true
-      retweetUserNameLabel.bounds.size.height = 0
+      userImageTopConstraint.constant = -18
+      userScreenNameTopConstraint.constant = -18
     }
     else {
+      retweetImageView.isHidden = false
+      retweetUserNameLabel.isHidden = false
+      userImageTopConstraint.constant = 6
+      userScreenNameTopConstraint.constant = 14
       retweetUserNameLabel.text = (tweet?.retweetUserName)! + " Retweeted"
     }
     

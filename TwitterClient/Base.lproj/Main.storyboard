@@ -237,8 +237,10 @@
                                             <outlet property="retweetUserLabel" destination="NLr-aw-aJf" id="w4i-zf-c7J"/>
                                             <outlet property="timeStampLabel" destination="HRf-bS-9gM" id="Pt3-oX-HXw"/>
                                             <outlet property="tweetTextLabel" destination="wHn-b4-e04" id="XXp-ZO-u8N"/>
+                                            <outlet property="userImageTopViewContraint" destination="Rqi-bj-vFW" id="Nhs-Bc-Mla"/>
                                             <outlet property="userImageView" destination="cus-9c-b1H" id="rKG-9e-dyI"/>
                                             <outlet property="userNameLabel" destination="aMM-fc-3QJ" id="uLt-26-L2w"/>
+                                            <outlet property="userScreeNameTopViewConstraint" destination="q8B-Fj-9M4" id="27g-NE-A1A"/>
                                             <outlet property="userScreenNameLabel" destination="ZML-bn-Z2v" id="PaX-xF-VBa"/>
                                             <segue destination="AJK-66-8wW" kind="show" identifier="tweetDetailSegue" id="0wA-Ur-NcC"/>
                                         </connections>
@@ -520,8 +522,8 @@
                                     <action selector="onReplyButtton:" destination="xZE-Rj-9A0" eventType="touchUpInside" id="cuc-Mf-8jF"/>
                                 </connections>
                             </button>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Tc5-eA-LHv">
-                                <rect key="frame" x="10" y="58" width="300" height="175"/>
+                            <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Tc5-eA-LHv">
+                                <rect key="frame" x="-300" y="58" width="300" height="175"/>
                                 <subviews>
                                     <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="B6k-RH-T9F">
                                         <rect key="frame" x="0.0" y="0.0" width="300" height="147"/>
@@ -587,7 +589,6 @@
                             <constraint firstItem="zrJ-kI-CzB" firstAttribute="leading" secondItem="Vnd-ef-M2s" secondAttribute="trailing" constant="50" id="IsP-3O-QgK"/>
                             <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="eDF-Dd-zMz" secondAttribute="trailing" constant="10" id="LEA-JW-9ob"/>
                             <constraint firstItem="igf-YS-LR5" firstAttribute="centerY" secondItem="cEy-Hq-oa0" secondAttribute="centerY" id="Lml-WG-lkO"/>
-                            <constraint firstItem="GU7-B8-bCc" firstAttribute="top" secondItem="lKG-t5-zpy" secondAttribute="bottom" constant="6" id="Rcu-0x-wCE"/>
                             <constraint firstAttribute="trailing" secondItem="G9N-KN-tcM" secondAttribute="trailing" constant="16" id="UCY-Sd-IRW"/>
                             <constraint firstItem="l9B-hb-tII" firstAttribute="top" secondItem="Or4-kG-1hj" secondAttribute="bottom" constant="4" id="V2S-UW-a8r"/>
                             <constraint firstItem="JXK-RW-DZF" firstAttribute="leading" secondItem="heM-3h-Nvj" secondAttribute="leading" constant="16" id="WtX-u5-js6"/>
@@ -641,9 +642,11 @@
                         <outlet property="retweetUserNameLabel" destination="Nm3-vC-0rw" id="I9g-z2-KHr"/>
                         <outlet property="tweetTextLabel" destination="tja-r7-ssm" id="uA0-k8-u7w"/>
                         <outlet property="tweetTimeStampLabel" destination="Z3Q-9j-kr3" id="H9L-PT-O57"/>
+                        <outlet property="userImageTopConstraint" destination="HfR-qK-FK4" id="gUk-6H-U95"/>
                         <outlet property="userImageView" destination="GU7-B8-bCc" id="CMT-oZ-NP2"/>
                         <outlet property="userNameLabel" destination="l9B-hb-tII" id="EpV-h6-0qS"/>
                         <outlet property="userScreenNameLabel" destination="Or4-kG-1hj" id="NGo-CS-CUb"/>
+                        <outlet property="userScreenNameTopConstraint" destination="pYL-qn-GF2" id="DJ6-4G-k3N"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="LF4-SP-fgI" userLabel="First Responder" sceneMemberID="firstResponder"/>

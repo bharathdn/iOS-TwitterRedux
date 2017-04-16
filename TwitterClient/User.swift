@@ -55,7 +55,7 @@ class User: NSObject {
         defaults.set(data, forKey: currentUserDataKey)
       }
       else {
-        defaults.set(nil, forKey: currentUserDataKey)
+        defaults.removeObject(forKey: currentUserDataKey)
       }
       
       defaults.synchronize()

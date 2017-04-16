@@ -26,17 +26,24 @@ class TweetCell: UITableViewCell {
   @IBOutlet weak var retweetButtonImageView: UIButton!
   @IBOutlet weak var favButtonImageView: UIButton!
   
+  @IBOutlet weak var userImageTopViewContraint: NSLayoutConstraint!
+  @IBOutlet weak var userScreeNameTopViewConstraint: NSLayoutConstraint!
   
   var tweet: Tweet! {
     didSet {
       userImageView.setImageWith(tweet.userImageUrl!)
+      
       if tweet.retweetUserName == nil {
         retweetImageView.isHidden = true
-        retweetImageView.bounds.size.height = 0
         retweetUserLabel.isHidden = true
-        retweetUserLabel.bounds.size.height = 0
+        userImageTopViewContraint.constant = -12
+        userScreeNameTopViewConstraint.constant = -12
       } else {
+        retweetImageView.isHidden = false
+        retweetUserLabel.isHidden = false
         retweetUserLabel.text = tweet.retweetUserScreenName! + " Retweeted"
+        userImageTopViewContraint.constant = 6
+        userScreeNameTopViewConstraint.constant = 4
       }
       
       userScreenNameLabel.text = tweet.userScreenName!
