@@ -29,6 +29,8 @@ class TweetDetailViewController: UIViewController {
   @IBOutlet weak var replyPopoverTextView: UITextView!
   @IBOutlet weak var replyPopoverButton: UIButton!
   @IBOutlet weak var remainingCharLabel: UILabel!
+  @IBOutlet weak var replyPopoverBottomConstraint: NSLayoutConstraint!
+  var keyBoardHeight: CGFloat?
   
   // auto-layout constraints
   @IBOutlet weak var userScreenNameTopConstraint: NSLayoutConstraint!
@@ -44,7 +46,15 @@ class TweetDetailViewController: UIViewController {
     if tweet != nil {
       populateDetails()
     }
+    
+    registerForKeyboardNotifications()
   }
+  
+  override func viewWillDisappear(_ animated: Bool) {
+    super.viewWillDisappear(animated)
+    deregisterFromKeyboardNotifications()
+  }
+  
   
   func populateDetails() {
     userImageView.setImageWith(tweet.userImageUrl!)
@@ -130,8 +140,46 @@ class TweetDetailViewController: UIViewController {
     
     view.endEditing(true)
     replyPopoverView.isHidden = true
-    replyPopoverTextView.text = ""
+    replyPopoverTextView.text = nil
   }
+  
+  @IBAction func onClosePopoverButton(_ sender: Any) {
+    view.endEditing(true)
+    replyPopoverView.isHidden = true
+  }
+  
+  func registerForKeyboardNotifications()
+  {
+    //Adding notifies on keyboard appearing
+    NotificationCenter.default.addObserver(self, selector: #selector(TweetDetailViewController.keyboardWasShown), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
+    NotificationCenter.default.addObserver(self, selector: #selector(TweetDetailViewController.keyboardWillBeHidden), name: NSNotification.Name.UIKeyboardWillHide, object: nil)
+  }
+  
+  
+  func deregisterFromKeyboardNotifications()
+  {
+    //Removing notifies on keyboard appearing
+    NotificationCenter.default.removeObserver(self, name: NSNotification.Name.UIKeyboardWillShow, object: nil)
+    NotificationCenter.default.removeObserver(self, name: NSNotification.Name.UIKeyboardWillHide, object: nil)
+  }
+  
+  
+  func keyboardWasShown(notification:NSNotification) {
+    let userInfo:NSDictionary = notification.userInfo! as NSDictionary
+    let keyboardFrame:NSValue = userInfo.value(forKey: UIKeyboardFrameEndUserInfoKey) as! NSValue
+    let keyboardRectangle = keyboardFrame.cgRectValue
+    keyBoardHeight = keyboardRectangle.height
+    
+    replyPopoverBottomConstraint.constant = keyBoardHeight! + 20
+  }
+  
+  
+  func keyboardWillBeHidden(notification: NSNotification)
+  {
+    replyPopoverBottomConstraint.constant = 60
+  }
+  
+  
   /*
    // MARK: - Navigation
    
@@ -156,10 +204,10 @@ extension TweetDetailViewController: UITextViewDelegate {
       replyPopoverButton.setTitleColor(UIColor.gray, for: .normal)
     }
     
-    limitcharacterCount()
+    limitCharacterCount()
   }
   
-  func limitcharacterCount() {
+  func limitCharacterCount() {
     let limit = 140
     let replyText = replyPopoverTextView.text!
     

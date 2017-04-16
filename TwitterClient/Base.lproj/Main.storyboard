@@ -6,7 +6,6 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12078"/>
-        <capability name="Alignment constraints with different attributes" minToolsVersion="5.1"/>
         <capability name="Navigation items with more than one left or right bar item" minToolsVersion="7.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -523,7 +522,7 @@
                                 </connections>
                             </button>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Tc5-eA-LHv">
-                                <rect key="frame" x="10" y="58" width="300" height="175"/>
+                                <rect key="frame" x="10" y="333" width="300" height="175"/>
                                 <subviews>
                                     <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="B6k-RH-T9F">
                                         <rect key="frame" x="0.0" y="0.0" width="300" height="147"/>
@@ -556,15 +555,28 @@
                                             <action selector="onPopoverReplyButton:" destination="xZE-Rj-9A0" eventType="touchUpInside" id="giB-Db-c4o"/>
                                         </connections>
                                     </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vxe-mr-YNZ">
+                                        <rect key="frame" x="268" y="0.0" width="32" height="32"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="32" id="aqQ-Mo-YP0"/>
+                                            <constraint firstAttribute="height" constant="32" id="daK-Y1-qnm"/>
+                                        </constraints>
+                                        <state key="normal" image="close"/>
+                                        <connections>
+                                            <action selector="onClosePopoverButton:" destination="xZE-Rj-9A0" eventType="touchUpInside" id="zfN-9b-QiW"/>
+                                        </connections>
+                                    </button>
                                 </subviews>
                                 <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="175" id="595-2h-ee5"/>
                                     <constraint firstItem="B6k-RH-T9F" firstAttribute="top" secondItem="Tc5-eA-LHv" secondAttribute="top" id="6fO-wr-DAf"/>
                                     <constraint firstItem="i6p-Sp-2bU" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="0JZ-JW-OXa" secondAttribute="trailing" constant="10" id="D4A-F0-y5A"/>
+                                    <constraint firstItem="vxe-mr-YNZ" firstAttribute="top" secondItem="Tc5-eA-LHv" secondAttribute="top" id="FPC-QB-L9n"/>
                                     <constraint firstItem="i6p-Sp-2bU" firstAttribute="top" secondItem="B6k-RH-T9F" secondAttribute="bottom" id="UnM-90-G7r"/>
                                     <constraint firstAttribute="bottom" secondItem="i6p-Sp-2bU" secondAttribute="bottom" id="fCs-dt-Dr2"/>
                                     <constraint firstItem="B6k-RH-T9F" firstAttribute="leading" secondItem="Tc5-eA-LHv" secondAttribute="leading" id="ggL-Yf-LZn"/>
+                                    <constraint firstAttribute="trailing" secondItem="vxe-mr-YNZ" secondAttribute="trailing" id="h0r-Wm-g7Z"/>
                                     <constraint firstAttribute="trailing" secondItem="i6p-Sp-2bU" secondAttribute="trailing" id="jBH-aV-HHJ"/>
                                     <constraint firstAttribute="bottom" secondItem="0JZ-JW-OXa" secondAttribute="bottom" id="juM-jw-5iN"/>
                                     <constraint firstAttribute="trailing" secondItem="B6k-RH-T9F" secondAttribute="trailing" id="kAh-uE-Vbf"/>
@@ -605,7 +617,6 @@
                             <constraint firstItem="CfP-2i-TRB" firstAttribute="leading" secondItem="heM-3h-Nvj" secondAttribute="leading" constant="24" id="ek7-wz-Ne7"/>
                             <constraint firstItem="Nm3-vC-0rw" firstAttribute="centerY" secondItem="lKG-t5-zpy" secondAttribute="centerY" id="fwI-4D-OkL"/>
                             <constraint firstItem="lKG-t5-zpy" firstAttribute="leading" secondItem="heM-3h-Nvj" secondAttribute="leading" constant="49" id="g0l-TD-uJT"/>
-                            <constraint firstItem="Tc5-eA-LHv" firstAttribute="baseline" secondItem="Z3Q-9j-kr3" secondAttribute="bottom" constant="40" id="gNu-pV-BqK"/>
                             <constraint firstItem="i7R-qU-qs5" firstAttribute="leading" secondItem="heM-3h-Nvj" secondAttribute="leading" constant="16" id="glM-N9-6xR"/>
                             <constraint firstItem="tja-r7-ssm" firstAttribute="leading" secondItem="heM-3h-Nvj" secondAttribute="leading" constant="16" id="iwK-Wl-kpR"/>
                             <constraint firstAttribute="trailing" secondItem="l9B-hb-tII" secondAttribute="trailing" constant="20" id="kZr-S9-OP8"/>
@@ -616,6 +627,7 @@
                             <constraint firstItem="Or4-kG-1hj" firstAttribute="top" secondItem="Nm3-vC-0rw" secondAttribute="bottom" constant="14.5" id="pYL-qn-GF2"/>
                             <constraint firstItem="GU7-B8-bCc" firstAttribute="leading" secondItem="heM-3h-Nvj" secondAttribute="leading" constant="16" id="rbn-6r-7pt"/>
                             <constraint firstItem="l9B-hb-tII" firstAttribute="leading" secondItem="GU7-B8-bCc" secondAttribute="trailing" constant="8" id="rvI-0r-ebU"/>
+                            <constraint firstItem="JlO-ap-e7n" firstAttribute="top" secondItem="Tc5-eA-LHv" secondAttribute="bottom" constant="60" id="sRa-hf-MTd"/>
                             <constraint firstItem="Z3Q-9j-kr3" firstAttribute="leading" secondItem="heM-3h-Nvj" secondAttribute="leading" constant="16" id="tEL-xU-W2s"/>
                             <constraint firstItem="Zoa-P7-wjT" firstAttribute="leading" secondItem="igf-YS-LR5" secondAttribute="trailing" constant="15" id="uIX-IU-b91"/>
                             <constraint firstItem="eDF-Dd-zMz" firstAttribute="leading" secondItem="Zoa-P7-wjT" secondAttribute="trailing" constant="5" id="vLy-Ao-u6T"/>
@@ -636,6 +648,7 @@
                         <outlet property="favButtonImageView" destination="zrJ-kI-CzB" id="Ejj-on-Mtr"/>
                         <outlet property="favCountLabel" destination="Zoa-P7-wjT" id="orD-vR-lh6"/>
                         <outlet property="remainingCharLabel" destination="0JZ-JW-OXa" id="rh2-PL-Cuq"/>
+                        <outlet property="replyPopoverBottomConstraint" destination="sRa-hf-MTd" id="9jd-nP-QGQ"/>
                         <outlet property="replyPopoverButton" destination="i6p-Sp-2bU" id="YwJ-Iy-CE5"/>
                         <outlet property="replyPopoverTextView" destination="B6k-RH-T9F" id="yq3-CV-To5"/>
                         <outlet property="replyPopoverView" destination="Tc5-eA-LHv" id="jD4-cb-LgB"/>
@@ -718,8 +731,9 @@
         </scene>
     </scenes>
     <resources>
+        <image name="close" width="13" height="13"/>
         <image name="likeInactive" width="54" height="72"/>
-        <image name="reply2" width="65" height="72"/>
+        <image name="reply2" width="32" height="36"/>
         <image name="retweet-1" width="75" height="72"/>
         <image name="retweet_blue" width="24" height="24"/>
         <image name="tweet" width="24" height="24"/>
