@@ -12,6 +12,7 @@ class TweetsViewController: UIViewController {
   
   var tweets: [Tweet] = []
   var replyIndex: Int?
+  var detailsViewIndex: Int?
   
   @IBOutlet weak var tableView: UITableView!
   let refreshControl = UIRefreshControl()
@@ -55,10 +56,6 @@ class TweetsViewController: UIViewController {
     NotificationCenter.default.post(name: NSNotification.Name(rawValue: User.userDidLogoutNotification), object: nil)
   }
   
-  func loadSubsequentTweets() {
-  
-  }
-  
   func loadTweets() {
     var parameters = [String: AnyObject]()
     parameters["count"] = 20 as AnyObject
@@ -83,14 +80,6 @@ class TweetsViewController: UIViewController {
     })
   }
   
-  @IBAction private func onReplyButtton(_ sender: Any) {
-    print("Replying to tweet")
-    //    TwitterClient.sharedInstance?.replyToTweet(replyMsg: "Hello der", tweet: tweet, success: { (responseTweet: Tweet) in
-    //      print("reply success")
-    //    }, failure: { (error: Error) in
-    //      print("reply fail")
-    //    })
-  }
   
   @IBAction private func onRetweetButton(_ sender: Any) {
     print("Retweeting from home Timeline")
@@ -100,14 +89,20 @@ class TweetsViewController: UIViewController {
     let index = tableView.indexPath(for: cell)?[1]
     
     let tweet = tweets[index!]
-    let indexPath = IndexPath(item: index!, section: 0)
     
-    TwitterClient.sharedInstance?.reTweet(tweet: tweet, success: { (responseTweet: Tweet) in
-      self.tweets[index!] = tweet
-      self.tableView.reloadRows(at: [indexPath], with: .automatic)
-    }, failure: { (error: Error) in
-      print("\n\nError retweting from Home TimeLine:: \(error.localizedDescription)")
-    })
+    if !(tweet.didUserRetweet!) {
+      
+      let indexPath = IndexPath(item: index!, section: 0)
+      
+      TwitterClient.sharedInstance?.reTweet(tweet: tweet, success: { (responseTweet: Tweet) in
+        tweet.didUserRetweet = true
+        tweet.retweetCount += 1
+        self.tweets[index!] = tweet
+        self.tableView.reloadRows(at: [indexPath], with: .automatic)
+      }, failure: { (error: Error) in
+        print("\n\nError retweting from Home TimeLine:: \(error.localizedDescription)")
+      })
+    }
   }
   
   @IBAction private func onFavButton(_ sender: Any) {
@@ -117,14 +112,19 @@ class TweetsViewController: UIViewController {
     let index = tableView.indexPath(for: cell)?[1]
     
     let tweet = tweets[index!]
-    let indexPath = IndexPath(item: index!, section: 0)
     
-    TwitterClient.sharedInstance?.favoriteTweet(tweet: tweet, success: { (tweet: Tweet) in
-      self.tweets[index!] = tweet
-      self.tableView.reloadRows(at: [indexPath], with: .automatic)
-    }, failure: { (error: Error) in
-      print("\n\nError favoriting tweet on home Timeline:: \(error.localizedDescription)")
-    })
+    if !(tweet.didUserFavorite!) {
+      let indexPath = IndexPath(item: index!, section: 0)
+      
+      TwitterClient.sharedInstance?.favoriteTweet(tweet: tweet, success: { (tweet: Tweet) in
+        tweet.didUserFavorite = true
+        tweet.favouritesCount += 1
+        self.tweets[index!] = tweet
+        self.tableView.reloadRows(at: [indexPath], with: .automatic)
+      }, failure: { (error: Error) in
+        print("\n\nError favoriting tweet on home Timeline:: \(error.localizedDescription)")
+      })
+    }
   }
   
   
@@ -134,6 +134,7 @@ class TweetsViewController: UIViewController {
       let cell = sender as! TweetCell
       let indexPath = tableView.indexPath(for: cell)
       let tweet = tweets[indexPath!.row]
+      detailsViewIndex = indexPath!.row
       
       let uiNavigationController = segue.destination as! UINavigationController
       let detailViewController = uiNavigationController.topViewController as! TweetDetailViewController
@@ -159,8 +160,9 @@ class TweetsViewController: UIViewController {
   
 }
 
-// MARK: - ComposeTweetControllerDelegate
-extension TweetsViewController: ComposeTweetControllerDelegate, TweetReplyViewControllerDelegate {
+// MARK: - ComposeTweetControllerDelegate, TweetReplyViewControllerDelegate
+extension TweetsViewController: ComposeTweetControllerDelegate, TweetReplyViewControllerDelegate,
+                                TweetDetailViewControllerDelegate {
   func composeTweetController(composeTweetController: ComposeTweetController, didPostTweet tweet: Tweet) {
     print("tweet posted delegate called on TweetViewController")
     tweets.insert(tweet, at: 0)
@@ -170,8 +172,14 @@ extension TweetsViewController: ComposeTweetControllerDelegate, TweetReplyViewCo
   func tweetReplyViewController(tweetReplyViewController: TweetReplyViewController, didPostReply tweet: Tweet) {
     print("reply to tweet has been posted")
     tweets[replyIndex!] = tweet
-    
     let indexPath = IndexPath(item: replyIndex!, section: 0)
+    self.tableView.reloadRows(at: [indexPath], with: .automatic)
+  }
+  
+  func tweetDetailViewController(tweetDetailViewController: TweetDetailViewController, tweetUpadted tweet: Tweet) {
+    print("fav/retweeted in detail view ctlr. Delegate received")
+    tweets[detailsViewIndex!] = tweet
+    let indexPath = IndexPath(item: detailsViewIndex!, section: 0)
     self.tableView.reloadRows(at: [indexPath], with: .automatic)
   }
 }

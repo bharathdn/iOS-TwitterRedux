@@ -48,6 +48,7 @@ class TweetReplyViewController: UIViewController {
     let replyText = replyTextView.text!
     TwitterClient.sharedInstance?.replyToTweet(replyMsg: replyText, tweet: tweet, success: { (responseTweet: Tweet) in
       print("reply success")
+      
       self.delegate?.tweetReplyViewController!(tweetReplyViewController: self, didPostReply: responseTweet)
       self.dismiss(animated: true, completion: nil)
     }, failure: { (error: Error) in

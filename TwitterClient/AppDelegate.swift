@@ -57,6 +57,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
       self.window?.rootViewController = viewControllerMain
     }
     
+    
     // The following line of code is to enable auto correction of fields when keyboard is enabled :: https://github.com/hackiftekhar/IQKeyboardManager
     //IQKeyboardManager.sharedManager().enable = true
     return true

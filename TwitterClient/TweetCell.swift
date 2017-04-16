@@ -57,9 +57,14 @@ class TweetCell: UITableViewCell {
       if tweet.didUserRetweet! {
         retweetButtonImageView.setImage(#imageLiteral(resourceName: "retweetGreen"), for: .normal)
       }
+      else {
+        retweetButtonImageView.setImage(#imageLiteral(resourceName: "retweet-1"), for: .normal)
+      }
       
       if tweet.didUserFavorite! {
         favButtonImageView.setImage(#imageLiteral(resourceName: "likeActive"), for: .normal)
+      } else {
+        favButtonImageView.setImage(#imageLiteral(resourceName: "likeInactive"), for: .normal)
       }
     }
   }
