@@ -144,7 +144,7 @@ class TwitterClient: BDBOAuth1SessionManager {
       print("tweet favorited successfully")
       success(Tweet.init(dictionary: response as! NSDictionary))
     }, failure: { (task: URLSessionDataTask?, error: Error) in
-      print("\nError favoriting tweet1:: \(error) \n\n")
+      print("\nError favoriting tweet:: \(error) \n\n")
       failure(error)
     })
   }
@@ -158,7 +158,7 @@ class TwitterClient: BDBOAuth1SessionManager {
     print("reply posted successfully")
     success(Tweet.init(dictionary: response as! NSDictionary))
     }, failure: { (task: URLSessionDataTask?, error: Error) in
-    print("\nError favoriting tweet1:: \(error) \n\n")
+    print("\nError replying to tweet:: \(error) \n\n")
     failure(error)
     })
   }

@@ -11,9 +11,9 @@ import UIKit
 class TweetsViewController: UIViewController {
   
   var tweets: [Tweet] = []
+  var replyIndex: Int?
   
   @IBOutlet weak var tableView: UITableView!
-  
   let refreshControl = UIRefreshControl()
   
   var isMoreDataLoading = false
@@ -148,6 +148,7 @@ class TweetsViewController: UIViewController {
       let button = sender as! UIButton
       let cell = button.superview?.superview as! TweetCell
       let index = tableView.indexPath(for: cell)?[1]
+      replyIndex = index
       let tweet = tweets[index!]
       
       let uiNavigationController = segue.destination as! UINavigationController
@@ -159,11 +160,19 @@ class TweetsViewController: UIViewController {
 }
 
 // MARK: - ComposeTweetControllerDelegate
-extension TweetsViewController: ComposeTweetControllerDelegate {
+extension TweetsViewController: ComposeTweetControllerDelegate, TweetReplyViewControllerDelegate {
   func composeTweetController(composeTweetController: ComposeTweetController, didPostTweet tweet: Tweet) {
     print("tweet posted delegate called on TweetViewController")
     tweets.insert(tweet, at: 0)
     tableView.reloadData()
+  }
+  
+  func tweetReplyViewController(tweetReplyViewController: TweetReplyViewController, didPostReply tweet: Tweet) {
+    print("reply to tweet has been posted")
+    tweets[replyIndex!] = tweet
+    
+    let indexPath = IndexPath(item: replyIndex!, section: 0)
+    self.tableView.reloadRows(at: [indexPath], with: .automatic)
   }
 }
 
