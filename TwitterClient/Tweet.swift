@@ -26,6 +26,26 @@ class Tweet: NSObject {
   var retweetUserName: String?
   var retweetUserScreenName: String?
   
+  private static var _max_id: Int?
+  class var MaxId: Int? {
+    get{
+      return _max_id
+    }
+    set(id) {
+      _max_id = id!
+    }
+  }
+  
+  private static var _since_id: Int?
+  class var SinceId: Int? {
+    get{
+      return _since_id
+    }
+    set(id) {
+      _since_id = id!
+    }
+  }
+ 
 
   init(dictionary: NSDictionary) {
     text = dictionary["text"] as? String
@@ -79,8 +99,24 @@ class Tweet: NSObject {
     for dictionary in dictionaryArray {
       let tweet = Tweet(dictionary: dictionary)
       tweets.append(tweet)
+      
+      // compute max_id (the lowest value of ids) and since_id (greatest value of ids)
+      let id = Int(tweet.id!)
+      
+      if MaxId == nil {
+        MaxId = id
+      }
+      else if id! < MaxId! {
+        MaxId = id
+      }
+      
+      if SinceId == nil {
+        SinceId = id
+      }
+      else if id! > SinceId! {
+        SinceId = id
+      }
     }
-    //    print(dictionaryArray[1])
     
     return tweets
   }

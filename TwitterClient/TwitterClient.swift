@@ -37,7 +37,6 @@ class TwitterClient: BDBOAuth1SessionManager {
   var loginSuccess: (() -> ())?
   var loginFailure: ((Error) -> ())?
   
-  
   func homeTimeLine(parameters: [String: AnyObject]? ,success: @escaping ([Tweet]) -> (), failure: @escaping (Error) -> ()) {
     
     get(twitterHomeTimeLinePath, parameters: parameters, progress: nil, success: { (task: URLSessionDataTask, response: Any?) in

@@ -17,7 +17,7 @@ class TweetsViewController: UIViewController {
   let refreshControl = UIRefreshControl()
   
   var isMoreDataLoading = false
-  var currentOffset = 0
+  var isFirstRequestLoaded = false
   var loadingMoreView:InfiniteScrollActivityView?
   
   override func viewDidLoad() {
@@ -29,8 +29,8 @@ class TweetsViewController: UIViewController {
     tableView.rowHeight = UITableViewAutomaticDimension
     tableView.estimatedRowHeight = 200
     
-    currentOffset = 0
     loadTweets()
+    isFirstRequestLoaded = true
     
     // Refresh Control
     refreshControl.addTarget(self, action: #selector(TweetsViewController.loadTweets), for: .valueChanged)
@@ -55,10 +55,19 @@ class TweetsViewController: UIViewController {
     NotificationCenter.default.post(name: NSNotification.Name(rawValue: User.userDidLogoutNotification), object: nil)
   }
   
+  func loadSubsequentTweets() {
+  
+  }
+  
   func loadTweets() {
     var parameters = [String: AnyObject]()
     parameters["count"] = 20 as AnyObject
-    parameters["offset"] = currentOffset as AnyObject
+    
+    if isFirstRequestLoaded && Tweet.MaxId != nil {
+      
+      print("\n\n\n \(Tweet.MaxId!) \n\n\n")
+      parameters["max_id"] = Tweet.MaxId as AnyObject
+    }
     
     TwitterClient.sharedInstance?.homeTimeLine(parameters: parameters ,success: { (tweets: [Tweet]?) in
       print("*** \(tweets?.count ?? 0) Number of tweets retrieved for user")
@@ -177,7 +186,7 @@ extension TweetsViewController: UITableViewDataSource, UITableViewDelegate {
         let frame = CGRect(x: 0, y: tableView.contentSize.height, width: tableView.bounds.size.width, height: InfiniteScrollActivityView.defaultHeight)
         loadingMoreView?.frame = frame
         loadingMoreView!.startAnimating()
-        currentOffset += 20
+        
         loadTweets()
       }
     }

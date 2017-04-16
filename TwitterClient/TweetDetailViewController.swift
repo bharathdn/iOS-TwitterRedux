@@ -34,7 +34,7 @@ class TweetDetailViewController: UIViewController {
   @IBOutlet weak var userScreenNameTopConstraint: NSLayoutConstraint!
   @IBOutlet weak var userImageTopConstraint: NSLayoutConstraint!
   
-  let twitterBlueColor = UIColor(displayP3Red: 0, green: 122, blue: 255, alpha: 0)
+//  let twitterBlueColor = UIColor(displayP3Red: 0, green: 122, blue: 255, alpha: 0)
   
   override func viewDidLoad() {
     super.viewDidLoad()
