@@ -22,37 +22,19 @@ class TweetDetailViewController: UIViewController {
   @IBOutlet weak var favCountLabel: UILabel!
   @IBOutlet weak var retweetButtonImageView: UIButton!
   @IBOutlet weak var favButtonImageView: UIButton!
-  @IBOutlet weak var charsRemainingLabel: UILabel!
-  
-  // Pop over items
-  @IBOutlet weak var replyPopoverView: UIView!
-  @IBOutlet weak var replyPopoverTextView: UITextView!
-  @IBOutlet weak var replyPopoverButton: UIButton!
-  @IBOutlet weak var remainingCharLabel: UILabel!
-  @IBOutlet weak var replyPopoverBottomConstraint: NSLayoutConstraint!
-  var keyBoardHeight: CGFloat?
   
   // auto-layout constraints
   @IBOutlet weak var userScreenNameTopConstraint: NSLayoutConstraint!
   @IBOutlet weak var userImageTopConstraint: NSLayoutConstraint!
   
-//  let twitterBlueColor = UIColor(displayP3Red: 0, green: 122, blue: 255, alpha: 0)
-  
   override func viewDidLoad() {
     super.viewDidLoad()
-    replyPopoverView.isHidden = true
-    replyPopoverTextView.delegate = self
+    
     tweetTextLabel.preferredMaxLayoutWidth = tweetTextLabel.frame.size.width
     if tweet != nil {
       populateDetails()
     }
-    
-    registerForKeyboardNotifications()
-  }
-  
-  override func viewWillDisappear(_ animated: Bool) {
-    super.viewWillDisappear(animated)
-    deregisterFromKeyboardNotifications()
+
   }
   
   
@@ -99,15 +81,7 @@ class TweetDetailViewController: UIViewController {
   @IBAction func onCancelButton(_ sender: Any) {
     dismiss(animated: true, completion: nil)
   }
-  
-  @IBAction func onReplyButtton(_ sender: Any) {
-    print("Replying to tweet")
-    replyPopoverView.isHidden = false
-    replyPopoverTextView.becomeFirstResponder()
-    replyPopoverButton.isEnabled = false
-    replyPopoverButton.setTitleColor(UIColor.gray, for: .normal)
-  }
-  
+    
   @IBAction func onRetweetButton(_ sender: Any) {
     print("Retweeting")
     TwitterClient.sharedInstance?.reTweet(tweet: tweet, success: { (responseTweet: Tweet) in
@@ -128,103 +102,27 @@ class TweetDetailViewController: UIViewController {
     })
   }
   
-  @IBAction func onPopoverReplyButton(_ sender: Any) {
-    let replyText = replyPopoverTextView.text!
-    print("your reply:: \(replyText)")
-    let replyMsg = replyPopoverTextView.text!
-    TwitterClient.sharedInstance?.replyToTweet(replyMsg: replyMsg, tweet: tweet, success: { (responseTweet: Tweet) in
-      print("reply success")
-    }, failure: { (error: Error) in
-      print("reply fail")
-    })
-    
-    view.endEditing(true)
-    replyPopoverView.isHidden = true
-    replyPopoverTextView.text = nil
-  }
-  
-  @IBAction func onClosePopoverButton(_ sender: Any) {
-    view.endEditing(true)
-    replyPopoverView.isHidden = true
-  }
-  
-  func registerForKeyboardNotifications()
-  {
-    //Adding notifies on keyboard appearing
-    NotificationCenter.default.addObserver(self, selector: #selector(TweetDetailViewController.keyboardWasShown), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
-    NotificationCenter.default.addObserver(self, selector: #selector(TweetDetailViewController.keyboardWillBeHidden), name: NSNotification.Name.UIKeyboardWillHide, object: nil)
-  }
-  
-  
-  func deregisterFromKeyboardNotifications()
-  {
-    //Removing notifies on keyboard appearing
-    NotificationCenter.default.removeObserver(self, name: NSNotification.Name.UIKeyboardWillShow, object: nil)
-    NotificationCenter.default.removeObserver(self, name: NSNotification.Name.UIKeyboardWillHide, object: nil)
-  }
-  
-  
-  func keyboardWasShown(notification:NSNotification) {
-    let userInfo:NSDictionary = notification.userInfo! as NSDictionary
-    let keyboardFrame:NSValue = userInfo.value(forKey: UIKeyboardFrameEndUserInfoKey) as! NSValue
-    let keyboardRectangle = keyboardFrame.cgRectValue
-    keyBoardHeight = keyboardRectangle.height
-    
-    replyPopoverBottomConstraint.constant = keyBoardHeight! + 20
-  }
-  
-  
-  func keyboardWillBeHidden(notification: NSNotification)
-  {
-    replyPopoverBottomConstraint.constant = 60
-  }
-  
-  
-  /*
    // MARK: - Navigation
    
    // In a storyboard-based application, you will often want to do a little preparation before navigation
    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-   // Get the new view controller using segue.destinationViewController.
-   // Pass the selected object to the new view controller.
+    print("segue called")
+    if segue.identifier == "replyToTweetSegueFromDetail" {
+      print("segue to tweet reply controller")
+      let uiNavigationController = segue.destination as! UINavigationController
+      let replyViewController = uiNavigationController.topViewController as! TweetReplyViewController
+      replyViewController.tweet = tweet
+    }
    }
-   */
-  
 }
 
-extension TweetDetailViewController: UITextViewDelegate {
+extension TweetDetailViewController: TweetReplyViewControllerDelegate {
   
-  func textViewDidChange(_ textView: UITextView) {
-    if(replyPopoverTextView.text!.characters.count > 0) {
-      replyPopoverButton.isEnabled = true
-      replyPopoverButton.setTitleColor(UIColor.white, for: .normal)
-    }
-    else {
-      replyPopoverButton.isEnabled = false
-      replyPopoverButton.setTitleColor(UIColor.gray, for: .normal)
-    }
-    
-    limitCharacterCount()
+  func tweetReplyViewController(tweetReplyViewController: TweetReplyViewController, didPostReply tweet: Tweet) {
+    print("TweetDetailView Controller:  reply to tweet has been posted")
+    self.tweet = tweet
+    populateDetails()
   }
   
-  func limitCharacterCount() {
-    let limit = 140
-    let replyText = replyPopoverTextView.text!
-    
-    let replyTextCharCount = replyText.characters.count
-    let remainingCharacters = limit - replyTextCharCount
-    
-    if remainingCharacters <= 0 {
-      remainingCharLabel.textColor = UIColor.red
-      remainingCharLabel.text = "0 chars remaining"
-      
-      let limitedCharactersIndex = replyText.index(replyText.startIndex, offsetBy: limit)
-      replyPopoverTextView.text = replyText.substring(to: limitedCharactersIndex)
-    }
-    else {
-      remainingCharLabel.text = String(remainingCharacters) + " chars remaining"
-      remainingCharLabel.textColor = UIColor.white
-    }
-  }
 }
 

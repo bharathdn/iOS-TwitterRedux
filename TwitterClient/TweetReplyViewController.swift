@@ -36,12 +36,6 @@ class TweetReplyViewController: UIViewController {
     userNameLabel.text = tweet.userName
     userScreenNameLabel.text = tweet.userScreenName
     tweetTextLabel.text = tweet.text
-    registerForKeyboardNotifications()
-  }
-  
-  override func viewWillDisappear(_ animated: Bool) {
-    super.viewWillDisappear(animated)
-    deregisterFromKeyboardNotifications()
   }
   
   @IBAction func onCancelButton(_ sender: Any) {
@@ -84,37 +78,7 @@ class TweetReplyViewController: UIViewController {
     }
   }
   
-  func registerForKeyboardNotifications()
-  {
-    //Adding notifies on keyboard appearing
-    NotificationCenter.default.addObserver(self, selector: #selector(TweetDetailViewController.keyboardWasShown), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
-    NotificationCenter.default.addObserver(self, selector: #selector(TweetDetailViewController.keyboardWillBeHidden), name: NSNotification.Name.UIKeyboardWillHide, object: nil)
-  }
-  
-  
-  func deregisterFromKeyboardNotifications()
-  {
-    //Removing notifies on keyboard appearing
-    NotificationCenter.default.removeObserver(self, name: NSNotification.Name.UIKeyboardWillShow, object: nil)
-    NotificationCenter.default.removeObserver(self, name: NSNotification.Name.UIKeyboardWillHide, object: nil)
-  }
-  
-  
-  func keyboardWasShown(notification:NSNotification) {
-    let userInfo:NSDictionary = notification.userInfo! as NSDictionary
-    let keyboardFrame:NSValue = userInfo.value(forKey: UIKeyboardFrameEndUserInfoKey) as! NSValue
-    let keyboardRectangle = keyboardFrame.cgRectValue
-    keyBoardHeight = keyboardRectangle.height
     
-    replyTextViewTopConstraint.constant -= keyBoardHeight!
-  }
-  
-  
-  func keyboardWillBeHidden(notification: NSNotification)
-  {
-    replyTextViewTopConstraint.constant = 160
-  }
-  
   
   /*
    // MARK: - Navigation
