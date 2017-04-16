@@ -144,6 +144,16 @@ class TweetsViewController: UIViewController {
       let composeTweetController = uiNavigationController.topViewController as!ComposeTweetController
       composeTweetController.delegate = self
     }
+    else if segue.identifier == "replyToTweetSegueFromHome" {
+      let button = sender as! UIButton
+      let cell = button.superview?.superview as! TweetCell
+      let index = tableView.indexPath(for: cell)?[1]
+      let tweet = tweets[index!]
+      
+      let uiNavigationController = segue.destination as! UINavigationController
+      let replyViewController = uiNavigationController.topViewController as! TweetReplyViewController
+      replyViewController.tweet = tweet
+    }
   }
   
 }
