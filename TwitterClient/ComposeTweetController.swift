@@ -74,7 +74,7 @@ class ComposeTweetController: UIViewController {
     }
     else {
       charCountBarItem.title = String(remainingCharacters)
-      charCountBarItem.tintColor = UIColor.gray
+      charCountBarItem.tintColor = UIColor.white
     }
   }
   
