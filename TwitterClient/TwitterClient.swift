@@ -11,16 +11,19 @@ import BDBOAuth1Manager
 
 // APP Keys
 let twitterBaseUrl = "https://api.twitter.com"
-let twitterConsumerKey = "Bfsp7IKTeuS83c2RCckteVSbE"
-let twitterConsumerSecret = "6iMhMnvoyWoWrSHTLiUgA7437WkB3xdmCsTwEAk4JVr1SniNdC"
+let twitterConsumerKey = Key.TwitterConsumerKey //"Bfsp7IKTeuS83c2RCckteVSbE"
+let twitterConsumerSecret = Key.TwitterConsumerSecret //"6iMhMnvoyWoWrSHTLiUgA7437WkB3xdmCsTwEAk4JVr1SniNdC"
 // Url paths
 let twitterRequestTokenPath = "oauth/request_token"
+let twitterClientOAuthUrl = "twitterClient://oauth"
 let twitterAuthUrl = "https://api.twitter.com/oauth/authorize"
 let twitterAccessTokenPath = "oauth/access_token"
 let twitterVerifyCredentialsPath = "1.1/account/verify_credentials.json"
-let twitterHomeTimeLinePath = "1.1/statuses/home_timeline.json"
-let twitterClientOAuthUrl = "twitterClient://oauth"
 
+// home timeline
+let twitterHomeTimeLinePath = "1.1/statuses/home_timeline.json"
+// mentions
+let twitterMentionsPath = "1.1/statuses/mentions_timeline.json"
 // Post tweet
 let twitterPostTweetUrl = "1.1/statuses/update.json"
 // Retweet
@@ -162,5 +165,22 @@ class TwitterClient: BDBOAuth1SessionManager {
     failure(error)
     })
   }
+  
+  func mentions(parameters: [String: AnyObject]? ,success: @escaping ([Tweet]) -> (), failure: @escaping (Error) -> ()) {
+    
+    get(twitterMentionsPath, parameters: parameters, progress: nil, success: { (task: URLSessionDataTask, response: Any?) in
+      
+      let dictionariesArray = response as! [NSDictionary]
+      let tweets = Tweet.mentionTweetsWithArray(dictionaryArray: dictionariesArray)
+      success(tweets)
+      
+    }, failure: { (task: URLSessionDataTask?, error: Error?) in
+      
+      failure(error!)
+      
+    })
+  }
+  
+  
   
 }

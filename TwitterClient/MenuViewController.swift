@@ -14,6 +14,7 @@ class MenuViewController: UIViewController {
   var hamburgerViewController: HamburgerViewController!
   
   private var homeTimeLineViewController: UIViewController!
+  private var mentionsViewController: UIViewController!
   
   @IBOutlet weak var tableView: UITableView!
   let menuLabels = ["Profile", "TimeLine", "Mentions", "Accounts"]
@@ -28,6 +29,12 @@ class MenuViewController: UIViewController {
     let storyBoard = UIStoryboard(name: "Main", bundle: nil)
     homeTimeLineViewController = storyBoard.instantiateViewController(withIdentifier: "HomeTimeLineViewController")
     viewControllers.append(homeTimeLineViewController)
+    // change this later
+    viewControllers.append(homeTimeLineViewController)
+    
+    mentionsViewController = storyBoard.instantiateViewController(withIdentifier: "MentionsViewController")
+    viewControllers.append(mentionsViewController)
+    viewControllers.append(mentionsViewController)
     hamburgerViewController.contentViewController = viewControllers[0]
   }
   
@@ -43,9 +50,9 @@ class MenuViewController: UIViewController {
 }
 
 extension MenuViewController : UITableViewDelegate, UITableViewDataSource {
-  func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath) {
+  func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
     tableView.deselectRow(at: indexPath, animated: true)
-    hamburgerViewController.contentViewController = viewControllers[0]
+    hamburgerViewController.contentViewController = viewControllers[indexPath.row]
   }
   
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -56,6 +63,6 @@ extension MenuViewController : UITableViewDelegate, UITableViewDataSource {
   }
   
   func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-    return 4
+    return viewControllers.count
   }
 }

@@ -120,6 +120,21 @@ class Tweet: NSObject {
     
     return tweets
   }
+
+  class func mentionTweetsWithArray(dictionaryArray: [NSDictionary]) -> [Tweet] {
+    var tweets: [Tweet] = []
+    
+    for dictionary in dictionaryArray {
+      let tweet = Tweet(dictionary: dictionary)
+      tweets.append(tweet)
+      
+      // compute max_id (the lowest value of ids) and since_id (greatest value of ids    
+    }
+    
+    return tweets
+  }
+
+  
   
   func stringifyTweet() -> String {
     return "tweet with text \" \(text ?? "Text Unavailable!!") \"  posted successfully"

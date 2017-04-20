@@ -38,19 +38,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
   
   func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
     
-    let hamburgerViewController = window?.rootViewController as! HamburgerViewController
-    let storyBoard = UIStoryboard(name: "Main", bundle: nil)
-    let menuViewController = storyBoard.instantiateViewController(withIdentifier: "MenuViewController") as! MenuViewController
-    
-    menuViewController.hamburgerViewController = hamburgerViewController
-    hamburgerViewController.menuViewController = menuViewController
-    
     // User related
     print("from URL to delegate")
     print("checking if user already exists")
     
     if User.currentUser != nil {
-//      print("There is a current user")
+      print("There is a current user")
 //      let storyBoard = UIStoryboard(name: "Main", bundle: nil)
 //      let tweetViewController = storyBoard.instantiateViewController(withIdentifier: "TweetsNavigationController")
 //      window?.rootViewController = tweetViewController
@@ -66,6 +59,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
       self.window?.rootViewController = viewControllerMain
     }
     
+    
+    let hamburgerViewController = window?.rootViewController as! HamburgerViewController
+    let storyBoard = UIStoryboard(name: "Main", bundle: nil)
+    let menuViewController = storyBoard.instantiateViewController(withIdentifier: "MenuViewController") as! MenuViewController
+    
+    menuViewController.hamburgerViewController = hamburgerViewController
+    hamburgerViewController.menuViewController = menuViewController
     
     // The following line of code is to enable auto correction of fields when keyboard is enabled :: https://github.com/hackiftekhar/IQKeyboardManager
     //IQKeyboardManager.sharedManager().enable = true
