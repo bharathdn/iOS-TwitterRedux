@@ -37,14 +37,23 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
   }
   
   func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
+    
+    let hamburgerViewController = window?.rootViewController as! HamburgerViewController
+    let storyBoard = UIStoryboard(name: "Main", bundle: nil)
+    let menuViewController = storyBoard.instantiateViewController(withIdentifier: "MenuViewController") as! MenuViewController
+    
+    menuViewController.hamburgerViewController = hamburgerViewController
+    hamburgerViewController.menuViewController = menuViewController
+    
+    // User related
     print("from URL to delegate")
     print("checking if user already exists")
     
     if User.currentUser != nil {
-      print("There is a current user")
-      let storyBoard = UIStoryboard(name: "Main", bundle: nil)
-      let tweetViewController = storyBoard.instantiateViewController(withIdentifier: "TweetsNavigationController")
-      window?.rootViewController = tweetViewController
+//      print("There is a current user")
+//      let storyBoard = UIStoryboard(name: "Main", bundle: nil)
+//      let tweetViewController = storyBoard.instantiateViewController(withIdentifier: "TweetsNavigationController")
+//      window?.rootViewController = tweetViewController
     }
     else {
       print("There is no current user")
