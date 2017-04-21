@@ -44,12 +44,26 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     if User.currentUser != nil {
       print("There is a current user")
-//      let storyBoard = UIStoryboard(name: "Main", bundle: nil)
-//      let tweetViewController = storyBoard.instantiateViewController(withIdentifier: "TweetsNavigationController")
-//      window?.rootViewController = tweetViewController
+      //      let storyBoard = UIStoryboard(name: "Main", bundle: nil)
+      //      let tweetViewController = storyBoard.instantiateViewController(withIdentifier: "TweetsNavigationController")
+      //      window?.rootViewController = tweetViewController
+      
+      print("setting hamburger1")
+      let storyBoard = UIStoryboard(name: "Main", bundle: nil)
+      let hamburgerNavController = storyBoard.instantiateViewController(withIdentifier: "HamburgerNavController") as! UINavigationController
+      let hamburgerViewController = hamburgerNavController.topViewController as! HamburgerViewController
+      window?.rootViewController = hamburgerNavController
+      
+      let menuViewController = storyBoard.instantiateViewController(withIdentifier: "MenuViewController") as! MenuViewController
+      
+      menuViewController.hamburgerViewController = hamburgerViewController
+      hamburgerViewController.menuViewController = menuViewController
     }
     else {
       print("There is no current user")
+      let storyBoard = UIStoryboard(name: "Main", bundle: nil)
+      let loginViewController = storyBoard.instantiateViewController(withIdentifier: "LoginViewController")
+      window?.rootViewController = loginViewController
       //TwitterClient.sharedInstance?.handleOpenUrl(url: url)
     }
     
@@ -59,22 +73,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
       self.window?.rootViewController = viewControllerMain
     }
     
-    
-    let hamburgerNavController = window?.rootViewController as! UINavigationController
-    let hamburgerViewController = hamburgerNavController.topViewController as! HamburgerViewController
-    
-    let storyBoard = UIStoryboard(name: "Main", bundle: nil)
-    let menuViewController = storyBoard.instantiateViewController(withIdentifier: "MenuViewController") as! MenuViewController
-    
-    menuViewController.hamburgerViewController = hamburgerViewController
-    hamburgerViewController.menuViewController = menuViewController
-    
-    // The following line of code is to enable auto correction of fields when keyboard is enabled :: https://github.com/hackiftekhar/IQKeyboardManager
-    //IQKeyboardManager.sharedManager().enable = true
     return true
   }
   
   func application(_ app: UIApplication, open url: URL, options: [UIApplicationOpenURLOptionsKey : Any] = [:]) -> Bool {
+    
     print(url.description)
     TwitterClient.sharedInstance?.handleOpenUrl(url: url)
     return true

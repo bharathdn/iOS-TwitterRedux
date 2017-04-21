@@ -11,8 +11,8 @@ import BDBOAuth1Manager
 
 // APP Keys
 let twitterBaseUrl = "https://api.twitter.com"
-let twitterConsumerKey = Key.TwitterConsumerKey //"Bfsp7IKTeuS83c2RCckteVSbE"
-let twitterConsumerSecret = Key.TwitterConsumerSecret //"6iMhMnvoyWoWrSHTLiUgA7437WkB3xdmCsTwEAk4JVr1SniNdC"
+let twitterConsumerKey = APIKey.TwitterConsumerKey //"Bfsp7IKTeuS83c2RCckteVSbE"
+let twitterConsumerSecret = APIKey.TwitterConsumerSecret //"6iMhMnvoyWoWrSHTLiUgA7437WkB3xdmCsTwEAk4JVr1SniNdC"
 // Url paths
 let twitterRequestTokenPath = "oauth/request_token"
 let twitterClientOAuthUrl = "twitterClient://oauth"
@@ -100,7 +100,7 @@ class TwitterClient: BDBOAuth1SessionManager {
     let requestToken = BDBOAuth1Credential(queryString: url.query)
     
     fetchAccessToken(withPath: twitterAccessTokenPath, method: "POST", requestToken: requestToken, success: { (accesToken: BDBOAuth1Credential?) in
-      
+      print("Inside handleOpenUrl: Fecthing access token")
       self.currentAccount(success: { (user: User) in
         User.currentUser = user
         self.loginSuccess?()

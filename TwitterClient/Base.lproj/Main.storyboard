@@ -14,7 +14,7 @@
         <!--Login View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="LoginViewController" customModule="TwitterClient" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="LoginViewController" id="BYZ-38-t0r" customClass="LoginViewController" customModule="TwitterClient" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="y3c-jy-aDJ"/>
                         <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
@@ -63,6 +63,7 @@
                     <navigationItem key="navigationItem" id="5A3-Gq-33z"/>
                     <connections>
                         <segue destination="9lM-An-c9S" kind="presentation" identifier="loginSegue" id="MY2-Ob-rbS"/>
+                        <segue destination="OIX-7N-Kez" kind="show" identifier="loginHamburgerSegue" id="0zT-np-55f"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
@@ -588,7 +589,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="eEX-pW-GzK" userLabel="Background Image View">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="eEX-pW-GzK" userLabel="Background Image View">
                                 <rect key="frame" x="0.0" y="64" width="320" height="80"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="80" id="J9W-Fr-nDd"/>
@@ -932,7 +933,7 @@
         <!--Navigation Controller-->
         <scene sceneID="s1a-nC-30s">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="qSg-Wu-N0g" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="HamburgerNavController" automaticallyAdjustsScrollViewInsets="NO" id="qSg-Wu-N0g" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="B2A-tU-esc">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
@@ -975,4 +976,7 @@
         <image name="tweet" width="24" height="24"/>
         <image name="tweet3" width="16" height="16"/>
     </resources>
+    <inferredMetricsTieBreakers>
+        <segue reference="26W-Ig-wn6"/>
+    </inferredMetricsTieBreakers>
 </document>

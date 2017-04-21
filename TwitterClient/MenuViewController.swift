@@ -18,7 +18,7 @@ class MenuViewController: UIViewController {
   private var mentionsViewController: UIViewController!
   
   @IBOutlet weak var tableView: UITableView!
-  let menuLabels = ["Profile", "TimeLine", "Mentions", "Accounts", "Profile", "Profile"]
+  let menuLabels = ["Profile", "TimeLine", "Mentions", "Accounts"]
   
   override func viewDidLoad() {
     super.viewDidLoad()

@@ -48,6 +48,7 @@ class HamburgerViewController: UIViewController {
   override func viewDidLoad() {
     print("Hello from Hamburger view c")
     super.viewDidLoad()
+//    User.currentUser = nil
     self.edgesForExtendedLayout = UIRectEdge.init(rawValue: 0)
 //    self.automaticallyAdjustsScrollViewInsets = true
   }
