@@ -48,6 +48,7 @@ class HamburgerViewController: UIViewController {
   override func viewDidLoad() {
     print("Hello from Hamburger view c")
     super.viewDidLoad()
+    self.edgesForExtendedLayout = UIRectEdge.init(rawValue: 0)
   }
   
   override func didReceiveMemoryWarning() {
