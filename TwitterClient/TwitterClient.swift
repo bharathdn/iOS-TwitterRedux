@@ -24,6 +24,8 @@ let twitterVerifyCredentialsPath = "1.1/account/verify_credentials.json"
 let twitterHomeTimeLinePath = "1.1/statuses/home_timeline.json"
 // mentions
 let twitterMentionsPath = "1.1/statuses/mentions_timeline.json"
+// user timeline
+let twitterUserTimeLinePath = "1.1/statuses/user_timeline.json"
 // Post tweet
 let twitterPostTweetUrl = "1.1/statuses/update.json"
 // Retweet
@@ -181,6 +183,19 @@ class TwitterClient: BDBOAuth1SessionManager {
     })
   }
   
-  
+  func userTimeline(parameters: [String: AnyObject]? ,success: @escaping ([Tweet]) -> (), failure: @escaping (Error) -> ()) {
+    
+    get(twitterUserTimeLinePath, parameters: parameters, progress: nil, success: { (task: URLSessionDataTask, response: Any?) in
+      
+      let dictionariesArray = response as! [NSDictionary]
+      let tweets = Tweet.mentionTweetsWithArray(dictionaryArray: dictionariesArray)
+      success(tweets)
+      
+    }, failure: { (task: URLSessionDataTask?, error: Error?) in
+      
+      failure(error!)
+      
+    })
+  }
   
 }

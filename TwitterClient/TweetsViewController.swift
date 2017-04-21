@@ -85,7 +85,7 @@ class TweetsViewController: UIViewController {
     print("Retweeting from home Timeline")
     
     let button = sender as! UIButton
-    let cell = button.superview?.superview as! TweetCell
+    let cell = button.superview?.superview as! TweetPrototypeCell
     let index = tableView.indexPath(for: cell)?[1]
     
     let tweet = tweets[index!]
@@ -108,7 +108,7 @@ class TweetsViewController: UIViewController {
   @IBAction private func onFavButton(_ sender: Any) {
     print("Fav Tweet clicked")
     let button = sender as! UIButton
-    let cell = button.superview?.superview as! TweetCell
+    let cell = button.superview?.superview as! TweetPrototypeCell
     let index = tableView.indexPath(for: cell)?[1]
     
     let tweet = tweets[index!]
@@ -131,7 +131,7 @@ class TweetsViewController: UIViewController {
   // MARK: - Navigation
   override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
     if segue.identifier == "tweetDetailSegue" {
-      let cell = sender as! TweetCell
+      let cell = sender as! TweetPrototypeCell
       let indexPath = tableView.indexPath(for: cell)
       let tweet = tweets[indexPath!.row]
       detailsViewIndex = indexPath!.row
@@ -147,7 +147,7 @@ class TweetsViewController: UIViewController {
     }
     else if segue.identifier == "replyToTweetSegueFromHome" {
       let button = sender as! UIButton
-      let cell = button.superview?.superview as! TweetCell
+      let cell = button.superview?.superview as! TweetPrototypeCell
       let index = tableView.indexPath(for: cell)?[1]
       replyIndex = index
       let tweet = tweets[index!]
@@ -193,13 +193,7 @@ extension TweetsViewController: UITableViewDataSource, UITableViewDelegate {
   }
   
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-    //    let cell = tableView.dequeueReusableCell(withIdentifier: "TweetCell", for: indexPath) as! TweetCell
-    //    cell.tweet = tweets[indexPath.row]
-    //    //    print(tweets[indexPath.row])
-    //    return cell
-    
-    let cell = Bundle.main.loadNibNamed("TweetPrototypeCell", owner: self, options: nil) as! TweetPrototypeCell
-    
+    let cell = Bundle.main.loadNibNamed("TweetPrototypeCell", owner: self, options: nil)?.first as! TweetPrototypeCell
     cell.tweet = tweets[indexPath.row]
     return cell
   }

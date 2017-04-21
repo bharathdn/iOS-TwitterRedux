@@ -13,11 +13,12 @@ class MenuViewController: UIViewController {
   var viewControllers: [UIViewController] = []
   var hamburgerViewController: HamburgerViewController!
   
+  private var profileViewController: UIViewController!
   private var homeTimeLineViewController: UIViewController!
   private var mentionsViewController: UIViewController!
   
   @IBOutlet weak var tableView: UITableView!
-  let menuLabels = ["Profile", "TimeLine", "Mentions", "Accounts"]
+  let menuLabels = ["Profile", "TimeLine", "Mentions", "Accounts", "Profile", "Profile"]
   
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -27,15 +28,18 @@ class MenuViewController: UIViewController {
     print("Hello from Menu view c")
     
     let storyBoard = UIStoryboard(name: "Main", bundle: nil)
-    homeTimeLineViewController = storyBoard.instantiateViewController(withIdentifier: "HomeTimeLineViewController")
-    viewControllers.append(homeTimeLineViewController)
-    // change this later
-    viewControllers.append(homeTimeLineViewController)
-    
+    profileViewController = storyBoard.instantiateViewController(withIdentifier: "UserProfileView")
+    homeTimeLineViewController = storyBoard.instantiateViewController(withIdentifier:
+      "HomeTimeLineViewController")
     mentionsViewController = storyBoard.instantiateViewController(withIdentifier: "MentionsViewController")
+    
+    viewControllers.append(profileViewController)
+    viewControllers.append(homeTimeLineViewController)
     viewControllers.append(mentionsViewController)
     viewControllers.append(mentionsViewController)
-    hamburgerViewController.contentViewController = viewControllers[0]
+    viewControllers.append(profileViewController)
+    viewControllers.append(profileViewController)
+    hamburgerViewController.contentViewController = viewControllers[1]
   }
   
   /*

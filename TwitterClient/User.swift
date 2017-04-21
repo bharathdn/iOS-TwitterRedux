@@ -9,11 +9,17 @@
 import UIKit
 
 class User: NSObject {
+  var id: Int?
   var name: String?
   var screenName: String?
   var profileImageUrl: URL?
+  var profileBackgroundImageUrl: URL?
   var tagLine: String?
   var dictionary: NSDictionary?
+  
+  var tweetCount: Int?
+  var followerCount: Int?
+  var followingCount: Int?
   
   static let currentUserDataKey = "currentUserData"
   static let userDidLogoutNotification = "UserDidLogout"
@@ -21,6 +27,7 @@ class User: NSObject {
   init(dictionary: NSDictionary) {
     self.dictionary = dictionary
     
+    id = dictionary["id"] as? Int
     name = dictionary["screen_name"] as? String
     screenName = dictionary["name"] as? String
     
@@ -29,7 +36,16 @@ class User: NSObject {
       profileImageUrl = NSURL(string: profileUrlString)! as URL
     }
     
+    let profileBackgroundImageUrlString =  dictionary["profile_background_image_url_https"] as? String
+    if let profileBackgroundImageUrlString = profileBackgroundImageUrlString {
+      profileBackgroundImageUrl = NSURL(string: profileBackgroundImageUrlString)! as URL
+    }
+    
     tagLine = dictionary["description"] as? String
+    
+    tweetCount = dictionary["statuses_count"] as? Int
+    followerCount = dictionary["followers_count"] as? Int
+    followingCount = dictionary["friends_count"] as? Int
   }
   
   static var _currentUser: User?

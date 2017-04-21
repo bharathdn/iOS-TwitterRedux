@@ -65,9 +65,8 @@ extension MentionsViewController: UITableViewDataSource, UITableViewDelegate {
   }
   
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-    let cell = tableView.dequeueReusableCell(withIdentifier: "MentionCell", for: indexPath) as! MentionCell
+    let cell = Bundle.main.loadNibNamed("TweetPrototypeCell", owner: self, options: nil)?.first as! TweetPrototypeCell
     cell.tweet = tweets[indexPath.row]
-    //    print(tweets[indexPath.row])
     return cell
   }
   
