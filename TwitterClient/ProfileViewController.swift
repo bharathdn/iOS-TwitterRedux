@@ -57,9 +57,9 @@ class ProfileViewController: UIViewController {
     userBackgroundImageView.setImageWith(user.profileBackgroundImageUrl!)
     userImageView.setImageWith(user.profileImageUrl!)
     userScreeNameLabel.text = user.screenName
-    userNameLabel.text = user.name
+    userNameLabel.text = "@" + user.name!
     followersCountLabel.text = String(user.followerCount!)
-    followingCountLabel.text = String(user.followerCount!)
+    followingCountLabel.text = String(user.followingCount!)
     tweetCountLabel.text = String(user.tweetCount!)
   }
   

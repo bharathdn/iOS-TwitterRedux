@@ -37,8 +37,6 @@ class MenuViewController: UIViewController {
     viewControllers.append(homeTimeLineViewController)
     viewControllers.append(mentionsViewController)
     viewControllers.append(mentionsViewController)
-    viewControllers.append(profileViewController)
-    viewControllers.append(profileViewController)
     hamburgerViewController.contentViewController = viewControllers[1]
   }
   
