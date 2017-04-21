@@ -49,7 +49,7 @@ class HamburgerViewController: UIViewController {
     print("Hello from Hamburger view c")
     super.viewDidLoad()
     
-    self.edgesForExtendedLayout = UIRectEdge.init(rawValue: 0)
+//    self.edgesForExtendedLayout = UIRectEdge.init(rawValue: 0)
 //    self.automaticallyAdjustsScrollViewInsets = true
   }
   

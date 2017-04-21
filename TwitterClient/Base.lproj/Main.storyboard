@@ -7,6 +7,7 @@
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12078"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="Navigation items with more than one left or right bar item" minToolsVersion="7.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -63,7 +64,6 @@
                     <navigationItem key="navigationItem" id="5A3-Gq-33z"/>
                     <connections>
                         <segue destination="9lM-An-c9S" kind="presentation" identifier="loginSegue" id="MY2-Ob-rbS"/>
-                        <segue destination="OIX-7N-Kez" kind="show" identifier="loginHamburgerSegue" id="0zT-np-55f"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
@@ -91,8 +91,8 @@
                         <constraints>
                             <constraint firstItem="mtk-GE-8UN" firstAttribute="top" secondItem="DeV-og-yhG" secondAttribute="bottom" id="I5v-K5-Cni"/>
                             <constraint firstItem="DeV-og-yhG" firstAttribute="leading" secondItem="iXx-6j-rl6" secondAttribute="leading" id="LOr-mT-EnN"/>
+                            <constraint firstItem="DeV-og-yhG" firstAttribute="top" secondItem="iXx-6j-rl6" secondAttribute="topMargin" id="Uwo-iN-IsF"/>
                             <constraint firstAttribute="trailing" secondItem="DeV-og-yhG" secondAttribute="trailing" id="gg5-17-MTQ"/>
-                            <constraint firstItem="DeV-og-yhG" firstAttribute="top" secondItem="iXx-6j-rl6" secondAttribute="top" id="y8d-gE-39x"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Home" id="xHv-nc-5Wt">
@@ -789,9 +789,8 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="43" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="4K4-yI-xIp">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="43" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="4K4-yI-xIp">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" red="0.1148131862" green="0.63301128149999997" blue="0.94878464939999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <color key="separatorColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
@@ -824,6 +823,12 @@
                             </tableView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="4K4-yI-xIp" firstAttribute="leading" secondItem="6GX-eD-LyU" secondAttribute="leading" id="5rY-RE-VhX"/>
+                            <constraint firstAttribute="trailing" secondItem="4K4-yI-xIp" secondAttribute="trailing" id="9kp-4k-Jml"/>
+                            <constraint firstItem="4K4-yI-xIp" firstAttribute="top" secondItem="6GX-eD-LyU" secondAttribute="top" id="CFz-1K-gCA"/>
+                            <constraint firstItem="eww-lL-Yzd" firstAttribute="top" secondItem="4K4-yI-xIp" secondAttribute="bottom" id="x2O-mx-c6m"/>
+                        </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="62y-sK-wAk"/>
                     <connections>
@@ -986,7 +991,4 @@
         <image name="tweet" width="24" height="24"/>
         <image name="tweet3" width="16" height="16"/>
     </resources>
-    <inferredMetricsTieBreakers>
-        <segue reference="26W-Ig-wn6"/>
-    </inferredMetricsTieBreakers>
 </document>
