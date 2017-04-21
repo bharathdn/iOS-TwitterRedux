@@ -162,7 +162,7 @@ class TweetsViewController: UIViewController {
 
 // MARK: - ComposeTweetControllerDelegate, TweetReplyViewControllerDelegate
 extension TweetsViewController: ComposeTweetControllerDelegate, TweetReplyViewControllerDelegate,
-                                TweetDetailViewControllerDelegate {
+TweetDetailViewControllerDelegate {
   func composeTweetController(composeTweetController: ComposeTweetController, didPostTweet tweet: Tweet) {
     print("tweet posted delegate called on TweetViewController")
     tweets.insert(tweet, at: 0)
@@ -193,9 +193,14 @@ extension TweetsViewController: UITableViewDataSource, UITableViewDelegate {
   }
   
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-    let cell = tableView.dequeueReusableCell(withIdentifier: "TweetCell", for: indexPath) as! TweetCell
+    //    let cell = tableView.dequeueReusableCell(withIdentifier: "TweetCell", for: indexPath) as! TweetCell
+    //    cell.tweet = tweets[indexPath.row]
+    //    //    print(tweets[indexPath.row])
+    //    return cell
+    
+    let cell = Bundle.main.loadNibNamed("TweetPrototypeCell", owner: self, options: nil) as! TweetPrototypeCell
+    
     cell.tweet = tweets[indexPath.row]
-    //    print(tweets[indexPath.row])
     return cell
   }
   

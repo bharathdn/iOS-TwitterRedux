@@ -1,5 +1,5 @@
 //
-//  MentionCell.swift
+//  TweetPrototypeCell.swift
 //  TwitterClient
 //
 //  Created by Bharath D N on 4/20/17.
@@ -8,7 +8,7 @@
 
 import UIKit
 
-class MentionCell: UITableViewCell {
+class TweetPrototypeCell: UITableViewCell {
   
   @IBOutlet weak var userImageView: UIImageView!
   @IBOutlet weak var retweetImageView: UIImageView!
@@ -68,7 +68,6 @@ class MentionCell: UITableViewCell {
     }
   }
   
-  
   private func getTimeStampLabel(timeStamp: Date) -> String {
     let timeElaspsedInSeconds = Int(fabs((tweet.timeStamp?.timeIntervalSinceNow)!))
     let secondsIn23Hours = 23 * 60 * 60
@@ -85,20 +84,8 @@ class MentionCell: UITableViewCell {
       let formatter = DateFormatter()
       formatter.dateFormat = "MM/dd/yy"
       let dateString = formatter.string(from: (tweet?.timeStamp)!)
-      return "• \(dateString)"
+      return "• \(dateString)h"
     }
-  }
-  
-  
-  override func awakeFromNib() {
-    super.awakeFromNib()
-    // Initialization code
-  }
-  
-  override func setSelected(_ selected: Bool, animated: Bool) {
-    super.setSelected(selected, animated: animated)
-    
-    // Configure the view for the selected state
   }
   
 }
