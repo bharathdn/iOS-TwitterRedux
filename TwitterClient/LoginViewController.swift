@@ -30,15 +30,6 @@ class LoginViewController: UIViewController {
       // on succesful login, segue to next view controller
       print("I;ve loggged in successfully")
       //      self.performSegue(withIdentifier: "loginSegue", sender: nil)
-      print("Setting Hamburger as root")
-      
-      let storyBoard = UIStoryboard(name: "Main", bundle: nil)
-      let hamburgerViewController = storyBoard.instantiateViewController(withIdentifier: "HamburgerViewController") as! HamburgerViewController
-      self.window?.rootViewController = hamburgerViewController
-      
-      let menuViewController = storyBoard.instantiateViewController(withIdentifier: "MenuViewController") as! MenuViewController
-      menuViewController.hamburgerViewController = hamburgerViewController
-      hamburgerViewController.menuViewController = menuViewController
     }, failure: { (error: Error) in
       print(error.localizedDescription)
     })

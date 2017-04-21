@@ -755,7 +755,13 @@
                             <constraint firstItem="idG-TY-Jln" firstAttribute="width" secondItem="rKc-3r-Ulz" secondAttribute="width" id="yk0-m3-yWR"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="Home" id="DQC-Ld-8Xf"/>
+                    <navigationItem key="navigationItem" title="Home" id="DQC-Ld-8Xf">
+                        <barButtonItem key="leftBarButtonItem" title="Sign Out" id="a8i-fr-1Ff">
+                            <connections>
+                                <action selector="onSignOut:" destination="OIX-7N-Kez" id="DBk-85-gHM"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <outlet property="contentView" destination="idG-TY-Jln" id="Itn-UE-it7"/>
                         <outlet property="contentViewLeftMarginConstraint" destination="EZa-Ip-vEQ" id="8Iw-L1-A2I"/>
@@ -938,7 +944,11 @@
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="B2A-tU-esc">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
+                        <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <color key="barTintColor" red="0.1148131862" green="0.63301128149999997" blue="0.94878464939999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <textAttributes key="titleTextAttributes">
+                            <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        </textAttributes>
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>

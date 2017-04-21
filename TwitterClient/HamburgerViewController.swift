@@ -48,7 +48,7 @@ class HamburgerViewController: UIViewController {
   override func viewDidLoad() {
     print("Hello from Hamburger view c")
     super.viewDidLoad()
-//    User.currentUser = nil
+    
     self.edgesForExtendedLayout = UIRectEdge.init(rawValue: 0)
 //    self.automaticallyAdjustsScrollViewInsets = true
   }
@@ -78,6 +78,11 @@ class HamburgerViewController: UIViewController {
     }
   }
   
+  @IBAction func onSignOut(_ sender: Any) {
+    TwitterClient.sharedInstance?.deauthorize()
+    User.currentUser = nil
+    NotificationCenter.default.post(name: NSNotification.Name(rawValue: User.userDidLogoutNotification), object: nil)
+  }
   
   /*
    // MARK: - Navigation

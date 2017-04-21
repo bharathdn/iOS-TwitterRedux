@@ -96,16 +96,17 @@ class TwitterClient: BDBOAuth1SessionManager {
   }
   
   
-  func handleOpenUrl(url: URL) {
+  func handleOpenUrl(url: URL, success: @escaping () -> (), failure: @escaping (Error) -> ()) {
     let requestToken = BDBOAuth1Credential(queryString: url.query)
     
     fetchAccessToken(withPath: twitterAccessTokenPath, method: "POST", requestToken: requestToken, success: { (accesToken: BDBOAuth1Credential?) in
       print("Inside handleOpenUrl: Fecthing access token")
       self.currentAccount(success: { (user: User) in
         User.currentUser = user
-        self.loginSuccess?()
+        success()
       }, failure: { (error: Error) in
         self.loginFailure?(error)
+        failure(error)
       })
       
       

@@ -69,8 +69,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     NotificationCenter.default.addObserver(forName: NSNotification.Name(rawValue: User.userDidLogoutNotification), object: nil, queue: OperationQueue.main) { (Notification) in
       let storyBoard = UIStoryboard(name: "Main", bundle: nil)
-      let viewControllerMain = storyBoard.instantiateInitialViewController()
-      self.window?.rootViewController = viewControllerMain
+      let loginViewController = storyBoard.instantiateViewController(withIdentifier: "LoginViewController")
+      self.window?.rootViewController = loginViewController
     }
     
     return true
@@ -79,7 +79,22 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
   func application(_ app: UIApplication, open url: URL, options: [UIApplicationOpenURLOptionsKey : Any] = [:]) -> Bool {
     
     print(url.description)
-    TwitterClient.sharedInstance?.handleOpenUrl(url: url)
+    TwitterClient.sharedInstance?.handleOpenUrl(url: url, success: {
+      print("\nsetting Ham 2\n")
+      let storyBoard = UIStoryboard(name: "Main", bundle: nil)
+      let hamburgerNavController = storyBoard.instantiateViewController(withIdentifier: "HamburgerNavController") as! UINavigationController
+      let hamburgerViewController = hamburgerNavController.topViewController as! HamburgerViewController
+      self.window?.rootViewController = hamburgerNavController
+      
+      let menuViewController = storyBoard.instantiateViewController(withIdentifier: "MenuViewController") as! MenuViewController
+      
+      menuViewController.hamburgerViewController = hamburgerViewController
+      hamburgerViewController.menuViewController = menuViewController
+    }, failure: { (error: Error) in
+      print(error.localizedDescription)
+    })
+
+    
     return true
   }
   
