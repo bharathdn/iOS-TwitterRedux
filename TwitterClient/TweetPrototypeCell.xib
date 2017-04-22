@@ -125,6 +125,7 @@
                     <constraint firstItem="IWM-My-qGI" firstAttribute="leading" secondItem="KuO-GR-AZx" secondAttribute="trailing" constant="8" id="S3K-kl-Xaf"/>
                     <constraint firstItem="ylw-uH-Gy1" firstAttribute="leading" secondItem="lCb-y9-0ep" secondAttribute="trailing" constant="10" id="ULr-h5-rr3"/>
                     <constraint firstItem="N9o-s7-aAY" firstAttribute="top" secondItem="IWM-My-qGI" secondAttribute="bottom" constant="4" id="Uf4-BM-wIu"/>
+                    <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="ylw-uH-Gy1" secondAttribute="trailing" constant="12" id="ZpM-Cm-Hdf"/>
                     <constraint firstItem="ZbH-UU-VRa" firstAttribute="leading" secondItem="muY-t8-QKl" secondAttribute="trailing" constant="49" id="aRe-bm-gKv"/>
                     <constraint firstItem="lCb-y9-0ep" firstAttribute="centerY" secondItem="IWM-My-qGI" secondAttribute="centerY" id="aXv-aP-qeK"/>
                     <constraint firstItem="lCb-y9-0ep" firstAttribute="leading" secondItem="IWM-My-qGI" secondAttribute="trailing" constant="10" id="hG8-aD-LnQ"/>

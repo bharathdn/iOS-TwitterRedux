@@ -8,33 +8,34 @@
 
 import UIKit
 import AFNetworking
+import CoreImage
 
 class ProfileViewController: UIViewController {
   
   var tweets: [Tweet] = []
   var user: User!
+  var headerView: ProfileCell!
+  
+  var context = CIContext(options: nil)
   
   @IBOutlet weak var tableView: UITableView!
-  @IBOutlet weak var userBackgroundImageView: UIImageView!
-  @IBOutlet weak var userImageView: UIImageView!
-  @IBOutlet weak var userNameLabel: UILabel!
-  @IBOutlet weak var userScreeNameLabel: UILabel!
-  
-  @IBOutlet weak var followersCountLabel: UILabel!
-  @IBOutlet weak var followingCountLabel: UILabel!
-  @IBOutlet weak var tweetCountLabel: UILabel!
-  
   override func viewDidLoad() {
     super.viewDidLoad()
+    
     tableView.delegate = self
     tableView.dataSource = self
     
     tableView.rowHeight = UITableViewAutomaticDimension
     tableView.estimatedRowHeight = 200
-    
     user = User.currentUser
-    populateUserElements()
     getTweetsForUser(user: user)
+    
+    headerView = Bundle.main.loadNibNamed("ProfileCell", owner: self, options: nil)?.first as! ProfileCell
+    headerView.user = user
+    headerView.frame = CGRect(x: 0, y: 0, width: view.frame.width, height: headerView.systemLayoutSizeFitting(UILayoutFittingCompressedSize).height)
+    headerView.setNeedsLayout()
+    headerView.layoutIfNeeded()
+    tableView.tableHeaderView = headerView
   }
   
   func getTweetsForUser(user: User) {
@@ -50,22 +51,7 @@ class ProfileViewController: UIViewController {
     }, failure: { (error: Error) in
       print(error.localizedDescription)
     })
-
-  }
-  
-  func populateUserElements() {
-    userBackgroundImageView.setImageWith(user.profileBackgroundImageUrl!)
-    userImageView.setImageWith(user.profileImageUrl!)
-    userScreeNameLabel.text = user.screenName
-    userNameLabel.text = "@" + user.name!
-    followersCountLabel.text = String(user.followerCount!)
-    followingCountLabel.text = String(user.followingCount!)
-    tweetCountLabel.text = String(user.tweetCount!)
-  }
-  
-  override func didReceiveMemoryWarning() {
-    super.didReceiveMemoryWarning()
-    // Dispose of any resources that can be recreated.
+    
   }
   
   
@@ -92,4 +78,29 @@ extension ProfileViewController: UITableViewDelegate, UITableViewDataSource {
     return cell
   }
   
+}
+
+extension ProfileViewController: UIScrollViewDelegate {
+  func scrollViewDidScroll(_ scrollView: UIScrollView) {
+    
+    let offset = scrollView.contentOffset.y
+    
+    // PULL DOWN -----------------
+    if offset < 0 {
+      UIView.animate(withDuration: 0.1, animations: {
+        self.headerView.userBackgroundImageView.transform = CGAffineTransform(scaleX: 1.3, y: 2)
+        self.headerView.userBackgroundImageView.alpha = 0.2
+      })
+    }
+      // Scroll up
+    else {
+      UIView.animate(withDuration: 0.1, animations: {
+        self.headerView.userBackgroundImageView.transform = CGAffineTransform.identity
+        self.headerView.userBackgroundImageView.alpha = 1
+      })
+    }
+  }
+  
+  // Bulr image code: runs very slow!
+  // code from : http://stackoverflow.com/questions/41156542/how-to-blur-an-existing-image-in-a-uiimageview-with-swift
 }

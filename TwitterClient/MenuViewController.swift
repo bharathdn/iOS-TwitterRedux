@@ -25,6 +25,9 @@ class MenuViewController: UIViewController {
     tableView.dataSource = self
     tableView.delegate = self
     
+    tableView.rowHeight = UITableViewAutomaticDimension
+    tableView.estimatedRowHeight = 200
+    
     print("Hello from Menu view c")
     
     let storyBoard = UIStoryboard(name: "Main", bundle: nil)
