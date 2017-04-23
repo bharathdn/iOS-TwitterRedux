@@ -1,4 +1,4 @@
-//
+  //
 //  TwitterClient.swift
 //  TwitterClient
 //
@@ -62,7 +62,8 @@ class TwitterClient: BDBOAuth1SessionManager {
     get(twitterVerifyCredentialsPath, parameters: nil, progress: nil, success: { (task: URLSessionDataTask, response: Any?) in
       
       let userDictionary = response as! NSDictionary
-      let user = User(dictionary: userDictionary)
+      let user = User(dictionary: userDictionary as! [String : AnyObject])
+      print("currentAccount: returning user")
       success(user)
       
     }, failure: { (task: URLSessionDataTask?, error: Error?) in
@@ -77,8 +78,9 @@ class TwitterClient: BDBOAuth1SessionManager {
   func login(success: @escaping () -> (), failure: @escaping (Error) -> ()) {
     loginSuccess = success
     loginFailure = failure
+    deauthorize()
     
-    TwitterClient.sharedInstance?.fetchRequestToken (withPath: twitterRequestTokenPath, method: "GET", callbackURL: NSURL(string: twitterClientOAuthUrl)! as URL, scope: nil, success: { (requestToken: BDBOAuth1Credential!) in
+    fetchRequestToken (withPath: twitterRequestTokenPath, method: "GET", callbackURL: NSURL(string: twitterClientOAuthUrl)! as URL, scope: nil, success: { (requestToken: BDBOAuth1Credential!) in
       
       let authUrl = twitterAuthUrl + "?oauth_token=\(requestToken.token!)"
       let url = NSURL(string: authUrl)! as URL
@@ -102,7 +104,7 @@ class TwitterClient: BDBOAuth1SessionManager {
     fetchAccessToken(withPath: twitterAccessTokenPath, method: "POST", requestToken: requestToken, success: { (accesToken: BDBOAuth1Credential?) in
       print("Inside handleOpenUrl: Fecthing access token")
       self.currentAccount(success: { (user: User) in
-        User.currentUser = user
+        User.saveCurrentUser(user: user, accessToken: accesToken!)
         success()
       }, failure: { (error: Error) in
         self.loginFailure?(error)
@@ -161,11 +163,11 @@ class TwitterClient: BDBOAuth1SessionManager {
     let url = "1.1/statuses/update.json?status=\(parsedMsg!)&" + twitterReplyStatusId + "=" + tweet.id!
     print(url)
     post(url, parameters: nil, progress: nil, success: { (task:  URLSessionDataTask, response: Any?) in
-    print("reply posted successfully")
-    success(Tweet.init(dictionary: response as! NSDictionary))
+      print("reply posted successfully")
+      success(Tweet.init(dictionary: response as! NSDictionary))
     }, failure: { (task: URLSessionDataTask?, error: Error) in
-    print("\nError replying to tweet:: \(error) \n\n")
-    failure(error)
+      print("\nError replying to tweet:: \(error) \n\n")
+      failure(error)
     })
   }
   

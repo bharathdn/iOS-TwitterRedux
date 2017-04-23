@@ -7,26 +7,34 @@
 //
 
 import UIKit
+import KeychainAccess
+import BDBOAuth1Manager
 
 class User: NSObject {
+  public private(set) var uuid: String?
+  
   var id: Int?
   var name: String?
   var screenName: String?
   var profileImageUrl: URL?
   var profileBackgroundImageUrl: URL?
   var tagLine: String?
-  var dictionary: NSDictionary?
   
   var tweetCount: Int?
   var followerCount: Int?
   var followingCount: Int?
   
-  static let currentUserDataKey = "currentUserData"
-  static let userDidLogoutNotification = "UserDidLogout"
+  var dictionary: [String: AnyObject]?
   
-  init(dictionary: NSDictionary) {
+  static let currentUserDataKey = "currentUserData"
+  static let userDataKey = "userDataKey"
+  static let userDidLogoutNotification = "UserDidLogout"
+  static let bundleIdenfitier = "com.bharath.DNRTwitterClient"
+  
+  init(dictionary: [String: AnyObject]) {
     self.dictionary = dictionary
     
+    uuid = dictionary["uuid"] as? String
     id = dictionary["id"] as? Int
     name = dictionary["screen_name"] as? String
     screenName = dictionary["name"] as? String
@@ -48,7 +56,7 @@ class User: NSObject {
     followingCount = dictionary["friends_count"] as? Int
   }
   
-  static var _currentUser: User?
+  private static var _currentUser: User?
   
   class var currentUser: User? {
     get{
@@ -57,7 +65,7 @@ class User: NSObject {
         let userData = defaults.object(forKey: currentUserDataKey) as? Data
         if let userData = userData {
           let dictionary = try! JSONSerialization.jsonObject(with: userData, options:[]) // as! NSDictionary
-          _currentUser = User.init(dictionary: dictionary as! NSDictionary)
+          _currentUser = User.init(dictionary: dictionary as! [String: AnyObject])
         }
       }
       return _currentUser
@@ -76,6 +84,93 @@ class User: NSObject {
       
       defaults.synchronize()
     }
+  }
+  
+  private static var _users: [User]?
+  class var users: [User]? {
+    get {
+      if let _users = _users {
+        return _users
+      } else {
+        let defaults = UserDefaults.standard
+        
+        if let usersData = defaults.object(forKey: userDataKey) as? Data,
+          let usersJson = try? JSONSerialization.jsonObject(with: usersData, options:[]),
+          let userDictionaries = usersJson as? [[String: AnyObject]] {
+          _users = userDictionaries.map { userDictionary in
+            let user = User(dictionary: userDictionary)
+            let uuid = userDictionary["uuid"]
+            if let uuid = uuid {
+              user.uuid = uuid as? String
+            }
+            return user
+          }
+          return _users
+        }
+        return nil
+      }
+    }
+    set(users) {
+      _users = users
+      
+      let defaults = UserDefaults.standard
+      if let users = users {
+        let userDictionaries: [[String: AnyObject]] = users.map { user in
+          return user.dictionary!
+        }
+        
+        if let usersData = try? JSONSerialization.data(withJSONObject: userDictionaries, options: []) {
+          defaults.set(usersData, forKey: userDataKey)
+        } else {
+          defaults.removeObject(forKey: userDataKey)
+        }
+      }
+      else {
+        defaults.removeObject(forKey: userDataKey)
+      }
+      defaults.synchronize()
+    }
+  }
+  
+  class func saveCurrentUser(user: User, accessToken: BDBOAuth1Credential) {
+    let uuid = UUID().uuidString
+    user.uuid = uuid
+    user.dictionary!["uuid"] = uuid as AnyObject?
+    
+    let keychain = Keychain(service: bundleIdenfitier)
+    if let token = accessToken.token,
+      let secret = accessToken.secret {
+      keychain["\(uuid)_access_token"] = token
+      keychain["\(uuid)_access_token_secret"] = secret
+    }
+    
+    currentUser = user
+    if users != nil {
+      self.users! += [user]
+    } else {
+      self.users = [user]
+    }
+  }
+  
+  class func loadAccessToken() -> Bool {
+    print("loading access token")
+    if let client = TwitterClient.sharedInstance {
+      client.requestSerializer.removeAccessToken()
+      
+      if let currentUser = User.currentUser,
+        let uuid = currentUser.uuid {
+        let keychain = Keychain(service: bundleIdenfitier)
+        if let accessToken = keychain["\(uuid)_access_token"],
+          let accessTokenSecret = keychain["\(uuid)_access_token_secret"] {
+          
+          let generatedToken = BDBOAuth1Credential(token: accessToken, secret: accessTokenSecret, expiration: nil)
+          client.requestSerializer.saveAccessToken(generatedToken)
+          
+          return true
+        }
+      }
+    }
+    return false
   }
   
 }

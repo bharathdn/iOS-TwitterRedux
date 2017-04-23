@@ -16,6 +16,7 @@ class MenuViewController: UIViewController {
   private var profileViewController: UIViewController!
   private var homeTimeLineViewController: UIViewController!
   private var mentionsViewController: UIViewController!
+  private var accountsViewController: UIViewController!
   
   @IBOutlet weak var tableView: UITableView!
   let menuLabels = ["Profile", "TimeLine", "Mentions", "Accounts"]
@@ -35,12 +36,13 @@ class MenuViewController: UIViewController {
     homeTimeLineViewController = storyBoard.instantiateViewController(withIdentifier:
       "HomeTimeLineViewController")
     mentionsViewController = storyBoard.instantiateViewController(withIdentifier: "MentionsViewController")
+    accountsViewController = storyBoard.instantiateViewController(withIdentifier: "AccountView")
     
     viewControllers.append(profileViewController)
     viewControllers.append(homeTimeLineViewController)
     viewControllers.append(mentionsViewController)
-    viewControllers.append(mentionsViewController)
-    hamburgerViewController.contentViewController = viewControllers[1]
+    viewControllers.append(accountsViewController)
+    hamburgerViewController.contentViewController = viewControllers[3]
   }
   
   /*
@@ -63,7 +65,6 @@ extension MenuViewController : UITableViewDelegate, UITableViewDataSource {
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
     let cell = tableView.dequeueReusableCell(withIdentifier: "MenuCell") as! MenuCell
     cell.menuLabel.text = menuLabels[indexPath.row]
-    print("setting row at indexpath \(indexPath.row)")
     return cell
   }
   

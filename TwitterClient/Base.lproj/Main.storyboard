@@ -575,10 +575,10 @@
             </objects>
             <point key="canvasLocation" x="5338" y="-533"/>
         </scene>
-        <!--View Controller-->
+        <!--Account View Controller-->
         <scene sceneID="UwY-wE-0QQ">
             <objects>
-                <viewController id="39V-M7-zbc" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="AccountView" id="39V-M7-zbc" customClass="AccountViewController" customModule="TwitterClient" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="hIN-6B-Bpt"/>
                         <viewControllerLayoutGuide type="bottom" id="83B-kL-BMt"/>
@@ -586,13 +586,28 @@
                     <view key="view" contentMode="scaleToFill" id="Tlg-Cq-Bjb">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="hkx-eV-X0i">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </tableView>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="83B-kL-BMt" firstAttribute="top" secondItem="hkx-eV-X0i" secondAttribute="bottom" id="5rB-n8-l0N"/>
+                            <constraint firstItem="hkx-eV-X0i" firstAttribute="top" secondItem="Tlg-Cq-Bjb" secondAttribute="top" id="8UI-IC-lN3"/>
+                            <constraint firstItem="hkx-eV-X0i" firstAttribute="leading" secondItem="Tlg-Cq-Bjb" secondAttribute="leading" id="ONB-EG-q27"/>
+                            <constraint firstAttribute="trailing" secondItem="hkx-eV-X0i" secondAttribute="trailing" id="xKT-G1-MGr"/>
+                        </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="NXb-u9-UoS"/>
+                    <connections>
+                        <outlet property="tableView" destination="hkx-eV-X0i" id="dGf-vY-CMG"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="mSx-U5-W3B" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="7052" y="-533"/>
+            <point key="canvasLocation" x="7051.875" y="-533.45070422535207"/>
         </scene>
         <!--Profile View Controller-->
         <scene sceneID="oJM-2d-WiI">

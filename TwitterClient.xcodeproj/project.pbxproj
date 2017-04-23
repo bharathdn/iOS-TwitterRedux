@@ -28,6 +28,11 @@
 		A1CA394A1EAA9D690055D8F8 /* APIKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1CA39491EAA9D690055D8F8 /* APIKey.swift */; };
 		A1CA394D1EAB1A6B0055D8F8 /* ProfileCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1CA394B1EAB1A6A0055D8F8 /* ProfileCell.swift */; };
 		A1CA394E1EAB1A6B0055D8F8 /* ProfileCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A1CA394C1EAB1A6A0055D8F8 /* ProfileCell.xib */; };
+		A1CA39501EABDA140055D8F8 /* AccountViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1CA394F1EABDA140055D8F8 /* AccountViewController.swift */; };
+		A1CA39531EABDABB0055D8F8 /* AddButtonCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1CA39511EABDABB0055D8F8 /* AddButtonCell.swift */; };
+		A1CA39541EABDABB0055D8F8 /* AddButtonCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A1CA39521EABDABB0055D8F8 /* AddButtonCell.xib */; };
+		A1CA39571EABDE940055D8F8 /* AccountLabelImageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1CA39551EABDE940055D8F8 /* AccountLabelImageCell.swift */; };
+		A1CA39581EABDE940055D8F8 /* AccountLabelImageCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A1CA39561EABDE940055D8F8 /* AccountLabelImageCell.xib */; };
 		A1F1CBCC1EA046F6000FADE3 /* ComposeTweetController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1F1CBCB1EA046F6000FADE3 /* ComposeTweetController.swift */; };
 		A1F1CBCF1EA09005000FADE3 /* TweetDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1F1CBCE1EA09005000FADE3 /* TweetDetailViewController.swift */; };
 		A1F1CBD11EA14828000FADE3 /* InfiniteScrollActivityView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1F1CBD01EA14828000FADE3 /* InfiniteScrollActivityView.swift */; };
@@ -60,6 +65,11 @@
 		A1CA39491EAA9D690055D8F8 /* APIKey.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APIKey.swift; sourceTree = "<group>"; };
 		A1CA394B1EAB1A6A0055D8F8 /* ProfileCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileCell.swift; sourceTree = "<group>"; };
 		A1CA394C1EAB1A6A0055D8F8 /* ProfileCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ProfileCell.xib; sourceTree = "<group>"; };
+		A1CA394F1EABDA140055D8F8 /* AccountViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AccountViewController.swift; sourceTree = "<group>"; };
+		A1CA39511EABDABB0055D8F8 /* AddButtonCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddButtonCell.swift; sourceTree = "<group>"; };
+		A1CA39521EABDABB0055D8F8 /* AddButtonCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AddButtonCell.xib; sourceTree = "<group>"; };
+		A1CA39551EABDE940055D8F8 /* AccountLabelImageCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AccountLabelImageCell.swift; sourceTree = "<group>"; };
+		A1CA39561EABDE940055D8F8 /* AccountLabelImageCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AccountLabelImageCell.xib; sourceTree = "<group>"; };
 		A1F1CBCB1EA046F6000FADE3 /* ComposeTweetController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ComposeTweetController.swift; sourceTree = "<group>"; };
 		A1F1CBCE1EA09005000FADE3 /* TweetDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TweetDetailViewController.swift; sourceTree = "<group>"; };
 		A1F1CBD01EA14828000FADE3 /* InfiniteScrollActivityView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InfiniteScrollActivityView.swift; sourceTree = "<group>"; };
@@ -96,6 +106,10 @@
 				A105AC8A1EA99F2E000DD915 /* TweetPrototypeCell.xib */,
 				A1CA394B1EAB1A6A0055D8F8 /* ProfileCell.swift */,
 				A1CA394C1EAB1A6A0055D8F8 /* ProfileCell.xib */,
+				A1CA39511EABDABB0055D8F8 /* AddButtonCell.swift */,
+				A1CA39521EABDABB0055D8F8 /* AddButtonCell.xib */,
+				A1CA39551EABDE940055D8F8 /* AccountLabelImageCell.swift */,
+				A1CA39561EABDE940055D8F8 /* AccountLabelImageCell.xib */,
 			);
 			name = Prototype;
 			sourceTree = "<group>";
@@ -175,6 +189,7 @@
 				A10311FA1EA899060082692E /* MenuViewController.swift */,
 				A105AC851EA96963000DD915 /* MentionsViewController.swift */,
 				A105AC8E1EA9B42D000DD915 /* ProfileViewController.swift */,
+				A1CA394F1EABDA140055D8F8 /* AccountViewController.swift */,
 			);
 			name = "View Controllers";
 			sourceTree = "<group>";
@@ -262,8 +277,10 @@
 				A1285B461E9D835E00B67B13 /* LaunchScreen.storyboard in Resources */,
 				A1285B431E9D835E00B67B13 /* Assets.xcassets in Resources */,
 				A105AC8C1EA99F2E000DD915 /* TweetPrototypeCell.xib in Resources */,
+				A1CA39581EABDE940055D8F8 /* AccountLabelImageCell.xib in Resources */,
 				A1285B411E9D835E00B67B13 /* Main.storyboard in Resources */,
 				A1CA394E1EAB1A6B0055D8F8 /* ProfileCell.xib in Resources */,
+				A1CA39541EABDABB0055D8F8 /* AddButtonCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -324,6 +341,7 @@
 			files = (
 				A1285B4F1E9D881700B67B13 /* LoginViewController.swift in Sources */,
 				A1285B3E1E9D835D00B67B13 /* ViewController.swift in Sources */,
+				A1CA39501EABDA140055D8F8 /* AccountViewController.swift in Sources */,
 				A10311F91EA897FE0082692E /* HamburgerViewController.swift in Sources */,
 				A105AC861EA96963000DD915 /* MentionsViewController.swift in Sources */,
 				A10311FB1EA899060082692E /* MenuViewController.swift in Sources */,
@@ -334,6 +352,8 @@
 				A1CA394D1EAB1A6B0055D8F8 /* ProfileCell.swift in Sources */,
 				A105AC8F1EA9B42D000DD915 /* ProfileViewController.swift in Sources */,
 				A1FF23E91EA3ED1600B8C8CA /* TweetReplyViewController.swift in Sources */,
+				A1CA39571EABDE940055D8F8 /* AccountLabelImageCell.swift in Sources */,
+				A1CA39531EABDABB0055D8F8 /* AddButtonCell.swift in Sources */,
 				A1F1CBD11EA14828000FADE3 /* InfiniteScrollActivityView.swift in Sources */,
 				A18110971E9DF99800C93C30 /* TweetsViewController.swift in Sources */,
 				A1F1CBCC1EA046F6000FADE3 /* ComposeTweetController.swift in Sources */,

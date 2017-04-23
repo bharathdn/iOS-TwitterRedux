@@ -16,16 +16,30 @@ PODS:
     - AFNetworking/NSURLSession
   - BDBOAuth1Manager (2.0.0):
     - AFNetworking/NSURLSession (~> 3.0.0)
+  - KeychainAccess (3.0.2)
+  - pop (1.0.9)
 
 DEPENDENCIES:
   - AFNetworking (= 3.0.0)
-  - AFNetworking (~> 3.0)
   - BDBOAuth1Manager (= 2.0.0)
+  - KeychainAccess (from `https://github.com/kishikawakatsumi/KeychainAccess.git`)
+  - pop (~> 1.0)
+
+EXTERNAL SOURCES:
+  KeychainAccess:
+    :git: https://github.com/kishikawakatsumi/KeychainAccess.git
+
+CHECKOUT OPTIONS:
+  KeychainAccess:
+    :commit: 6e3d9679fd49c7ae8869454e76edf1306983c62c
+    :git: https://github.com/kishikawakatsumi/KeychainAccess.git
 
 SPEC CHECKSUMS:
   AFNetworking: 932ff751f9d6fb1dad0b3af58b7e3ffba0a4e7fd
   BDBOAuth1Manager: 92d17d06f8a648602962304cd2f35ae7394fa001
+  KeychainAccess: 53275d79a7449d8adb71302c2e5a7cf6ecead088
+  pop: f667631a5108a2e60d9e8797c9b32ddaf2080bce
 
-PODFILE CHECKSUM: 58f7bff0eb7f7a03f4d4253591b1412b1bdeb431
+PODFILE CHECKSUM: 2ae6b448c0b90e5466d6e7799ab2239e7e5ad6a4
 
 COCOAPODS: 1.2.0

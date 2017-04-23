@@ -14,7 +14,17 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
+		<key>KeychainAccess.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 		<key>Pods-TwitterClient.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
+		<key>pop.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
@@ -22,12 +32,22 @@
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
-		<key>CF671F7E57B92905F1CC91D036D6B4A7</key>
+		<key>035B69A20D16D466ADD1777A7190F6B9</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>D42A318A3D9F709D197892F94E2A323B</key>
+		<key>8809092B0982DD638FE692038520D6A7</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>8905DB6521F8FDC34752B69DEE3FDEB7</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>CF671F7E57B92905F1CC91D036D6B4A7</key>
 		<dict>
 			<key>primary</key>
 			<true/>
