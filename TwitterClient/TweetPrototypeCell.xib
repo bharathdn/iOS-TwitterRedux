@@ -81,6 +81,9 @@
                             <constraint firstAttribute="height" constant="20" id="NsU-mw-fFz"/>
                         </constraints>
                         <state key="normal" title="Button" image="reply2"/>
+                        <connections>
+                            <action selector="onReplyButton:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="pK9-F3-7R4"/>
+                        </connections>
                     </button>
                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gfZ-Ki-IMi">
                         <rect key="frame" x="178.5" y="78.5" width="20" height="20"/>
@@ -89,6 +92,9 @@
                             <constraint firstAttribute="height" constant="20" id="M9a-PZ-Ytg"/>
                         </constraints>
                         <state key="normal" title="Button" image="retweet-1"/>
+                        <connections>
+                            <action selector="onRetweetButton:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="LfP-at-8pC"/>
+                        </connections>
                     </button>
                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZbH-UU-VRa">
                         <rect key="frame" x="284" y="78.5" width="20" height="20"/>
@@ -97,6 +103,9 @@
                             <constraint firstAttribute="width" constant="20" id="ZlX-ei-GvO"/>
                         </constraints>
                         <state key="normal" title="Button" image="likeInactive"/>
+                        <connections>
+                            <action selector="onFavButton:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="wS8-U8-5Z5"/>
+                        </connections>
                     </button>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="t06-Pd-FuW">
                         <rect key="frame" x="306" y="80.5" width="32.5" height="16"/>

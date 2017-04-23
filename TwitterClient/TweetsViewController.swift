@@ -81,23 +81,18 @@ class TweetsViewController: UIViewController {
   }
   
   
-  @IBAction private func onRetweetButton(_ sender: Any) {
-    print("Retweeting from home Timeline")
-    
-    let button = sender as! UIButton
-    let cell = button.superview?.superview as! TweetPrototypeCell
-    let index = tableView.indexPath(for: cell)?[1]
-    
-    let tweet = tweets[index!]
+  fileprivate func HandleRetweetAction(index: Int) {
+    print("\nRetweeting from home Timeline")
+    let tweet = tweets[index]
     
     if !(tweet.didUserRetweet!) {
       
-      let indexPath = IndexPath(item: index!, section: 0)
+      let indexPath = IndexPath(item: index, section: 0)
       
       TwitterClient.sharedInstance?.reTweet(tweet: tweet, success: { (responseTweet: Tweet) in
         tweet.didUserRetweet = true
         tweet.retweetCount += 1
-        self.tweets[index!] = tweet
+        self.tweets[index] = tweet
         self.tableView.reloadRows(at: [indexPath], with: .automatic)
       }, failure: { (error: Error) in
         print("\n\nError retweting from Home TimeLine:: \(error.localizedDescription)")
@@ -105,21 +100,17 @@ class TweetsViewController: UIViewController {
     }
   }
   
-  @IBAction private func onFavButton(_ sender: Any) {
-    print("Fav Tweet clicked")
-    let button = sender as! UIButton
-    let cell = button.superview?.superview as! TweetPrototypeCell
-    let index = tableView.indexPath(for: cell)?[1]
-    
-    let tweet = tweets[index!]
+  fileprivate func HandleFavAction(index: Int) {
+    print("\n Fav Tweet from Home timeline")
+    let tweet = tweets[index]
     
     if !(tweet.didUserFavorite!) {
-      let indexPath = IndexPath(item: index!, section: 0)
+      let indexPath = IndexPath(item: index, section: 0)
       
       TwitterClient.sharedInstance?.favoriteTweet(tweet: tweet, success: { (tweet: Tweet) in
         tweet.didUserFavorite = true
         tweet.favouritesCount += 1
-        self.tweets[index!] = tweet
+        self.tweets[index] = tweet
         self.tableView.reloadRows(at: [indexPath], with: .automatic)
       }, failure: { (error: Error) in
         print("\n\nError favoriting tweet on home Timeline:: \(error.localizedDescription)")
@@ -145,13 +136,8 @@ class TweetsViewController: UIViewController {
       let composeTweetController = uiNavigationController.topViewController as!ComposeTweetController
       composeTweetController.delegate = self
     }
-    else if segue.identifier == "replyToTweetSegueFromHome" {
-      let button = sender as! UIButton
-      let cell = button.superview?.superview as! TweetPrototypeCell
-      let index = tableView.indexPath(for: cell)?[1]
-      replyIndex = index
-      let tweet = tweets[index!]
-      
+    else if segue.identifier == "HomeReplySegue" {
+      let tweet = tweets[replyIndex!]
       let uiNavigationController = segue.destination as! UINavigationController
       let replyViewController = uiNavigationController.topViewController as! TweetReplyViewController
       replyViewController.tweet = tweet
@@ -195,6 +181,9 @@ extension TweetsViewController: UITableViewDataSource, UITableViewDelegate {
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
     let cell = Bundle.main.loadNibNamed("TweetPrototypeCell", owner: self, options: nil)?.first as! TweetPrototypeCell
     cell.tweet = tweets[indexPath.row]
+    cell.delegate = self
+    cell.index = indexPath.row
+    
     return cell
   }
   
@@ -216,5 +205,24 @@ extension TweetsViewController: UITableViewDataSource, UITableViewDelegate {
         loadTweets()
       }
     }
+  }
+}
+
+// MARK: - ComposeTweetControllerDelegate, TweetReplyViewControllerDelegate
+extension TweetsViewController: TweetPrototypeCellDelegate {
+  func tweetPrototypeCell (tweetPrototypeCell: TweetPrototypeCell, didClickReply tweet: Tweet) {
+    print("reply button clicked on \(tweetPrototypeCell.index ?? -1)")
+    replyIndex = tweetPrototypeCell.index!
+    performSegue(withIdentifier: "HomeReplySegue", sender: nil)
+  }
+  
+  func tweetPrototypeCell (tweetPrototypeCell: TweetPrototypeCell, didClickRetweet tweet: Tweet) {
+    print("ReTWEET button clicked on \(tweetPrototypeCell.index ?? -1)")
+    HandleRetweetAction(index: tweetPrototypeCell.index!)
+  }
+  
+  func tweetPrototypeCell (tweetPrototypeCell: TweetPrototypeCell, didClickFav tweet: Tweet) {
+    print("FAv button clicked on \(tweetPrototypeCell.index ?? -1)")
+    HandleFavAction(index: tweetPrototypeCell.index!)
   }
 }

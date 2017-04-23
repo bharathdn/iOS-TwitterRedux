@@ -8,6 +8,12 @@
 
 import UIKit
 
+@objc protocol TweetPrototypeCellDelegate {
+  @objc optional func tweetPrototypeCell (tweetPrototypeCell: TweetPrototypeCell, didClickReply tweet: Tweet)
+  @objc optional func tweetPrototypeCell (tweetPrototypeCell: TweetPrototypeCell, didClickRetweet tweet: Tweet)
+  @objc optional func tweetPrototypeCell (tweetPrototypeCell: TweetPrototypeCell, didClickFav tweet: Tweet)
+}
+
 class TweetPrototypeCell: UITableViewCell {
   
   @IBOutlet weak var userImageView: UIImageView!
@@ -27,6 +33,9 @@ class TweetPrototypeCell: UITableViewCell {
   
   @IBOutlet weak var userImageTopViewContraint: NSLayoutConstraint!
   @IBOutlet weak var userScreeNameTopViewConstraint: NSLayoutConstraint!
+  
+  weak var delegate: TweetPrototypeCellDelegate?
+  var index: Int?
   
   var tweet: Tweet! {
     didSet {
@@ -88,4 +97,16 @@ class TweetPrototypeCell: UITableViewCell {
     }
   }
   
+  // MARK: - event handlers
+  @IBAction func onReplyButton(_ sender: Any) {
+    delegate?.tweetPrototypeCell!(tweetPrototypeCell: self, didClickReply: tweet)
+  }
+  
+  @IBAction func onRetweetButton(_ sender: Any) {
+    delegate?.tweetPrototypeCell!(tweetPrototypeCell: self, didClickRetweet: tweet)
+  }
+  
+  @IBAction func onFavButton(_ sender: Any) {
+    delegate?.tweetPrototypeCell!(tweetPrototypeCell: self, didClickFav: tweet)
+  }
 }

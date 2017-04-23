@@ -109,6 +109,7 @@
                     </navigationItem>
                     <connections>
                         <outlet property="tableView" destination="DeV-og-yhG" id="1n9-f1-O5I"/>
+                        <segue destination="2tl-QW-xXa" kind="presentation" identifier="HomeReplySegue" id="lBm-HA-NJz"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="WLM-qf-FNF" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -731,7 +732,7 @@
                     </connections>
                 </panGestureRecognizer>
             </objects>
-            <point key="canvasLocation" x="-1534" y="-533"/>
+            <point key="canvasLocation" x="-1433" y="-1002"/>
         </scene>
         <!--Menu View Controller-->
         <scene sceneID="Q3P-Sg-QoV">
@@ -839,7 +840,7 @@
         <!--Navigation Controller-->
         <scene sceneID="oGU-gH-ItK">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="2tl-QW-xXa" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="TweetReplyNavController" automaticallyAdjustsScrollViewInsets="NO" id="2tl-QW-xXa" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="2jF-mp-Y0Z">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
@@ -918,7 +919,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Jsr-I8-836" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-2396" y="-533"/>
+            <point key="canvasLocation" x="-2310" y="-1002"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="a25-oX-hXa">
@@ -967,4 +968,7 @@
         <image name="tweet" width="24" height="24"/>
         <image name="tweet3" width="16" height="16"/>
     </resources>
+    <inferredMetricsTieBreakers>
+        <segue reference="lBm-HA-NJz"/>
+    </inferredMetricsTieBreakers>
 </document>
