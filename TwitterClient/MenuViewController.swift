@@ -42,7 +42,7 @@ class MenuViewController: UIViewController {
     viewControllers.append(homeTimeLineViewController)
     viewControllers.append(mentionsViewController)
     viewControllers.append(accountsViewController)
-    hamburgerViewController.contentViewController = viewControllers[3]
+    hamburgerViewController.contentViewController = viewControllers[1]
   }
   
   /*
