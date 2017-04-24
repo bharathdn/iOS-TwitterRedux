@@ -121,12 +121,8 @@ class TweetsViewController: UIViewController {
   
   // MARK: - Navigation
   override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-    if segue.identifier == "tweetDetailSegue" {
-      let cell = sender as! TweetPrototypeCell
-      let indexPath = tableView.indexPath(for: cell)
-      let tweet = tweets[indexPath!.row]
-      detailsViewIndex = indexPath!.row
-      
+    if segue.identifier == "HomeDetailSegue" {
+      let tweet = tweets[detailsViewIndex!]
       let uiNavigationController = segue.destination as! UINavigationController
       let detailViewController = uiNavigationController.topViewController as! TweetDetailViewController
       detailViewController.tweet = tweet
@@ -185,6 +181,11 @@ extension TweetsViewController: UITableViewDataSource, UITableViewDelegate {
     cell.index = indexPath.row
     
     return cell
+  }
+  
+  func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+    detailsViewIndex = indexPath.row
+    performSegue(withIdentifier: "HomeDetailSegue", sender: nil)
   }
   
   func scrollViewDidScroll(_ scrollView: UIScrollView) {

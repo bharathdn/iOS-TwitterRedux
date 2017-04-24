@@ -110,6 +110,7 @@
                     <connections>
                         <outlet property="tableView" destination="DeV-og-yhG" id="1n9-f1-O5I"/>
                         <segue destination="2tl-QW-xXa" kind="presentation" identifier="HomeReplySegue" id="lBm-HA-NJz"/>
+                        <segue destination="AJK-66-8wW" kind="presentation" identifier="HomeDetailSegue" id="zYV-hr-B8P"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="WLM-qf-FNF" userLabel="First Responder" sceneMemberID="firstResponder"/>
