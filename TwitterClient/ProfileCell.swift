@@ -18,10 +18,16 @@ class ProfileCell: UITableViewCell {
   @IBOutlet weak var followersCountLabel: UILabel!
   @IBOutlet weak var followingCountLabel: UILabel!
   @IBOutlet weak var tweetCountLabel: UILabel!
+  @IBOutlet weak var pageControl: UIPageControl!
   
   var user: User! {
     didSet {
-      userBackgroundImageView.setImageWith(user.profileBackgroundImageUrl!)
+      let backgroundUrl = user.profileBackgroundImageUrl
+      if backgroundUrl != nil {
+        userBackgroundImageView.setImageWith(user.profileBackgroundImageUrl!)
+      } else {
+        userBackgroundImageView.image = #imageLiteral(resourceName: "wall")
+      }
       userImageView.setImageWith(user.profileImageUrl!)
       userScreeNameLabel.text = user.screenName!
       userNameLabel.text = "@" + user.name!
@@ -30,4 +36,6 @@ class ProfileCell: UITableViewCell {
       tweetCountLabel.text = String(user.tweetCount!)
     }
   }
+  
+  
 }

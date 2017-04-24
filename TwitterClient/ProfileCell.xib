@@ -79,11 +79,6 @@
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <pageControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" numberOfPages="2" translatesAutoresizingMaskIntoConstraints="NO" id="7ls-eX-A5h">
-                        <rect key="frame" x="163" y="125" width="23" height="37"/>
-                        <color key="pageIndicatorTintColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
-                        <color key="currentPageIndicatorTintColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
-                    </pageControl>
                 </subviews>
                 <constraints>
                     <constraint firstItem="a2b-Ug-c1q" firstAttribute="leading" secondItem="gCx-oy-tLG" secondAttribute="leading" id="0k1-Wg-aSi"/>
@@ -92,7 +87,6 @@
                     <constraint firstItem="abL-Bo-nSw" firstAttribute="leading" secondItem="KxT-q8-Pj1" secondAttribute="trailing" constant="40" id="5V5-sj-gJ7"/>
                     <constraint firstItem="KxT-q8-Pj1" firstAttribute="leading" secondItem="T4D-Iw-FTw" secondAttribute="trailing" constant="40" id="5qw-fO-Czb"/>
                     <constraint firstItem="gCx-oy-tLG" firstAttribute="top" secondItem="4vV-da-6Kq" secondAttribute="bottom" constant="8" id="BZz-Eh-YBd"/>
-                    <constraint firstItem="7ls-eX-A5h" firstAttribute="centerY" secondItem="gCx-oy-tLG" secondAttribute="centerY" id="Fno-6F-doi"/>
                     <constraint firstItem="gCx-oy-tLG" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="20" id="FpX-Wo-XSt"/>
                     <constraint firstItem="4vV-da-6Kq" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="20" id="G7Q-Qx-r87"/>
                     <constraint firstAttribute="bottom" secondItem="T4D-Iw-FTw" secondAttribute="bottom" constant="10" id="HMh-3V-sBd"/>
@@ -100,7 +94,6 @@
                     <constraint firstItem="T4D-Iw-FTw" firstAttribute="leading" secondItem="gCx-oy-tLG" secondAttribute="leading" id="RKx-0e-Sc6"/>
                     <constraint firstItem="KxT-q8-Pj1" firstAttribute="centerY" secondItem="T4D-Iw-FTw" secondAttribute="centerY" id="TO4-Yw-yKg"/>
                     <constraint firstItem="a2b-Ug-c1q" firstAttribute="top" secondItem="gCx-oy-tLG" secondAttribute="bottom" constant="5" id="UEN-B2-4gt"/>
-                    <constraint firstItem="7ls-eX-A5h" firstAttribute="centerX" secondItem="H2p-sc-9uM" secondAttribute="centerX" id="Y2A-ZA-sa1"/>
                     <constraint firstItem="OpO-8M-WXc" firstAttribute="top" secondItem="a2b-Ug-c1q" secondAttribute="bottom" constant="8" id="a3O-lV-GHg"/>
                     <constraint firstItem="abL-Bo-nSw" firstAttribute="centerY" secondItem="T4D-Iw-FTw" secondAttribute="centerY" id="afw-cS-gta"/>
                     <constraint firstItem="Ysb-bj-Tfo" firstAttribute="centerY" secondItem="OpO-8M-WXc" secondAttribute="centerY" id="eaF-3c-ivp"/>

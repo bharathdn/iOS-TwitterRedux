@@ -27,19 +27,7 @@ class HamburgerNavController: UINavigationController {
   func showUserAccountView(sender: UILongPressGestureRecognizer) {
     print("user long pressed")
     if sender.state == .began {
-        performSegue(withIdentifier: "HamburgerAccountSegue", sender: nil)
+      performSegue(withIdentifier: "HamburgerAccountSegue", sender: nil)
     }
   }
-  
-  
-  /*
-   // MARK: - Navigation
-   
-   // In a storyboard-based application, you will often want to do a little preparation before navigation
-   override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-   // Get the new view controller using segue.destinationViewController.
-   // Pass the selected object to the new view controller.
-   }
-   */
-  
 }
