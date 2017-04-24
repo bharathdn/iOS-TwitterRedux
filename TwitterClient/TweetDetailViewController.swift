@@ -124,6 +124,12 @@ class TweetDetailViewController: UIViewController {
     }
   }
   
+  @IBAction func onUserImageTapGesture(_ sender: UITapGestureRecognizer) {
+    performSegue(withIdentifier: "TweetDetailProfileSegue", sender: nil)
+    
+  }
+  
+  
   // MARK: - Navigation
   
   // In a storyboard-based application, you will often want to do a little preparation before navigation
@@ -135,6 +141,15 @@ class TweetDetailViewController: UIViewController {
       let replyViewController = uiNavigationController.topViewController as! TweetReplyViewController
       replyViewController.tweet = tweet
     }
+    else if segue.identifier == "TweetDetailProfileSegue" {
+      let tweetDictionary = tweet.tweetDictionary
+      let userDictionary = tweetDictionary?["user"] as! [String: AnyObject]
+      let user = User(dictionary: userDictionary)
+      
+      let uiNavigationController = segue.destination as! UINavigationController
+      let profileViewController = uiNavigationController.topViewController as! ProfileViewController
+      profileViewController.user = user
+    }
   }
 }
 
@@ -145,5 +160,7 @@ extension TweetDetailViewController: TweetReplyViewControllerDelegate {
     self.tweet = tweet
     populateDetails()
   }
+  
+  
   
 }

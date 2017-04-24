@@ -244,12 +244,16 @@
                                     <constraint firstAttribute="height" constant="17" id="wDH-hx-8yA"/>
                                 </constraints>
                             </imageView>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="GU7-B8-bCc">
+                            <imageView contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="GU7-B8-bCc">
                                 <rect key="frame" x="16" y="95" width="50" height="50"/>
+                                <gestureRecognizers/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="50" id="htF-uI-uUA"/>
                                     <constraint firstAttribute="width" constant="50" id="qOs-S2-gGq"/>
                                 </constraints>
+                                <connections>
+                                    <outletCollection property="gestureRecognizers" destination="cpu-U6-c50" appends="YES" id="qie-Qn-zKc"/>
+                                </connections>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="retweeted by" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Nm3-vC-0rw">
                                 <rect key="frame" x="76" y="73" width="73.5" height="14.5"/>
@@ -428,11 +432,17 @@
                         <outlet property="userNameLabel" destination="l9B-hb-tII" id="EpV-h6-0qS"/>
                         <outlet property="userScreenNameLabel" destination="Or4-kG-1hj" id="NGo-CS-CUb"/>
                         <outlet property="userScreenNameTopConstraint" destination="pYL-qn-GF2" id="DJ6-4G-k3N"/>
+                        <segue destination="Zlq-IG-qNu" kind="presentation" identifier="TweetDetailProfileSegue" id="m4D-Iy-6ce"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="LF4-SP-fgI" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <tapGestureRecognizer id="cpu-U6-c50">
+                    <connections>
+                        <action selector="onUserImageTapGesture:" destination="xZE-Rj-9A0" id="Iv9-ds-evd"/>
+                    </connections>
+                </tapGestureRecognizer>
             </objects>
-            <point key="canvasLocation" x="2240" y="-533"/>
+            <point key="canvasLocation" x="2406" y="-533"/>
         </scene>
         <!--Tweet Reply View Controller-->
         <scene sceneID="nt6-xf-X8b">
@@ -989,5 +999,6 @@
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="vxJ-U2-QQE"/>
+        <segue reference="m4D-Iy-6ce"/>
     </inferredMetricsTieBreakers>
 </document>
