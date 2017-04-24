@@ -16,8 +16,7 @@ class AccountViewController: UIViewController {
   @IBOutlet weak var tableView: UITableView!
  
   var hamburgerViewController: HamburgerViewController!
-  //var menuViewController: MenuViewController!
-  var homeTimeLineViewController: UIViewController!
+  var homeTimeLineViewController: TweetsViewController!
   
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -26,12 +25,6 @@ class AccountViewController: UIViewController {
     
     users = User.users
     addFooterView()
-    
-    let storyBoard = UIStoryboard(name: "Main", bundle: nil)
-    let hamburgerNavController = storyBoard.instantiateViewController(withIdentifier: "HamburgerNavController") as! UINavigationController
-    hamburgerViewController = hamburgerNavController.topViewController as! HamburgerViewController
-    homeTimeLineViewController = storyBoard.instantiateViewController(withIdentifier:
-      "HomeTimeLineViewController") as! TweetsViewController
   }
   
   
@@ -98,12 +91,15 @@ extension AccountViewController: UITableViewDelegate, UITableViewDataSource {
 //          return print(error.localizedDescription)
 //      })
 //    }
-//    
-    loadHomeTimeline()
+//  
+    UIView.animate(withDuration: 1) { 
+      self.loadHomeTimeline()
+    }
+    
   }
   
   
-  func loadHomeTimeline() {
+  func loadHomeTimeline() {  
     hamburgerViewController.contentViewController = homeTimeLineViewController
   }
   

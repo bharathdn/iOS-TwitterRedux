@@ -13,10 +13,10 @@ class MenuViewController: UIViewController {
   var viewControllers: [UIViewController] = []
   var hamburgerViewController: HamburgerViewController!
   
-  private var profileViewController: UIViewController!
-  private var homeTimeLineViewController: UIViewController!
-  private var mentionsViewController: UIViewController!
-  private var accountsViewController: UIViewController!
+  private var profileViewController: ProfileViewController!
+  private var homeTimeLineViewController: TweetsViewController!
+  private var mentionsViewController: MentionsViewController!
+  private var accountsViewController: AccountViewController!
   
   @IBOutlet weak var tableView: UITableView!
   let menuLabels = ["Profile", "TimeLine", "Mentions", "Accounts"]
@@ -30,19 +30,24 @@ class MenuViewController: UIViewController {
     tableView.estimatedRowHeight = 200
     
     print("Hello from Menu view c")
-    
+    instantiateViewControllers()
+    hamburgerViewController.contentViewController = viewControllers[1]
+  }
+  
+  private func instantiateViewControllers() {
     let storyBoard = UIStoryboard(name: "Main", bundle: nil)
-    profileViewController = storyBoard.instantiateViewController(withIdentifier: "UserProfileView")
+    profileViewController = storyBoard.instantiateViewController(withIdentifier: "UserProfileView") as! ProfileViewController
     homeTimeLineViewController = storyBoard.instantiateViewController(withIdentifier:
-      "HomeTimeLineViewController")
-    mentionsViewController = storyBoard.instantiateViewController(withIdentifier: "MentionsViewController")
-    accountsViewController = storyBoard.instantiateViewController(withIdentifier: "AccountView")
+      "HomeTimeLineViewController") as! TweetsViewController
+    mentionsViewController = storyBoard.instantiateViewController(withIdentifier: "MentionsViewController") as! MentionsViewController
+    accountsViewController = storyBoard.instantiateViewController(withIdentifier: "AccountView") as! AccountViewController
+    accountsViewController.hamburgerViewController = hamburgerViewController
+    accountsViewController.homeTimeLineViewController = homeTimeLineViewController
     
     viewControllers.append(profileViewController)
     viewControllers.append(homeTimeLineViewController)
     viewControllers.append(mentionsViewController)
     viewControllers.append(accountsViewController)
-    hamburgerViewController.contentViewController = viewControllers[1]
   }
   
   /*
