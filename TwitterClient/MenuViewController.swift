@@ -43,11 +43,20 @@ class MenuViewController: UIViewController {
     accountsViewController = storyBoard.instantiateViewController(withIdentifier: "AccountView") as! AccountViewController
     accountsViewController.hamburgerViewController = hamburgerViewController
     accountsViewController.homeTimeLineViewController = homeTimeLineViewController
+    accountsViewController.didLoadFromSegue = false
     
     viewControllers.append(profileViewController)
     viewControllers.append(homeTimeLineViewController)
     viewControllers.append(mentionsViewController)
     viewControllers.append(accountsViewController)
+  }
+  
+  func getHamburgerReference() -> HamburgerViewController {
+    return hamburgerViewController
+  }
+  
+  func getHomeTimeLineReference() -> TweetsViewController {
+    return homeTimeLineViewController
   }
   
   /*

@@ -11,17 +11,20 @@ import UIKit
 class AccountViewController: UIViewController {
   
   var users: [User]!
-
+  
   var footerView: AddButtonCell!
   @IBOutlet weak var tableView: UITableView!
- 
+  
   var hamburgerViewController: HamburgerViewController!
   var homeTimeLineViewController: TweetsViewController!
+  var didLoadFromSegue = true
   
   override func viewDidLoad() {
     super.viewDidLoad()
     tableView.delegate = self
     tableView.dataSource = self
+    
+    
     
     users = User.users
     addFooterView()
@@ -43,19 +46,24 @@ class AccountViewController: UIViewController {
   }
   
   func onPlusButtonTap(_ sender: UITapGestureRecognizer) {
-      TwitterClient.sharedInstance?.login(
-        success: {
-          self.users = User.users
-          self.tableView.reloadData()
-      },
-        failure: { (error) in
-          print("error adding new user")
-          print(error.localizedDescription)
-      })
+    TwitterClient.sharedInstance?.login(
+      success: {
+        self.users = User.users
+        self.tableView.reloadData()
+    },
+      failure: { (error) in
+        print("error adding new user")
+        print(error.localizedDescription)
+    })
   }
-
   
-   /*
+  @IBAction func onCancel(_ sender: Any) {
+    dismiss(animated: true) {
+    }
+  }
+  
+  
+  /*
    // MARK: - Navigation
    
    // In a storyboard-based application, you will often want to do a little preparation before navigation
@@ -88,19 +96,24 @@ extension AccountViewController: UITableViewDelegate, UITableViewDataSource {
           print("Newly selected user set")
           self.loadHomeTimeline()
       },
-      failure: { error in
+        failure: { error in
           return print(error.localizedDescription)
       })
     }
-  
-    UIView.animate(withDuration: 1) {
+    
+    UIView.animate(withDuration: 0.5) {
       self.loadHomeTimeline()
     }
     
   }
   
   func loadHomeTimeline() {
-    hamburgerViewController.contentViewController = homeTimeLineViewController
+    if !didLoadFromSegue {
+      hamburgerViewController.contentViewController = homeTimeLineViewController
+    }
+    else {
+      dismiss(animated: true) { }
+    }
   }
   
 }

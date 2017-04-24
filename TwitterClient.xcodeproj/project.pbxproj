@@ -24,6 +24,7 @@
 		A1285B571E9DAC7800B67B13 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1285B561E9DAC7700B67B13 /* User.swift */; };
 		A1285B591E9DAC9200B67B13 /* Tweet.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1285B581E9DAC9200B67B13 /* Tweet.swift */; };
 		A1285B5B1E9DBCD500B67B13 /* TwitterClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1285B5A1E9DBCD400B67B13 /* TwitterClient.swift */; };
+		A1602EDB1EADABC500A2474C /* HamburgerNavController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1602EDA1EADABC500A2474C /* HamburgerNavController.swift */; };
 		A18110971E9DF99800C93C30 /* TweetsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A18110961E9DF99800C93C30 /* TweetsViewController.swift */; };
 		A1CA394A1EAA9D690055D8F8 /* APIKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1CA39491EAA9D690055D8F8 /* APIKey.swift */; };
 		A1CA394D1EAB1A6B0055D8F8 /* ProfileCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1CA394B1EAB1A6A0055D8F8 /* ProfileCell.swift */; };
@@ -61,6 +62,7 @@
 		A1285B561E9DAC7700B67B13 /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		A1285B581E9DAC9200B67B13 /* Tweet.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Tweet.swift; sourceTree = "<group>"; };
 		A1285B5A1E9DBCD400B67B13 /* TwitterClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TwitterClient.swift; sourceTree = "<group>"; };
+		A1602EDA1EADABC500A2474C /* HamburgerNavController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HamburgerNavController.swift; sourceTree = "<group>"; };
 		A18110961E9DF99800C93C30 /* TweetsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TweetsViewController.swift; sourceTree = "<group>"; };
 		A1CA39491EAA9D690055D8F8 /* APIKey.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APIKey.swift; sourceTree = "<group>"; };
 		A1CA394B1EAB1A6A0055D8F8 /* ProfileCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileCell.swift; sourceTree = "<group>"; };
@@ -190,6 +192,7 @@
 				A105AC851EA96963000DD915 /* MentionsViewController.swift */,
 				A105AC8E1EA9B42D000DD915 /* ProfileViewController.swift */,
 				A1CA394F1EABDA140055D8F8 /* AccountViewController.swift */,
+				A1602EDA1EADABC500A2474C /* HamburgerNavController.swift */,
 			);
 			name = "View Controllers";
 			sourceTree = "<group>";
@@ -352,6 +355,7 @@
 				A1CA394D1EAB1A6B0055D8F8 /* ProfileCell.swift in Sources */,
 				A105AC8F1EA9B42D000DD915 /* ProfileViewController.swift in Sources */,
 				A1FF23E91EA3ED1600B8C8CA /* TweetReplyViewController.swift in Sources */,
+				A1602EDB1EADABC500A2474C /* HamburgerNavController.swift in Sources */,
 				A1CA39571EABDE940055D8F8 /* AccountLabelImageCell.swift in Sources */,
 				A1CA39531EABDABB0055D8F8 /* AddButtonCell.swift in Sources */,
 				A1F1CBD11EA14828000FADE3 /* InfiniteScrollActivityView.swift in Sources */,

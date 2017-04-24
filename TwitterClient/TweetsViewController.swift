@@ -31,8 +31,10 @@ class TweetsViewController: UIViewController {
     tableView.rowHeight = UITableViewAutomaticDimension
     tableView.estimatedRowHeight = 200
     
-    loadTweets()
-    isFirstRequestLoaded = true
+    if tweets.count == 0 {
+      loadTweets()
+      isFirstRequestLoaded = true
+    }
     
     // Refresh Control
     refreshControl.addTarget(self, action: #selector(TweetsViewController.loadTweets), for: .valueChanged)
@@ -56,7 +58,11 @@ class TweetsViewController: UIViewController {
   override func viewWillAppear(_ animated: Bool) {
     loadTweets()
   }
-
+  
+  override func viewWillDisappear(_ animated: Bool) {
+    isFirstRequestLoaded = false
+  }
+  
   
   @IBAction func onLogoutButton(_ sender: Any) {
     print("Logging out user")
@@ -72,15 +78,18 @@ class TweetsViewController: UIViewController {
     
     if isFirstRequestLoaded && Tweet.MaxId != nil {
       
-      print("\n\n\n \(Tweet.MaxId!) \n\n\n")
+      print("\n\(Tweet.MaxId!) \n")
       parameters["max_id"] = Tweet.MaxId as AnyObject
     }
     
     print("TimeLine: Fetching tweets for user: \(User.currentUser?.screenName ?? "unknown") :: \(User.currentUser?.name ?? "unknown")")
     TwitterClient.sharedInstance?.homeTimeLine(parameters: parameters ,success: { (tweets: [Tweet]?) in
       print("*** \(tweets?.count ?? 0) Number of tweets retrieved for user")
-      
-      self.tweets += tweets!
+      if !self.isFirstRequestLoaded {
+        self.tweets = tweets!
+      } else {
+        self.tweets += tweets!
+      }
       self.tableView.reloadData()
       self.refreshControl.endRefreshing()
       self.loadingMoreView!.stopAnimating()

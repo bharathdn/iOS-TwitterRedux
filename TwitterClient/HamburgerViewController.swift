@@ -51,6 +51,7 @@ class HamburgerViewController: UIViewController {
     
     self.edgesForExtendedLayout = UIRectEdge.init(rawValue: 0)
     //    self.automaticallyAdjustsScrollViewInsets = true
+    
   }
   
   override func didReceiveMemoryWarning() {

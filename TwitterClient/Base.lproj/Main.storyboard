@@ -575,7 +575,7 @@
             </objects>
             <point key="canvasLocation" x="4471" y="-533"/>
         </scene>
-        <!--Account View Controller-->
+        <!--Accounts-->
         <scene sceneID="UwY-wE-0QQ">
             <objects>
                 <viewController storyboardIdentifier="AccountView" id="39V-M7-zbc" customClass="AccountViewController" customModule="TwitterClient" customModuleProvider="target" sceneMemberID="viewController">
@@ -600,16 +600,23 @@
                             <constraint firstAttribute="trailing" secondItem="hkx-eV-X0i" secondAttribute="trailing" id="xKT-G1-MGr"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" id="NXb-u9-UoS"/>
+                    <navigationItem key="navigationItem" title="Accounts" id="NXb-u9-UoS">
+                        <barButtonItem key="leftBarButtonItem" title="Cancel" id="EwJ-UM-pis">
+                            <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            <connections>
+                                <action selector="onCancel:" destination="39V-M7-zbc" id="7cd-nd-c3o"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <outlet property="tableView" destination="hkx-eV-X0i" id="dGf-vY-CMG"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="mSx-U5-W3B" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="5599" y="-535"/>
+            <point key="canvasLocation" x="-1129" y="185"/>
         </scene>
-        <!--Profile View Controller-->
+        <!--User Profile-->
         <scene sceneID="oJM-2d-WiI">
             <objects>
                 <viewController storyboardIdentifier="UserProfileView" id="9S8-5v-yeY" customClass="ProfileViewController" customModule="TwitterClient" customModuleProvider="target" sceneMemberID="viewController">
@@ -649,7 +656,7 @@
                             <constraint firstItem="TGW-6f-yMf" firstAttribute="centerX" secondItem="B4k-cT-Vt1" secondAttribute="centerX" id="z3P-eq-jGV"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" id="bLg-fg-eiZ">
+                    <navigationItem key="navigationItem" title="User Profile" id="bLg-fg-eiZ">
                         <barButtonItem key="leftBarButtonItem" title="Cancel" id="fe3-ub-vjA">
                             <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             <connections>
@@ -743,7 +750,7 @@
                     </connections>
                 </panGestureRecognizer>
             </objects>
-            <point key="canvasLocation" x="37" y="-533"/>
+            <point key="canvasLocation" x="-101" y="-533"/>
         </scene>
         <!--Menu View Controller-->
         <scene sceneID="Q3P-Sg-QoV">
@@ -909,10 +916,10 @@
             </objects>
             <point key="canvasLocation" x="623" y="-533"/>
         </scene>
-        <!--Navigation Controller-->
+        <!--Hamburger Nav Controller-->
         <scene sceneID="s1a-nC-30s">
             <objects>
-                <navigationController storyboardIdentifier="HamburgerNavController" automaticallyAdjustsScrollViewInsets="NO" id="qSg-Wu-N0g" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="HamburgerNavController" automaticallyAdjustsScrollViewInsets="NO" id="qSg-Wu-N0g" customClass="HamburgerNavController" customModule="TwitterClient" customModuleProvider="target" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="B2A-tU-esc">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
@@ -926,11 +933,12 @@
                     <nil name="viewControllers"/>
                     <connections>
                         <segue destination="OIX-7N-Kez" kind="relationship" relationship="rootViewController" id="26W-Ig-wn6"/>
+                        <segue destination="D4J-gE-Vx2" kind="show" identifier="HamburgerAccountSegue" id="sTN-hs-q37"/>
                     </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Jsr-I8-836" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-474" y="-533"/>
+            <point key="canvasLocation" x="-795" y="-533"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="a25-oX-hXa">
@@ -968,7 +976,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="qMy-hz-qDM" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4906" y="-534"/>
+            <point key="canvasLocation" x="-1845" y="185"/>
         </scene>
     </scenes>
     <resources>
@@ -980,6 +988,6 @@
         <image name="tweet3" width="16" height="16"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="lBm-HA-NJz"/>
+        <segue reference="vxJ-U2-QQE"/>
     </inferredMetricsTieBreakers>
 </document>
