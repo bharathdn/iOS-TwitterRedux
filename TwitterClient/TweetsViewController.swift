@@ -153,7 +153,7 @@ class TweetsViewController: UIViewController {
       
       let uiNavigationController = segue.destination as! UINavigationController
       let profileViewController = uiNavigationController.topViewController as! ProfileViewController
-       profileViewController.user = user
+      profileViewController.user = user
     }
   }
   

@@ -80,7 +80,7 @@ extension AccountViewController: UITableViewDelegate, UITableViewDataSource {
   
   func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
     User.currentUser = users[indexPath.row]
-    print("\n new user account \(User.currentUser?.name) has been set \n")
+    print("\n new user account \(User.currentUser?.name ?? "unknown") has been set \n")
     tableView.deselectRow(at: indexPath, animated: true)
     if User.loadAccessToken() {
       TwitterClient.sharedInstance?.currentAccount(

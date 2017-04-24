@@ -64,6 +64,7 @@ class ProfileViewController: UIViewController {
   @IBAction func onCancel(_ sender: Any) {
     dismiss(animated: true) {
       print("exiting profile view")
+      self.user = User.currentUser!
     }
   }
   
