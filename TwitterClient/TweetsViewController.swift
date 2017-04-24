@@ -13,6 +13,7 @@ class TweetsViewController: UIViewController {
   var tweets: [Tweet] = []
   var replyIndex: Int?
   var detailsViewIndex: Int?
+  var profileIndex: Int?
   
   @IBOutlet weak var tableView: UITableView!
   let refreshControl = UIRefreshControl()
@@ -75,6 +76,7 @@ class TweetsViewController: UIViewController {
       parameters["max_id"] = Tweet.MaxId as AnyObject
     }
     
+    print("TimeLine: Fetching tweets for user: \(User.currentUser?.screenName ?? "unknown") :: \(User.currentUser?.name ?? "unknown")")
     TwitterClient.sharedInstance?.homeTimeLine(parameters: parameters ,success: { (tweets: [Tweet]?) in
       print("*** \(tweets?.count ?? 0) Number of tweets retrieved for user")
       
@@ -137,16 +139,21 @@ class TweetsViewController: UIViewController {
       let detailViewController = uiNavigationController.topViewController as! TweetDetailViewController
       detailViewController.tweet = tweet
     }
-//    else if segue.identifier == "HomeNewTweetSegue" {
-//      let uiNavigationController = segue.destination as! UINavigationController
-//      let composeTweetController = uiNavigationController.topViewController as!ComposeTweetController
-//      composeTweetController.delegate = self
-//    }
     else if segue.identifier == "HomeReplySegue" {
       let tweet = tweets[replyIndex!]
       let uiNavigationController = segue.destination as! UINavigationController
       let replyViewController = uiNavigationController.topViewController as! TweetReplyViewController
       replyViewController.tweet = tweet
+    }
+    else if segue.identifier == "HomeProfileSegue" {
+      let tweet = tweets[profileIndex!]
+      let tweetDictionary = tweet.tweetDictionary
+      let userDictionary = tweetDictionary?["user"] as! [String: AnyObject]
+      let user = User(dictionary: userDictionary)
+      
+      let uiNavigationController = segue.destination as! UINavigationController
+      let profileViewController = uiNavigationController.topViewController as! ProfileViewController
+       profileViewController.user = user
     }
   }
   
@@ -155,14 +162,6 @@ class TweetsViewController: UIViewController {
 // MARK: - ComposeTweetControllerDelegate, TweetReplyViewControllerDelegate
 extension TweetsViewController: TweetReplyViewControllerDelegate,
 TweetDetailViewControllerDelegate {
-  
-//  func composeTweetController(composeTweetController: ComposeTweetController, didPostTweet tweet: Tweet) {
-//    print("new tweet posted delegate called on TweetViewController")
-//    tweets.insert(tweet, at: 0)
-//    tableView.reloadData()
-//  }
-
-  
   
   func tweetReplyViewController(tweetReplyViewController: TweetReplyViewController, didPostReply tweet: Tweet) {
     print("reply to tweet has been posted")
@@ -238,5 +237,12 @@ extension TweetsViewController: TweetPrototypeCellDelegate {
   func tweetPrototypeCell (tweetPrototypeCell: TweetPrototypeCell, didClickFav tweet: Tweet) {
     print("FAv button clicked on \(tweetPrototypeCell.index ?? -1)")
     HandleFavAction(index: tweetPrototypeCell.index!)
+  }
+  
+  func tweetPrototypeCell (tweetPrototypeCell: TweetPrototypeCell, didClickUserImage tweet: Tweet) {
+    print("user Image clicked on index \(tweetPrototypeCell.index ?? -1)")
+    profileIndex = tweetPrototypeCell.index
+    performSegue(withIdentifier: "HomeProfileSegue", sender: nil)
+    
   }
 }

@@ -30,7 +30,9 @@ class ProfileViewController: UIViewController {
   }
   
   override func viewWillAppear(_ animated: Bool) {
-    user = User.currentUser
+    if user == nil {
+      user = User.currentUser
+    }
     getTweetsForUser(user: user)
     
     headerView = Bundle.main.loadNibNamed("ProfileCell", owner: self, options: nil)?.first as! ProfileCell
@@ -55,6 +57,14 @@ class ProfileViewController: UIViewController {
       print(error.localizedDescription)
     })
     
+  }
+  
+  // MARK: - Event handler
+  
+  @IBAction func onCancel(_ sender: Any) {
+    dismiss(animated: true) {
+      print("exiting profile view")
+    }
   }
   
   
@@ -103,6 +113,8 @@ extension ProfileViewController: UIScrollViewDelegate {
       })
     }
   }
+  
+  
   
   // Blur image code: runs very slow!
   // code from : http://stackoverflow.com/questions/41156542/how-to-blur-an-existing-image-in-a-uiimageview-with-swift

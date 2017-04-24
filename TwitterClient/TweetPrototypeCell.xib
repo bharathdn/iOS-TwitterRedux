@@ -25,12 +25,16 @@
                             <constraint firstAttribute="width" constant="17" id="XRE-Cb-cod"/>
                         </constraints>
                     </imageView>
-                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="KuO-GR-AZx">
+                    <imageView contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="KuO-GR-AZx">
                         <rect key="frame" x="10" y="30" width="55" height="55"/>
+                        <gestureRecognizers/>
                         <constraints>
                             <constraint firstAttribute="width" constant="55" id="Bng-Ge-dEx"/>
                             <constraint firstAttribute="height" constant="55" id="cRt-cb-pec"/>
                         </constraints>
+                        <connections>
+                            <outletCollection property="gestureRecognizers" destination="RNn-wL-sKn" appends="YES" id="fdQ-Nz-B5p"/>
+                        </connections>
                     </imageView>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="retweeted by" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hKZ-9A-XnU">
                         <rect key="frame" x="64" y="6" width="78.5" height="16"/>
@@ -165,6 +169,11 @@
             </connections>
             <point key="canvasLocation" x="-146.5" y="-59"/>
         </tableViewCell>
+        <tapGestureRecognizer id="RNn-wL-sKn">
+            <connections>
+                <action selector="onUserImageTap:" destination="KGk-i7-Jjw" id="4bq-qA-GCc"/>
+            </connections>
+        </tapGestureRecognizer>
     </objects>
     <resources>
         <image name="likeInactive" width="54" height="72"/>

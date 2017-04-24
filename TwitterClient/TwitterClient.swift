@@ -46,7 +46,7 @@ class TwitterClient: BDBOAuth1SessionManager {
     
     get(twitterHomeTimeLinePath, parameters: parameters, progress: nil, success: { (task: URLSessionDataTask, response: Any?) in
       
-      let dictionariesArray = response as! [NSDictionary]
+      let dictionariesArray = response as! [[String: AnyObject]]
       let tweets = Tweet.tweetsWithArray(dictionaryArray: dictionariesArray)
       success(tweets)
       
@@ -125,7 +125,7 @@ class TwitterClient: BDBOAuth1SessionManager {
     
     post(twitterPostTweetUrl, parameters: parameters, progress: nil, success: { (task:  URLSessionDataTask, response: Any?) in
       print("tweet sent successfully")
-      success(Tweet.init(dictionary: response as! NSDictionary))
+      success(Tweet.init(dictionary: response as! [String: AnyObject]))
     }, failure: { (task: URLSessionDataTask?, error: Error) in
       print("\nError posting tweet1:: \(error) \n\n")
       failure(error)
@@ -138,7 +138,7 @@ class TwitterClient: BDBOAuth1SessionManager {
     post(retweetUrlWithId, parameters: nil, progress: nil, success: { (task:  URLSessionDataTask, response: Any?) in
       print("retweeted successfully\n")
       print("\n\n")
-      success(Tweet.init(dictionary: response as! NSDictionary))
+      success(Tweet.init(dictionary: response as! [String: AnyObject]))
     }, failure: { (task: URLSessionDataTask?, error: Error) in
       print("\nError posting tweet1:: \(error) \n\n")
       failure(error)
@@ -150,7 +150,7 @@ class TwitterClient: BDBOAuth1SessionManager {
     let parameters = ["id": tweet.id]
     post(twitterFavUrl, parameters: parameters, progress: nil, success: { (task:  URLSessionDataTask, response: Any?) in
       print("tweet favorited successfully")
-      success(Tweet.init(dictionary: response as! NSDictionary))
+      success(Tweet.init(dictionary: response as! [String: AnyObject]))
     }, failure: { (task: URLSessionDataTask?, error: Error) in
       print("\nError favoriting tweet:: \(error) \n\n")
       failure(error)
@@ -164,7 +164,7 @@ class TwitterClient: BDBOAuth1SessionManager {
     print(url)
     post(url, parameters: nil, progress: nil, success: { (task:  URLSessionDataTask, response: Any?) in
       print("reply posted successfully")
-      success(Tweet.init(dictionary: response as! NSDictionary))
+      success(Tweet.init(dictionary: response as! [String: AnyObject]))
     }, failure: { (task: URLSessionDataTask?, error: Error) in
       print("\nError replying to tweet:: \(error) \n\n")
       failure(error)
@@ -175,7 +175,7 @@ class TwitterClient: BDBOAuth1SessionManager {
     
     get(twitterMentionsPath, parameters: parameters, progress: nil, success: { (task: URLSessionDataTask, response: Any?) in
       
-      let dictionariesArray = response as! [NSDictionary]
+      let dictionariesArray = response as! [[String: AnyObject]]
       let tweets = Tweet.mentionTweetsWithArray(dictionaryArray: dictionariesArray)
       success(tweets)
       
@@ -190,7 +190,7 @@ class TwitterClient: BDBOAuth1SessionManager {
     
     get(twitterUserTimeLinePath, parameters: parameters, progress: nil, success: { (task: URLSessionDataTask, response: Any?) in
       
-      let dictionariesArray = response as! [NSDictionary]
+      let dictionariesArray = response as! [[String: AnyObject]]
       let tweets = Tweet.mentionTweetsWithArray(dictionaryArray: dictionariesArray)
       success(tweets)
       

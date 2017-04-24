@@ -12,6 +12,7 @@ import UIKit
   @objc optional func tweetPrototypeCell (tweetPrototypeCell: TweetPrototypeCell, didClickReply tweet: Tweet)
   @objc optional func tweetPrototypeCell (tweetPrototypeCell: TweetPrototypeCell, didClickRetweet tweet: Tweet)
   @objc optional func tweetPrototypeCell (tweetPrototypeCell: TweetPrototypeCell, didClickFav tweet: Tweet)
+  @objc optional func tweetPrototypeCell (tweetPrototypeCell: TweetPrototypeCell, didClickUserImage tweet: Tweet)
 }
 
 class TweetPrototypeCell: UITableViewCell {
@@ -109,4 +110,11 @@ class TweetPrototypeCell: UITableViewCell {
   @IBAction func onFavButton(_ sender: Any) {
     delegate?.tweetPrototypeCell!(tweetPrototypeCell: self, didClickFav: tweet)
   }
+  
+  @IBAction func onUserImageTap(_ sender: UITapGestureRecognizer) {
+    delegate?.tweetPrototypeCell!(tweetPrototypeCell: self, didClickUserImage: tweet)
+  }
+  
+  
+  
 }

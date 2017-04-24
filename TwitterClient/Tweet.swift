@@ -26,6 +26,8 @@ class Tweet: NSObject {
   var retweetUserName: String?
   var retweetUserScreenName: String?
   
+  var tweetDictionary: [String: AnyObject]?
+  
   private static var _max_id: Int?
   class var MaxId: Int? {
     get{
@@ -47,7 +49,8 @@ class Tweet: NSObject {
   }
  
 
-  init(dictionary: NSDictionary) {
+  init(dictionary: [String: AnyObject]) {
+    tweetDictionary = dictionary
     text = dictionary["text"] as? String
     retweetCount = (dictionary["retweet_count"] as? Int) ?? 0
     favouritesCount = (dictionary["favorite_count"] as? Int) ?? 0
@@ -93,7 +96,7 @@ class Tweet: NSObject {
     }
   }
   
-  class func tweetsWithArray(dictionaryArray: [NSDictionary]) -> [Tweet] {
+  class func tweetsWithArray(dictionaryArray: [[String: AnyObject]]) -> [Tweet] {
     var tweets: [Tweet] = []
     
     for dictionary in dictionaryArray {
@@ -121,7 +124,7 @@ class Tweet: NSObject {
     return tweets
   }
 
-  class func mentionTweetsWithArray(dictionaryArray: [NSDictionary]) -> [Tweet] {
+  class func mentionTweetsWithArray(dictionaryArray: [[String: AnyObject]]) -> [Tweet] {
     var tweets: [Tweet] = []
     
     for dictionary in dictionaryArray {
