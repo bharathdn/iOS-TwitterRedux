@@ -29,6 +29,7 @@ class User: NSObject {
   static let currentUserDataKey = "currentUserData"
   static let userDataKey = "userDataKey"
   static let userDidLogoutNotification = "UserDidLogout"
+  static let userDidPostTweet = "UserDidPostTweet"
   static let bundleIdenfitier = "com.bharath.DNRTwitterClient"
   
   init(dictionary: [String: AnyObject]) {

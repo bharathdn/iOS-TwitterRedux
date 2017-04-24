@@ -47,6 +47,8 @@ class ComposeTweetController: UIViewController {
         print(response.stringifyTweet())
         self.delegate?.composeTweetController!(composeTweetController: self, didPostTweet: response)
         self.tweetTextView.text = nil
+        let responseTweet: [String: Tweet] = ["tweet": response]
+        NotificationCenter.default.post(name: NSNotification.Name(rawValue: User.userDidPostTweet), object: nil, userInfo: responseTweet)
         self.dismiss(animated: true, completion: nil)
       }, failure: { (error: Error) in
         print("\nError posting tweet2:: \(error) \n\n")

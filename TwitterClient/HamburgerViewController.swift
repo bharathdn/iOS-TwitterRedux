@@ -50,7 +50,7 @@ class HamburgerViewController: UIViewController {
     super.viewDidLoad()
     
     self.edgesForExtendedLayout = UIRectEdge.init(rawValue: 0)
-//    self.automaticallyAdjustsScrollViewInsets = true
+    //    self.automaticallyAdjustsScrollViewInsets = true
   }
   
   override func didReceiveMemoryWarning() {
@@ -67,14 +67,14 @@ class HamburgerViewController: UIViewController {
     } else if sender.state == .changed {
       contentViewLeftMarginConstraint.constant = contentViewOriginalLeftMargin + translation.x
     } else if sender.state == .ended {
-        UIView.animate(withDuration: 0.25, animations: {
-          if velocity.x > 0 {
-            self.contentViewLeftMarginConstraint.constant = self.view.frame .width - 100
-          } else {
-            self.contentViewLeftMarginConstraint.constant = 0
-          }
-          self.view.layoutIfNeeded()
-        })
+      UIView.animate(withDuration: 0.25, animations: {
+        if velocity.x > 0 {
+          self.contentViewLeftMarginConstraint.constant = self.view.frame .width - 100
+        } else {
+          self.contentViewLeftMarginConstraint.constant = 0
+        }
+        self.view.layoutIfNeeded()
+      })
     }
   }
   
@@ -84,14 +84,15 @@ class HamburgerViewController: UIViewController {
     NotificationCenter.default.post(name: NSNotification.Name(rawValue: User.userDidLogoutNotification), object: nil)
   }
   
-  /*
-   // MARK: - Navigation
-   
-   // In a storyboard-based application, you will often want to do a little preparation before navigation
-   override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-   // Get the new view controller using segue.destinationViewController.
-   // Pass the selected object to the new view controller.
-   }
-   */
+  
+  // MARK: - Navigation
+  
+  // In a storyboard-based application, you will often want to do a little preparation before navigation
+  override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+//    if segue.identifier == "HomeNewTweetSegue" {
+//      let uiNavigationController = segue.destination as! UINavigationController
+//      let composeTweetController = uiNavigationController.topViewController as!ComposeTweetController
+//    }
+  }
   
 }

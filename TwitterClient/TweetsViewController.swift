@@ -46,6 +46,11 @@ class TweetsViewController: UIViewController {
     var insets = tableView.contentInset
     insets.bottom += InfiniteScrollActivityView.defaultHeight
     tableView.contentInset = insets
+    
+    NotificationCenter.default.addObserver(forName: NSNotification.Name(rawValue: User.userDidPostTweet), object: nil, queue: OperationQueue.main) { (notification) in
+      self.tweets.insert(notification.userInfo?["tweet"] as! Tweet, at: 0)
+      self.tableView.reloadData()
+    }
   }
   
   @IBAction func onLogoutButton(_ sender: Any) {
@@ -127,11 +132,11 @@ class TweetsViewController: UIViewController {
       let detailViewController = uiNavigationController.topViewController as! TweetDetailViewController
       detailViewController.tweet = tweet
     }
-    else if segue.identifier == "newTweetSegue" {
-      let uiNavigationController = segue.destination as! UINavigationController
-      let composeTweetController = uiNavigationController.topViewController as!ComposeTweetController
-      composeTweetController.delegate = self
-    }
+//    else if segue.identifier == "HomeNewTweetSegue" {
+//      let uiNavigationController = segue.destination as! UINavigationController
+//      let composeTweetController = uiNavigationController.topViewController as!ComposeTweetController
+//      composeTweetController.delegate = self
+//    }
     else if segue.identifier == "HomeReplySegue" {
       let tweet = tweets[replyIndex!]
       let uiNavigationController = segue.destination as! UINavigationController
@@ -143,13 +148,16 @@ class TweetsViewController: UIViewController {
 }
 
 // MARK: - ComposeTweetControllerDelegate, TweetReplyViewControllerDelegate
-extension TweetsViewController: ComposeTweetControllerDelegate, TweetReplyViewControllerDelegate,
+extension TweetsViewController: TweetReplyViewControllerDelegate,
 TweetDetailViewControllerDelegate {
-  func composeTweetController(composeTweetController: ComposeTweetController, didPostTweet tweet: Tweet) {
-    print("tweet posted delegate called on TweetViewController")
-    tweets.insert(tweet, at: 0)
-    tableView.reloadData()
-  }
+  
+//  func composeTweetController(composeTweetController: ComposeTweetController, didPostTweet tweet: Tweet) {
+//    print("new tweet posted delegate called on TweetViewController")
+//    tweets.insert(tweet, at: 0)
+//    tableView.reloadData()
+//  }
+
+  
   
   func tweetReplyViewController(tweetReplyViewController: TweetReplyViewController, didPostReply tweet: Tweet) {
     print("reply to tweet has been posted")
@@ -209,7 +217,7 @@ extension TweetsViewController: UITableViewDataSource, UITableViewDelegate {
   }
 }
 
-// MARK: - ComposeTweetControllerDelegate, TweetReplyViewControllerDelegate
+// MARK: - retweet, reply and fav delegates
 extension TweetsViewController: TweetPrototypeCellDelegate {
   func tweetPrototypeCell (tweetPrototypeCell: TweetPrototypeCell, didClickReply tweet: Tweet) {
     print("reply button clicked on \(tweetPrototypeCell.index ?? -1)")
