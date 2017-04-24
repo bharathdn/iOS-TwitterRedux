@@ -579,11 +579,12 @@
                     <navigationItem key="navigationItem" title="Mentions" id="mOY-mk-x9p"/>
                     <connections>
                         <outlet property="tableView" destination="ydx-bn-Xsg" id="REK-xZ-MDm"/>
+                        <segue destination="Zlq-IG-qNu" kind="presentation" identifier="MentionsToProfile" id="BxF-fA-Msz"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Olf-lD-uAn" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4471" y="-533"/>
+            <point key="canvasLocation" x="4905" y="-536"/>
         </scene>
         <!--Accounts-->
         <scene sceneID="UwY-wE-0QQ">
@@ -905,7 +906,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="41l-Ap-O2y" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4043" y="-534"/>
+            <point key="canvasLocation" x="4230" y="-537"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="BiP-He-4pN">
@@ -999,6 +1000,6 @@
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="vxJ-U2-QQE"/>
-        <segue reference="m4D-Iy-6ce"/>
+        <segue reference="BxF-fA-Msz"/>
     </inferredMetricsTieBreakers>
 </document>

@@ -13,6 +13,7 @@ class MentionsViewController: UIViewController {
   var tweets: [Tweet] = []
   var replyIndex: Int?
   var detailsViewIndex: Int?
+  var profileIndex: Int?
   
   @IBOutlet weak var tableView: UITableView!
   
@@ -48,20 +49,27 @@ class MentionsViewController: UIViewController {
   }
   
   
-  /*
+
    // MARK: - Navigation
    
    // In a storyboard-based application, you will often want to do a little preparation before navigation
    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-   // Get the new view controller using segue.destinationViewController.
-   // Pass the selected object to the new view controller.
+    if segue.identifier == "MentionsToProfile" {
+      let tweet = tweets[replyIndex!]
+      let tweetDictionary = tweet.tweetDictionary
+      let userDictionary = tweetDictionary?["user"] as! [String: AnyObject]
+      let user = User(dictionary: userDictionary)
+      
+      let uiNavigationController = segue.destination as! UINavigationController
+      let profileViewController = uiNavigationController.topViewController as! ProfileViewController
+      profileViewController.user = user
+    }
    }
-   */
   
 }
 
 // MARK: - Table and Scroll View
-extension MentionsViewController: UITableViewDataSource, UITableViewDelegate {
+extension MentionsViewController: UITableViewDataSource, UITableViewDelegate, TweetPrototypeCellDelegate {
   
   func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
     return tweets.count
@@ -70,27 +78,15 @@ extension MentionsViewController: UITableViewDataSource, UITableViewDelegate {
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
     let cell = Bundle.main.loadNibNamed("TweetPrototypeCell", owner: self, options: nil)?.first as! TweetPrototypeCell
     cell.tweet = tweets[indexPath.row]
+    cell.index = indexPath.row
+    cell.delegate = self
     return cell
   }
+
+  func tweetPrototypeCell (tweetPrototypeCell: TweetPrototypeCell, didClickUserImage tweet: Tweet) {
+    replyIndex = tweetPrototypeCell.index
+    performSegue(withIdentifier: "MentionsToProfile", sender: nil)
+  }
   
-  //  func scrollViewDidScroll(_ scrollView: UIScrollView) {
-  //    // Calculate the position of one screen length before the bottom of the results
-  //    let scrollViewContentHeight = tableView.contentSize.height
-  //    let scrollOffsetThreshold = scrollViewContentHeight - tableView.bounds.size.height
-  //
-  //    if (!isMoreDataLoading) {
-  //      // When the user has scrolled past the threshold, start requesting
-  //      if(scrollView.contentOffset.y > scrollOffsetThreshold && tableView.isDragging) {
-  //        print("UI Scrolled for more data")
-  //        isMoreDataLoading = true
-  //        // Update position of loadingMoreView, and start loading indicator
-  //        let frame = CGRect(x: 0, y: tableView.contentSize.height, width: tableView.bounds.size.width, height: InfiniteScrollActivityView.defaultHeight)
-  //        loadingMoreView?.frame = frame
-  //        loadingMoreView!.startAnimating()
-  //
-  //        loadTweets()
-  //      }
-  //    }
-  //  }
 }
 
