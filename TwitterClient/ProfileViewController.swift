@@ -27,6 +27,9 @@ class ProfileViewController: UIViewController {
     
     tableView.rowHeight = UITableViewAutomaticDimension
     tableView.estimatedRowHeight = 200
+  }
+  
+  override func viewWillAppear(_ animated: Bool) {
     user = User.currentUser
     getTweetsForUser(user: user)
     
@@ -101,6 +104,6 @@ extension ProfileViewController: UIScrollViewDelegate {
     }
   }
   
-  // Bulr image code: runs very slow!
+  // Blur image code: runs very slow!
   // code from : http://stackoverflow.com/questions/41156542/how-to-blur-an-existing-image-in-a-uiimageview-with-swift
 }

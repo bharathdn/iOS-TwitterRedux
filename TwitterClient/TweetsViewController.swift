@@ -49,9 +49,13 @@ class TweetsViewController: UIViewController {
     
     NotificationCenter.default.addObserver(forName: NSNotification.Name(rawValue: User.userDidPostTweet), object: nil, queue: OperationQueue.main) { (notification) in
       self.tweets.insert(notification.userInfo?["tweet"] as! Tweet, at: 0)
-      self.tableView.reloadData()
     }
   }
+  
+  override func viewWillAppear(_ animated: Bool) {
+    loadTweets()
+  }
+
   
   @IBAction func onLogoutButton(_ sender: Any) {
     print("Logging out user")
@@ -79,6 +83,7 @@ class TweetsViewController: UIViewController {
       self.refreshControl.endRefreshing()
       self.loadingMoreView!.stopAnimating()
       self.isMoreDataLoading = false
+      self.tableView.reloadData()
       
     }, failure: { (error: Error) in
       print(error.localizedDescription)

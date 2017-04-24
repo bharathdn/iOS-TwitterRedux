@@ -24,10 +24,13 @@ class MentionsViewController: UIViewController {
     
     tableView.rowHeight = UITableViewAutomaticDimension
     tableView.estimatedRowHeight = 200
-    
-    loadMentions()
-    
   }
+  
+  
+  override func viewWillAppear(_ animated: Bool) {
+    loadMentions()
+  }
+  
   
   func loadMentions() {
     var parameters = [String: AnyObject]()
@@ -70,24 +73,24 @@ extension MentionsViewController: UITableViewDataSource, UITableViewDelegate {
     return cell
   }
   
-//  func scrollViewDidScroll(_ scrollView: UIScrollView) {
-//    // Calculate the position of one screen length before the bottom of the results
-//    let scrollViewContentHeight = tableView.contentSize.height
-//    let scrollOffsetThreshold = scrollViewContentHeight - tableView.bounds.size.height
-//    
-//    if (!isMoreDataLoading) {
-//      // When the user has scrolled past the threshold, start requesting
-//      if(scrollView.contentOffset.y > scrollOffsetThreshold && tableView.isDragging) {
-//        print("UI Scrolled for more data")
-//        isMoreDataLoading = true
-//        // Update position of loadingMoreView, and start loading indicator
-//        let frame = CGRect(x: 0, y: tableView.contentSize.height, width: tableView.bounds.size.width, height: InfiniteScrollActivityView.defaultHeight)
-//        loadingMoreView?.frame = frame
-//        loadingMoreView!.startAnimating()
-//        
-//        loadTweets()
-//      }
-//    }
-//  }
+  //  func scrollViewDidScroll(_ scrollView: UIScrollView) {
+  //    // Calculate the position of one screen length before the bottom of the results
+  //    let scrollViewContentHeight = tableView.contentSize.height
+  //    let scrollOffsetThreshold = scrollViewContentHeight - tableView.bounds.size.height
+  //
+  //    if (!isMoreDataLoading) {
+  //      // When the user has scrolled past the threshold, start requesting
+  //      if(scrollView.contentOffset.y > scrollOffsetThreshold && tableView.isDragging) {
+  //        print("UI Scrolled for more data")
+  //        isMoreDataLoading = true
+  //        // Update position of loadingMoreView, and start loading indicator
+  //        let frame = CGRect(x: 0, y: tableView.contentSize.height, width: tableView.bounds.size.width, height: InfiniteScrollActivityView.defaultHeight)
+  //        loadingMoreView?.frame = frame
+  //        loadingMoreView!.startAnimating()
+  //
+  //        loadTweets()
+  //      }
+  //    }
+  //  }
 }
 

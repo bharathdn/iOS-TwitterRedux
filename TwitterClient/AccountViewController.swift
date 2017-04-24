@@ -79,27 +79,27 @@ extension AccountViewController: UITableViewDelegate, UITableViewDataSource {
   }
   
   func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-//    User.currentUser = users[indexPath.row]
-//    tableView.deselectRow(at: indexPath, animated: true)
-//    if User.loadAccessToken() {
-//      TwitterClient.sharedInstance?.currentAccount(
-//        success: {_ in
-//          print("setting hamburger content to hometimeline")
-//          self.loadHomeTimeline()
-//      },
-//      failure: { error in
-//          return print(error.localizedDescription)
-//      })
-//    }
-//  
-    UIView.animate(withDuration: 1) { 
+    User.currentUser = users[indexPath.row]
+    print("\n new user account \(User.currentUser?.name) has been set \n")
+    tableView.deselectRow(at: indexPath, animated: true)
+    if User.loadAccessToken() {
+      TwitterClient.sharedInstance?.currentAccount(
+        success: {_ in
+          print("Newly selected user set")
+          self.loadHomeTimeline()
+      },
+      failure: { error in
+          return print(error.localizedDescription)
+      })
+    }
+  
+    UIView.animate(withDuration: 1) {
       self.loadHomeTimeline()
     }
     
   }
   
-  
-  func loadHomeTimeline() {  
+  func loadHomeTimeline() {
     hamburgerViewController.contentViewController = homeTimeLineViewController
   }
   
