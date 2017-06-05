@@ -31,6 +31,9 @@ class TweetsViewController: UIViewController {
     tableView.rowHeight = UITableViewAutomaticDimension
     tableView.estimatedRowHeight = 200
     
+    let tweetCellNib = UINib(nibName: "TweetCell", bundle: nil) // bundle: Bundle.main)
+    tableView.register(tweetCellNib, forCellReuseIdentifier: "TweetProtoCell")
+    
     if tweets.count == 0 {
       loadTweets()
       isFirstRequestLoaded = true
@@ -50,6 +53,8 @@ class TweetsViewController: UIViewController {
     insets.bottom += InfiniteScrollActivityView.defaultHeight
     tableView.contentInset = insets
     
+    
+    // when user posts new tweet, automatically apped this to top of list
     NotificationCenter.default.addObserver(forName: NSNotification.Name(rawValue: User.userDidPostTweet), object: nil, queue: OperationQueue.main) { (notification) in
       self.tweets.insert(notification.userInfo?["tweet"] as! Tweet, at: 0)
     }
@@ -196,7 +201,8 @@ extension TweetsViewController: UITableViewDataSource, UITableViewDelegate {
   }
   
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-    let cell = Bundle.main.loadNibNamed("TweetPrototypeCell", owner: self, options: nil)?.first as! TweetPrototypeCell
+//    let cell = Bundle.main.loadNibNamed("TweetPrototypeCell", owner: self, options: nil)?.first as! TweetPrototypeCell
+    let cell = tableView.dequeueReusableCell(withIdentifier: "TweetProtoCell", for: indexPath) as! TweetCell
     cell.tweet = tweets[indexPath.row]
     cell.delegate = self
     cell.index = indexPath.row
@@ -231,26 +237,17 @@ extension TweetsViewController: UITableViewDataSource, UITableViewDelegate {
 }
 
 // MARK: - retweet, reply and fav delegates
-extension TweetsViewController: TweetPrototypeCellDelegate {
-  func tweetPrototypeCell (tweetPrototypeCell: TweetPrototypeCell, didClickReply tweet: Tweet) {
-    print("reply button clicked on \(tweetPrototypeCell.index ?? -1)")
-    replyIndex = tweetPrototypeCell.index!
+extension TweetsViewController: TweetCellDelegate {
+
+   func tweetCell (tweetCell: TweetCell, didClickReply tweet: Tweet) {
+    print("reply button clicked on \(tweetCell.index ?? -1)")
+    replyIndex = tweetCell.index!
     performSegue(withIdentifier: "HomeReplySegue", sender: nil)
   }
   
-  func tweetPrototypeCell (tweetPrototypeCell: TweetPrototypeCell, didClickRetweet tweet: Tweet) {
-    print("ReTWEET button clicked on \(tweetPrototypeCell.index ?? -1)")
-    HandleRetweetAction(index: tweetPrototypeCell.index!)
-  }
-  
-  func tweetPrototypeCell (tweetPrototypeCell: TweetPrototypeCell, didClickFav tweet: Tweet) {
-    print("FAv button clicked on \(tweetPrototypeCell.index ?? -1)")
-    HandleFavAction(index: tweetPrototypeCell.index!)
-  }
-  
-  func tweetPrototypeCell (tweetPrototypeCell: TweetPrototypeCell, didClickUserImage tweet: Tweet) {
-    print("user Image clicked on index \(tweetPrototypeCell.index ?? -1)")
-    profileIndex = tweetPrototypeCell.index
+  func tweetCell (tweetCell: TweetCell, didClickUserImage tweet: Tweet) {
+    print("user Image clicked on index \(tweetCell.index ?? -1)")
+    profileIndex = tweetCell.index
     performSegue(withIdentifier: "HomeProfileSegue", sender: nil)
     
   }

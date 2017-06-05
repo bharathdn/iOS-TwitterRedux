@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12113" systemVersion="16E195" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12120" systemVersion="16F73" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_0" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12078"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12088"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -14,7 +14,7 @@
         <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="TweetPrototypeCell" rowHeight="124" id="KGk-i7-Jjw" customClass="TweetPrototypeCell" customModule="TwitterClient" customModuleProvider="target">
             <rect key="frame" x="0.0" y="0.0" width="399" height="124"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM" customClass="UITableViewCell">
                 <rect key="frame" x="0.0" y="0.0" width="399" height="123.5"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
@@ -32,9 +32,6 @@
                             <constraint firstAttribute="width" constant="55" id="Bng-Ge-dEx"/>
                             <constraint firstAttribute="height" constant="55" id="cRt-cb-pec"/>
                         </constraints>
-                        <connections>
-                            <outletCollection property="gestureRecognizers" destination="RNn-wL-sKn" appends="YES" id="fdQ-Nz-B5p"/>
-                        </connections>
                     </imageView>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="retweeted by" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hKZ-9A-XnU">
                         <rect key="frame" x="64" y="6" width="78.5" height="16"/>
@@ -85,9 +82,6 @@
                             <constraint firstAttribute="height" constant="20" id="NsU-mw-fFz"/>
                         </constraints>
                         <state key="normal" title="Button" image="reply2"/>
-                        <connections>
-                            <action selector="onReplyButton:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="pK9-F3-7R4"/>
-                        </connections>
                     </button>
                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gfZ-Ki-IMi">
                         <rect key="frame" x="178.5" y="78.5" width="20" height="20"/>
@@ -96,9 +90,6 @@
                             <constraint firstAttribute="height" constant="20" id="M9a-PZ-Ytg"/>
                         </constraints>
                         <state key="normal" title="Button" image="retweet-1"/>
-                        <connections>
-                            <action selector="onRetweetButton:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="LfP-at-8pC"/>
-                        </connections>
                     </button>
                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZbH-UU-VRa">
                         <rect key="frame" x="284" y="78.5" width="20" height="20"/>
@@ -107,9 +98,6 @@
                             <constraint firstAttribute="width" constant="20" id="ZlX-ei-GvO"/>
                         </constraints>
                         <state key="normal" title="Button" image="likeInactive"/>
-                        <connections>
-                            <action selector="onFavButton:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="wS8-U8-5Z5"/>
-                        </connections>
                     </button>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="t06-Pd-FuW">
                         <rect key="frame" x="306" y="80.5" width="32.5" height="16"/>
@@ -151,29 +139,25 @@
                 </constraints>
             </tableViewCellContentView>
             <connections>
-                <outlet property="favButtonImageView" destination="ZbH-UU-VRa" id="Hw9-85-fhC"/>
-                <outlet property="favCountLabel" destination="t06-Pd-FuW" id="GCh-ua-w2u"/>
-                <outlet property="repliesCountLabel" destination="Vym-Id-yLd" id="7TW-mP-a4u"/>
-                <outlet property="replyButtonImageView" destination="ADQ-fs-vu7" id="iUT-KA-WTY"/>
-                <outlet property="retweetButtonImageView" destination="gfZ-Ki-IMi" id="lyX-uR-iqb"/>
-                <outlet property="retweetCountLabel" destination="muY-t8-QKl" id="9vB-yq-GCz"/>
-                <outlet property="retweetImageView" destination="oeS-uH-hGS" id="HOk-Kv-IaF"/>
-                <outlet property="retweetUserLabel" destination="hKZ-9A-XnU" id="GWE-PR-6f0"/>
-                <outlet property="timeStampLabel" destination="ylw-uH-Gy1" id="z5D-Fk-hgH"/>
-                <outlet property="tweetTextLabel" destination="N9o-s7-aAY" id="EP0-Tw-fcF"/>
-                <outlet property="userImageTopViewContraint" destination="sS2-jk-hID" id="KOf-2k-4Bx"/>
-                <outlet property="userImageView" destination="KuO-GR-AZx" id="oOT-DM-Tqd"/>
-                <outlet property="userNameLabel" destination="lCb-y9-0ep" id="FVy-2j-EtW"/>
-                <outlet property="userScreeNameTopViewConstraint" destination="pcm-BP-sWA" id="FDh-hY-Ydz"/>
-                <outlet property="userScreenNameLabel" destination="IWM-My-qGI" id="Nad-w2-LYg"/>
+                <outlet property="favButtonImageView" destination="ZbH-UU-VRa" id="nqX-uY-eOe"/>
+                <outlet property="favCountLabel" destination="t06-Pd-FuW" id="bas-fc-0mo"/>
+                <outlet property="repliesCountLabel" destination="Vym-Id-yLd" id="2LQ-se-msN"/>
+                <outlet property="replyButtonImageView" destination="ADQ-fs-vu7" id="5qy-vZ-xAg"/>
+                <outlet property="retweetButtonImageView" destination="gfZ-Ki-IMi" id="mwN-Af-hEK"/>
+                <outlet property="retweetCountLabel" destination="muY-t8-QKl" id="fNo-AM-iPD"/>
+                <outlet property="retweetImageView" destination="oeS-uH-hGS" id="ZJJ-l3-ZWs"/>
+                <outlet property="retweetUserLabel" destination="hKZ-9A-XnU" id="sDZ-SX-xXY"/>
+                <outlet property="timeStampLabel" destination="ylw-uH-Gy1" id="Sgq-VX-zdt"/>
+                <outlet property="tweetTextLabel" destination="N9o-s7-aAY" id="Lgx-LX-zzc"/>
+                <outlet property="userImageTopViewContraint" destination="sS2-jk-hID" id="3Wz-tv-fDM"/>
+                <outlet property="userImageView" destination="KuO-GR-AZx" id="Qor-tl-A8f"/>
+                <outlet property="userNameLabel" destination="lCb-y9-0ep" id="gFp-5m-Mwi"/>
+                <outlet property="userScreeNameTopViewConstraint" destination="pcm-BP-sWA" id="Kwb-eG-FBx"/>
+                <outlet property="userScreenNameLabel" destination="IWM-My-qGI" id="g6m-tB-8CD"/>
             </connections>
             <point key="canvasLocation" x="-146.5" y="-59"/>
         </tableViewCell>
-        <tapGestureRecognizer id="RNn-wL-sKn">
-            <connections>
-                <action selector="onUserImageTap:" destination="KGk-i7-Jjw" id="4bq-qA-GCc"/>
-            </connections>
-        </tapGestureRecognizer>
+        <tapGestureRecognizer id="RNn-wL-sKn"/>
     </objects>
     <resources>
         <image name="likeInactive" width="54" height="72"/>

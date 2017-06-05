@@ -17,6 +17,7 @@ import UIKit
 
 class TweetPrototypeCell: UITableViewCell {
   
+  // @IBOutlet weak var cellContentView: UIView!
   @IBOutlet weak var userImageView: UIImageView!
   @IBOutlet weak var retweetImageView: UIImageView!
   @IBOutlet weak var retweetUserLabel: UILabel!
@@ -37,6 +38,21 @@ class TweetPrototypeCell: UITableViewCell {
   
   weak var delegate: TweetPrototypeCellDelegate?
   var index: Int?
+    
+  required init(coder aDecoder: NSCoder) {
+    super.init(coder: aDecoder)!
+    initSubviews()
+  }
+  
+  override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
+    super.init(style: style, reuseIdentifier: reuseIdentifier)
+    initSubviews()
+  }
+  
+  func initSubviews() {
+    contentView.frame = bounds
+//    addSubview(cellContentView)
+  }
   
   var tweet: Tweet! {
     didSet {
@@ -70,11 +86,11 @@ class TweetPrototypeCell: UITableViewCell {
         retweetButtonImageView.setImage(#imageLiteral(resourceName: "retweet-1"), for: .normal)
       }
       
-      if tweet.didUserFavorite! {
-        favButtonImageView.setImage(#imageLiteral(resourceName: "likeActive"), for: .normal)
-      } else {
-        favButtonImageView.setImage(#imageLiteral(resourceName: "likeInactive"), for: .normal)
-      }
+//      if tweet.didUserFavorite! {
+//        favButtonImageView.setImage(#imageLiteral(resourceName: "likeActive"), for: .normal)
+//      } else {
+//        favButtonImageView.setImage(#imageLiteral(resourceName: "likeInactive"), for: .normal)
+//      }
     }
   }
   
@@ -104,6 +120,15 @@ class TweetPrototypeCell: UITableViewCell {
   }
   
   @IBAction func onRetweetButton(_ sender: Any) {
+//    TwitterClient.sharedInstance?.reTweet(tweet: tweet, success: { (responseTweet: Tweet) in
+//      tweet.didUserRetweet = true
+//      tweet.retweetCount += 1
+//      self.tweets[index] = tweet
+//      self.tableView.reloadRows(at: [indexPath], with: .automatic)
+//    }, failure: { (error: Error) in
+//      print("\n\nError retweting from Home TimeLine:: \(error.localizedDescription)")
+//    })
+//    
     delegate?.tweetPrototypeCell!(tweetPrototypeCell: self, didClickRetweet: tweet)
   }
   
